@@ -14,10 +14,30 @@
     <item>
       <title>About</title>
       <link>https://jolynch.github.io/about/</link>
-      <pubDate>Sun, 03 Feb 2019 17:18:41 -0800</pubDate>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://jolynch.github.io/about/</guid>
-      <description>Hi, my name is Joey Lynch. I mostly hack on open source distributed systems problems, but also enjoy economics, politics, and debate.</description>
+      <description>Hi, my name is Joey Lynch. I mostly hack on open source distributed systems problems, but also enjoy economics, politics, and debate.
+I should have more info up soon.</description>
+    </item>
+    
+    <item>
+      <title>Talks</title>
+      <link>https://jolynch.github.io/talks/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://jolynch.github.io/talks/</guid>
+      <description>Below are a collection of conference talks or other presentations that I&amp;rsquo;ve given, typically related to distributed systems or other software engineering topics:
+ Iterating on Stateful Services in the Cloud (2018): A talk at re:Invent 2018 about how Netflix manages stateful services (such as datastores or databases) in the AWS cloud. Contains a lot of concrete advice for managing state in AWS. Repair Service and Cassandra (2018): Part of Netflix&amp;rsquo;s OSS Meetup about Polyglot Persistence.</description>
+    </item>
+    
+    <item>
+      <title>Publications</title>
+      <link>https://jolynch.github.io/publications/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://jolynch.github.io/publications/</guid>
+      <description>Coming soon.</description>
     </item>
     
     <item>
