@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Joey Lynch&#39;s Site</title>
+    <link>https://jolynch.github.io/</link>
+    <description>Recent content on Joey Lynch&#39;s Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 03 Feb 2019 17:22:58 -0800</lastBuildDate>
+    
+	<atom:link href="https://jolynch.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>About</title>
+      <link>https://jolynch.github.io/about/</link>
+      <pubDate>Sun, 03 Feb 2019 17:18:41 -0800</pubDate>
+      
+      <guid>https://jolynch.github.io/about/</guid>
+      <description>Hi, my name is Joey Lynch. I mostly hack on open source distributed systems problems, but also enjoy economics, politics, and debate.</description>
+    </item>
+    
+    <item>
+      <title>Purpose of this Blog</title>
+      <link>https://jolynch.github.io/posts/purpose_of_blog/</link>
+      <pubDate>Thu, 10 Jan 2019 11:30:16 -0800</pubDate>
+      
+      <guid>https://jolynch.github.io/posts/purpose_of_blog/</guid>
+      <description>I figured it was time to start a proper personal/tech blog given how much I enjoy writing about the crazy fun and wierd distributed systems problems that I work on.
+Initially I am planning on writing up my current rants on high performance software systems as understood through food service analogies, but I imagine it&amp;rsquo;ll evolve from there to just talking about cool systems problems I work on every day.</description>
+    </item>
+    
+  </channel>
+</rss>
