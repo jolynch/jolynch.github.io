@@ -15,15 +15,15 @@
       
       <li><a href="/">Home</a></li>
       
-      <li><a href="/posts/">Blog</a></li>
+      <li><a href="/posts/">Musings</a></li>
       
-      <li><a href="/about/">About</a></li>
+      <li><a href="/projects/">Projects</a></li>
       
       <li><a href="/talks/">Talks</a></li>
       
       <li><a href="/publications/">Publications</a></li>
       
-      <li><a href="/projects/">Projects</a></li>
+      <li><a href="/about/">About</a></li>
       
     </ul>
     <hr/>
@@ -36,7 +36,38 @@
 </div>
 
 <main>
-<p>Coming soon.</p>
+<p>I&rsquo;ve mostly written blog posts and whitepapers, mostly for employers. I&rsquo;ve
+included links here in case they might be interesting.</p>
+
+<ul>
+<li><a href="/pdf/cassandra-availability-virtual.pdf">Cassandra Availability with Virtual Nodes</a>
+(2018): A whitepaper I authored with Josh Snyder that gt attempted to formally model
+Cassandra&rsquo;s availability under different numbers of tokens per node. TLDR:
+use no more than 4 tokens if you want high availability in a Dynamo style
+database. The paper is based on <a href="https://github.com/jolynch/python_performance_toolkit/blob/master/notebooks/cassandra_availability/cassandra_availability.ipynb">this
+notebook</a></li>
+<li><a href="https://engineeringblog.yelp.com/2017/05/taking-zero-downtime-load-balancing-even-further.html">Taking Zero Downtime Load Balancing even Further</a> (2017): In this post I showed how Yelp had
+evolved their highly available and scalable service mesh based on SmartStack
+to use NGINX and HAProxy and get the best of all worlds.</li>
+<li><a href="https://engineeringblog.yelp.com/2016/06/monitoring-cassandra-at-scale.html">Monitoring Cassandra at
+Scale</a>
+(2016): A post I wrote for Yelp about how they monitored their distributed
+Cassandra deployments taking into account full ring health. Also includes
+some helpful examples for how to interact with Cassandra&rsquo;s JMX interface from
+Python.</li>
+<li><a href="https://engineeringblog.yelp.com/2015/04/true-zero-downtime-haproxy-reloads.html">True Zero Downtime HAProxy
+Reloads</a>
+(2015): A post I wrote for Yelp about how they reloaded HAProxy without any
+downtime to requests using Linux queueing disciplines. A super hacky way to
+achieve the end that has since been superseded by better techniques. It was
+pretty cool though.</li>
+<li><a href="https://engineeringblog.yelp.com/2014/11/scaling-elasticsearch-to-hundreds-of-developers.html">Scaling Elasticsearch to Hundreds of Developers</a>
+(2014): A blog post I wrote for Yelp about the Apollo data gateway which
+acted as a proxy tier to NoSQL databases such as Elasticsearch (And later
+Cassandra). Basically this was an API-gateway for datastores, which was
+ridiculously useful and helped Yelp&rsquo;s distsys-data team scale datastores and
+upgrade them all the time.</li>
+</ul>
 
 </main>
 
