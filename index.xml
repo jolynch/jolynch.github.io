@@ -41,6 +41,16 @@ I should have more info up soon.</description>
     </item>
     
     <item>
+      <title>Projects</title>
+      <link>https://jolynch.github.io/projects/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://jolynch.github.io/projects/</guid>
+      <description>Below are some of my projects roughly categorized by area.
+Distributed Systems  synapse and nerve service mesh aka SmartStack. I help maintain and have contributed significant features to Airbnb&amp;rsquo;s service mesh, including improving the scalability of the system by multiple orders of magnitude (Yelp ran tens of thousands of containers across a global network with full global service discovery), and extending Synapse to be fully pluggable and support any proxy.</description>
+    </item>
+    
+    <item>
       <title>Purpose of this Blog</title>
       <link>https://jolynch.github.io/posts/purpose_of_blog/</link>
       <pubDate>Thu, 10 Jan 2019 11:30:16 -0800</pubDate>

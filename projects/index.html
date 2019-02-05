@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Projects | Joey Lynch&#39;s Site</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/posts/">Blog</a></li>
+      
+      <li><a href="/about/">About</a></li>
+      
+      <li><a href="/talks/">Talks</a></li>
+      
+      <li><a href="/publications/">Publications</a></li>
+      
+      <li><a href="/projects/">Projects</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">Projects</span></h1>
+
+
+</div>
+
+<main>
+
+
+<p>Below are some of my projects roughly categorized by area.</p>
+
+<h2 id="distributed-systems">Distributed Systems</h2>
+
+<ul>
+<li><a href="https://github.com/airbnb/synapse"><code>synapse</code></a> and
+<a href="https://github.com/airbnb/nerve"><code>nerve</code></a> service mesh aka SmartStack. I help
+maintain and have contributed significant features to Airbnb&rsquo;s service mesh,
+including improving the scalability of the system by multiple orders of
+magnitude (Yelp ran tens of thousands of containers across a global network
+with full global service discovery), and extending Synapse to be fully
+pluggable and support any proxy.</li>
+<li><a href="https://github.com/Yelp/paasta"><code>Paasta</code></a> distributed platform as a service. I
+was a somewhat minor contributor to Paasta, mostly working on SmartStack
+integrations, but I did help port the whole codebase to Python 3 so that was
+interesting&hellip;</li>
+<li><a href="https://github.com/jolynch/jvmquake"><code>jvmquake</code></a> agent for rescuing
+distributed Java databases from themselves by killing them when they go
+sideways. This is basically an extension of
+<a href="https://github.com/airlift/jvmkill"><code>jvmkill</code></a> that also detects GC spirals of
+death.</li>
+<li><a href="https://github.com/Netflix/Priam"><code>Priam</code></a> distributed sidecar for Apache
+Cassandra. I work on this at Netflix, improving operability of Cassandra.</li>
+</ul>
+
+<h2 id="debugging">Debugging</h2>
+
+<ul>
+<li><a href="https://github.com/jolynch/cqltrace"><code>cqltrace</code></a> dynamic tracer for observing
+live CQL traffic in real time. I mostly use this for debugging Cassandra
+clients and their performance.</li>
+</ul>
+
+<h2 id="educational">Educational</h2>
+
+<ul>
+<li><a href="https://github.com/jolynch/python_service_performance"><code>python_service_performance</code></a>
+A step by step guide on how to make a <code>python3</code> web service based on
+<a href="https://github.com/unbit/uwsgi"><code>uwsgi</code></a>,
+<a href="https://github.com/Pylons/pyramid"><code>pyramid</code></a>,
+<a href="https://github.com/gevent/gevent"><code>gevent</code></a> and
+<a href="https://github.com/nginx/nginx"><code>nginx</code></a> production ready. This means high
+scalability and low latency with a typical microservice setup.</li>
+<li><a href="https://github.com/jolynch/python_performance_toolkit"><code>python_performance_toolkit</code></a>
+collection of <a href="https://github.com/jupyter"><code>jupyter</code></a> notebooks I&rsquo;ve used
+to analyze the performance of various service or database setups. Perhaps one
+of the more interesting ones is my notebook for modeling Cassandra
+availability with different numbers of
+<a href="https://github.com/jolynch/python_performance_toolkit/tree/master/notebooks/cassandra_availability">vnodes</a></li>
+</ul>
+
+<h2 id="economics">Economics</h2>
+
+<ul>
+<li><a href="https://github.com/jolynch/splitit"><code>splitit</code></a> algorithm and Python web
+service for fairly dividing items that are hard to value (e.g. rents in a 5
+bedroom apartment). I used this with my roommates to divide rent fairly in
+San Francisco.</li>
+</ul>
+
+<h2 id="debate">Debate</h2>
+
+<ul>
+<li><a href="https://github.com/MIT-Tab/mit-tab"><code>MIT-TAB</code></a> APDA parliamentary debate
+tabulation software. Basically this is a very complicated constraint
+optimization problem that debaters used to do by hand, and now a good
+fraction of the American Parliamentary Debate Association&rsquo;s tournaments run
+with this software. I was the original author but have since handed
+development off to <a href="https://github.com/BenMusch">Ben Muschol</a> who has really
+improved the project!</li>
+</ul>
+
+<h2 id="machine-learning-ai">Machine Learning / AI</h2>
+
+<ul>
+<li><a href="https://github.com/jolynch/python-hqsom"><code>python_hqsom</code></a> implementation of
+the HQSOM deep learning algorithm. This was a project I worked on for a few
+graduate classes at MIT (6.867 and 6.868) that used genetic algorithms and
+deep learning and other such buzzwords. Surprisingly it actually worked
+pretty well.</li>
+<li><a href="https://github.com/jolynch/food.op">food.op</a> recipe recommender based on
+gradient boosting classifiers. It was a hackathon project but sorta neat to
+have recipes recommended based on previous cooking experiences.</li>
+<li><a href="https://github.com/jolynch/organon"><code>organon</code></a> symbolic constraint framework
+and solver for modeling complex constrained systems that may not have
+solutions. The
+<a href="https://github.com/jolynch/organon/blob/master/papers/final.pdf">paper</a> is a
+decent read if you&rsquo;re interested in what this project can do.</li>
+</ul>
+
+</main>
+
+  <footer>
+  
+  
+  <hr/>
+  &copy; <a href="https://jolynch.github.io">Joey Lynch</a> 2019 | <a href="https://github.com/jolynch">Github</a>
+  
+  </footer>
+  </body>
+</html>
+
