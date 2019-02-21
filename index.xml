@@ -8,48 +8,8 @@
     <language>en-us</language>
     <lastBuildDate>Sun, 03 Feb 2019 17:22:58 -0800</lastBuildDate>
     
-	<atom:link href="https://jolynch.github.io/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://jolynch.github.io/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Projects</title>
-      <link>https://jolynch.github.io/projects/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://jolynch.github.io/projects/</guid>
-      <description>Below are some of my projects roughly categorized by area.
-Distributed Systems  synapse and nerve service mesh aka SmartStack. I help maintain and have contributed significant features to Airbnb&amp;rsquo;s service mesh, including improving the scalability of the system by multiple orders of magnitude (Yelp ran tens of thousands of containers across a global network with full global service discovery), and extending Synapse to be fully pluggable and support any proxy.</description>
-    </item>
-    
-    <item>
-      <title>Talks</title>
-      <link>https://jolynch.github.io/talks/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://jolynch.github.io/talks/</guid>
-      <description>Below are a collection of conference talks or other presentations that I&amp;rsquo;ve given, typically related to distributed systems or other software engineering topics:
- Iterating on Stateful Services in the Cloud (2018): A talk at re:Invent 2018 about how Netflix manages stateful services (such as datastores or databases) in the AWS cloud. Contains a lot of concrete advice for managing state in AWS. Repair Service and Cassandra (2018): Part of Netflix&amp;rsquo;s OSS Meetup about Polyglot Persistence.</description>
-    </item>
-    
-    <item>
-      <title>Publications</title>
-      <link>https://jolynch.github.io/publications/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://jolynch.github.io/publications/</guid>
-      <description>I&amp;rsquo;ve mostly written blog posts and whitepapers, mostly for employers. I&amp;rsquo;ve included links here in case they might be interesting.
- Cassandra Availability with Virtual Nodes (2018): A whitepaper I authored with Josh Snyder that attempted to formally model Cassandra&amp;rsquo;s availability under different numbers of tokens per node. TLDR: use no more than 4 tokens if you want high availability in a Dynamo style database. The paper is based on this notebook Taking Zero Downtime Load Balancing even Further (2017): In this post I showed how Yelp had evolved their highly available and scalable service mesh based on SmartStack to use NGINX and HAProxy and get the best of all worlds.</description>
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>https://jolynch.github.io/about/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://jolynch.github.io/about/</guid>
-      <description>Hi, my name is Joey Lynch. I mostly hack on open source distributed systems problems, but also enjoy economics, politics, and debate.
-I should have more info up soon.</description>
-    </item>
     
     <item>
       <title>Supermarkets And Efficient Queueing: Part 2</title>
