@@ -6,10 +6,21 @@
     <description>Recent content in Posts on Joey Lynch&#39;s Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 20 Feb 2019 00:00:00 -0100</lastBuildDate>
+    <lastBuildDate>Mon, 25 Feb 2019 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://jolynch.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Jimmy John&#39;s is like a High Performance Web Service</title>
+      <link>https://jolynch.github.io/posts/jimmy_johns_and_web_services/</link>
+      <pubDate>Mon, 25 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://jolynch.github.io/posts/jimmy_johns_and_web_services/</guid>
+      <description>Today on the &amp;ldquo;distributed systems as food service analogy&amp;rdquo; series we visit one of my favorites: sandwich shops.
+Most sandwich places are absolutely terrible at efficiently processing my sandwich order. They have limited workers that constantly context switch and are entirely unable to pipeline (looking at you Subway). Jimmy Johns, however, is wonderfully efficient and a model for all other sandwich places.
+In this post I will explore how Jimmy Johns operates as a high performance web (micro)service might.</description>
+    </item>
     
     <item>
       <title>Supermarkets And Efficient Queueing: Part 2</title>
