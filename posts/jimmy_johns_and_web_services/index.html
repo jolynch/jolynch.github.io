@@ -146,11 +146,9 @@ customer.</li>
 </ol>
 
 <p>Direct return is, in particular, really neat because it&rsquo;s what high performance
-routing layers like
-<a href="https://blog.envoyproxy.io/introduction-to-modern-network-load-balancing-and-proxying-a57f6ff80236">Envoy</a>
-and Google&rsquo;s Maglev [<a href="#maglev">1</a>] do to try to offload heavy network results off
-their load balancers (and instead have the servers return the bytes directly to
-the requester).</p>
+routing layers like Google&rsquo;s Maglev [<a href="#maglev">1</a>] do to try to offload heavy
+network results off their load balancers (and instead have the servers return
+the bytes directly to the requester).</p>
 
 <h2 id="trick-2-parallel-pipelines">Trick #2: Parallel Pipelines</h2>
 
