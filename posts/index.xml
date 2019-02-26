@@ -38,7 +38,7 @@ In this post I will explore how Jimmy Johns operates as a high performance web (
       <pubDate>Tue, 19 Feb 2019 12:00:00 +0000</pubDate>
       
       <guid>https://jolynch.github.io/posts/supermarkets_and_efficient_queueing_part_1/</guid>
-      <description>I&amp;rsquo;d like to kickoff the &amp;ldquo;distributed systems as food service analogy&amp;rdquo; series with the basics. In this two part series I cover the basics of queuing theory , and how we can understand it with the help of your every day supermarket or grocery store.
+      <description>I&amp;rsquo;d like to kick off the &amp;ldquo;distributed systems as food service analogy&amp;rdquo; series with the basics. In this two part series I cover the basics of queueing theory , and how we can understand it with the help of your every day supermarket or grocery store.
  Part 1: Basics of queueing theory and minimizing latency. Part 2: More advanced techniques past optimizing latency.  Why should software engineers care about Queueing Theory?</description>
     </item>
     
