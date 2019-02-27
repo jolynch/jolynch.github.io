@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Jimmy John&#39;s is like a High Performance Web Service | Joey Lynch&#39;s Site</title>
+    <title>Jimmy John&#39;s is like a High-Performance Web Service | Joey Lynch&#39;s Site</title>
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
     
@@ -32,7 +32,7 @@
     </nav>
 
 <div class="article-meta">
-<h1><span class="title">Jimmy John&rsquo;s is like a High Performance Web Service</span></h1>
+<h1><span class="title">Jimmy John&rsquo;s is like a High-Performance Web Service</span></h1>
 
 <h2 class="date">2019/02/25</h2>
 </div>
@@ -49,14 +49,14 @@ are entirely unable to pipeline (looking at you Subway). <a href="https://www.ji
 John&rsquo;s</a>, however, is wonderfully efficient and a
 model for all other sandwich places.</p>
 
-<p>In this post I will explore how Jimmy John&rsquo;s operates as a high performance web
-(micro)service might. When I worked at Yelp in San Francisco, I spent a great
-deal of time eating at Jimmy John&rsquo;s, and a non trivial reason for that is that
-it was so <em>efficient</em> at processing orders. I would show up and there would be
-a queue of 20-50 people, but I still got my sandwich in record time (a few
-minutes). At least the one near Yelp&rsquo;s SF office achieved this by operating as
-a finely tuned web service might, and I feel it&rsquo;s worth reflecting on all of
-the tricks they do. If you&rsquo;re building a high performance service and you
+<p>In this post, I will explore how Jimmy John&rsquo;s operates as a high-performance
+web (micro)service might. When I worked at Yelp in San Francisco, I spent a
+great deal of time eating at Jimmy John&rsquo;s, and a non-trivial reason for that is
+that it was so <em>efficient</em> at processing orders. I would show up and there
+would be a queue of 20-50 people, but I still got my sandwich in record time (a
+few minutes). At least the one near Yelp&rsquo;s SF office achieved this by operating
+as a finely tuned web service might, and I feel it&rsquo;s worth reflecting on all of
+the tricks they do. If you&rsquo;re building a high-performance service and you
 aren&rsquo;t doing these things, it&rsquo;s food for thought.</p>
 
 <h1 id="so-what-does-jimmy-john-s-do">So, what does Jimmy John&rsquo;s Do?</h1>
@@ -68,7 +68,7 @@ handle dozens of concurrent requests that might range in complexity from simple
 &ldquo;I&rsquo;ll have roast beef and some provolone&rdquo; to the more complex &ldquo;J.J. Gargantuan
 hold the oregano and extra tomatoes&rdquo;.</p>
 
-<p>In my experience Jimmy John&rsquo;s is able to achieve average processing times in
+<p>In my experience, Jimmy John&rsquo;s is able to achieve average processing times in
 less than 30 seconds from when I place my order to when I receive it, and the
 end to end experience even under heavy load is a few minutes. In queueing
 theory terms they achieve an impressive <code>T_processing</code> of ~30s and <code>T_queued</code>
@@ -81,12 +81,12 @@ holds a yearly <a href="https://vimeo.com/289769768">competition</a> called &ldq
 Masters&rdquo;, so you know they take this seriously.</p>
 
 <p>My favorite part of this all though is that Jimmy John&rsquo;s achieves these great
-speeds using a number of tricks common in high performance web services that I
+speeds using a number of tricks common in high-performance web services that I
 have worked on.</p>
 
 <h2 id="trick-1-avoid-context-switches">Trick #1: Avoid Context Switches</h2>
 
-<p>One of the biggest enemies of high performance systems is the <a href="https://en.wikipedia.org/wiki/Context_switch">&ldquo;context
+<p>One of the biggest enemies of high-performance systems is the <a href="https://en.wikipedia.org/wiki/Context_switch">&ldquo;context
 switch&rdquo;</a>.  The name comes from
 when CPUs have to switch from one running process to the other, which causes a
 significant delay in processing, but the concept is actually pretty general. A
@@ -95,8 +95,9 @@ thing to doing another. This change in activity usually takes some time that
 you could have been using to do real work.</p>
 
 <p>One of the most common ways that sandwich shops context switch is when the same
-person takes your order, retrieves your food, and has you pay. For example, at
-Subway, a worker might context switch <em>four or more times</em> in a single order:</p>
+person takes your order, retrieves your food, and takes your payment. For
+example, at Subway, a worker might context switch <em>four or more times</em> in a
+single order:</p>
 
 <ol>
 <li>Take your order,</li>
@@ -113,14 +114,14 @@ you start waiting on the person to come back.</li>
 the worker context switches to take another order which can take longer than
 my sandwich takes to toast. This kind of pre-emption based on IO bound work
 (toasting the sandwich) is called asynchronous processing and is generally
-a good thing, but in this case the context switch costs non trivial time and
+a good thing, but in this case the context switch costs non-trivial time and
 can result in slowing down the order.</p>
 
 <p>Jimmy John&rsquo;s doesn&rsquo;t do this. Jimmy John&rsquo;s has dedicated accept workers like
-high performance proxies use (e.g. <a href="http://www.haproxy.org/">HAProxy</a> and
+high-performance proxies use (e.g. <a href="http://www.haproxy.org/">HAProxy</a> and
 <a href="https://www.nginx.com/">NGINX</a>). These workers just accept orders and dispatch
 them to the appropriate downstream worker. They also use async processing by
-handing off the compute bound part (making the sandwich) but without the
+handing off the compute-bound part (making the sandwich) but without the
 context switch. This saves time because the workers never have to context
 switch, they just process order after order and dispatch that work to highly
 efficient sandwich making workers. It looks a little like:</p>
@@ -145,7 +146,7 @@ the register (looking at you McDonald&rsquo;s), it just goes straight to the
 customer.</li>
 </ol>
 
-<p>Direct return is, in particular, really neat because it&rsquo;s what high performance
+<p>Direct return is, in particular, really neat because it&rsquo;s what high-performance
 routing layers like Google&rsquo;s Maglev [<a href="#maglev">1</a>] do to try to offload heavy
 network results off their load balancers (and instead have the servers return
 the bytes directly to the requester).</p>
@@ -155,7 +156,7 @@ the bytes directly to the requester).</p>
 <p>Jimmy John&rsquo;s doesn&rsquo;t just get its speed from avoiding context switches, it
 also cuts significant time by using <a href="https://en.wikipedia.org/wiki/Parallel_computing"><em>parallel
 processing</em></a>. In a web
-service you might run multiple workers that each run their own compute
+service, you might run multiple workers that each run their own compute
 pipelines. You do this so that one slow order can&rsquo;t block all the fast ones.
 You also do this to allow different workers (services in software land) to
 specialize and process their work faster and more efficiently.</p>
@@ -163,7 +164,7 @@ specialize and process their work faster and more efficiently.</p>
 <p>Jimmy John&rsquo;s nails parallel processing. Not only does it have multiple lanes
 to make multiple sandwiches in parallel, but they even sometimes re-order
 or prioritize orders to make sure that large complex orders don&rsquo;t unnecessarily
-slow down short orders. This in turn keeps mean processing time and mean
+slow down short orders. This, in turn, keeps mean processing time and mean
 slowdown way down. We can now add the parallel sandwich pipelines to the Jimmy
 John&rsquo;s model:</p>
 
@@ -173,7 +174,7 @@ John&rsquo;s model:</p>
 orders like roast beef go to one lane and other orders like Italian sandwiches
 go to another lane. If they did do this it would be pretty neat because the
 workers could probably cut processing time by only having to handle a subset of
-the menu in the general case. Of course this would mean that they&rsquo;d have to
+the menu in the general case. Of course, this would mean that they&rsquo;d have to
 have good sandwich load balancing to make sure no one lane got overloaded, or
 dynamically re-assign the workers when there is extra capacity.</p>
 
@@ -191,9 +192,9 @@ For example, if you use <a href="https://en.wikipedia.org/wiki/Change_data_captu
 capture</a> (CDC) from your
 database to inform offline cache pre-compute systems which go off, calculates
 the value a cache should have and writes it into the cache pre-emptively, you
-can significantly improve your cache hit rate and keep systems running fast. A
-common example of this in industry are cache invalidation systems like
-Facebook&rsquo;s <code>mcsqueal</code> [<a href="#fb_memcache">2</a>] and Yelp&rsquo;s
+can significantly improve your cache hit rate and keep systems running fast.
+Some common examples of this technique from industry are cache invalidation
+systems like Facebook&rsquo;s <code>mcsqueal</code> [<a href="#fb_memcache">2</a>] and Yelp&rsquo;s
 <a href="https://engineeringblog.yelp.com/2018/03/caching-internal-service-calls-at-yelp.html">casper</a>
 project which uses CDC to <a href="https://engineeringblog.yelp.com/2018/03/caching-internal-service-calls-at-yelp.html#invalidating-caches">invalidate
 caches</a>.</p>
@@ -205,7 +206,7 @@ and re-fill the roast beef, Wicked.</p>
 <h1 id="summary-jimmy-john-s-is-very-efficient">Summary: Jimmy John&rsquo;s is Very Efficient</h1>
 
 <p>In this post we explored how Jimmy John&rsquo;s exploits the following concepts
-in high performance computing:</p>
+in high-performance computing:</p>
 
 <ol>
 <li>Minimize context switches with dedicated workers accepting sandwich
@@ -218,7 +219,7 @@ cache misses.</li>
 </ol>
 
 <p>Many food service shops do some of these techniques, but I am not aware of one
-that combines so many best practices in high performance systems engineering
+that combines so many best practices in high-performance systems engineering
 in one, very fast, sandwich making package.</p>
 
 <h1 id="citations">Citations</h1>

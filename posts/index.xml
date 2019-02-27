@@ -12,14 +12,14 @@
     
     
     <item>
-      <title>Jimmy John&#39;s is like a High Performance Web Service</title>
+      <title>Jimmy John&#39;s is like a High-Performance Web Service</title>
       <link>https://jolynch.github.io/posts/jimmy_johns_and_web_services/</link>
       <pubDate>Mon, 25 Feb 2019 00:00:00 +0000</pubDate>
       
       <guid>https://jolynch.github.io/posts/jimmy_johns_and_web_services/</guid>
       <description>Today on the &amp;ldquo;distributed systems as food service analogy&amp;rdquo; series we visit one of my favorites: sandwich shops.
 Most sandwich places are absolutely terrible at efficiently processing my sandwich order. They have limited workers that constantly context switch and are entirely unable to pipeline (looking at you Subway). Jimmy John&amp;rsquo;s, however, is wonderfully efficient and a model for all other sandwich places.
-In this post I will explore how Jimmy John&amp;rsquo;s operates as a high performance web (micro)service might.</description>
+In this post, I will explore how Jimmy John&amp;rsquo;s operates as a high-performance web (micro)service might.</description>
     </item>
     
     <item>
