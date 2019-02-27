@@ -2,7 +2,6 @@ body {
   max-width: 800px;
   margin: auto;
   padding: 1em;
-  line-height: 1.5em;
 }
 
 /* header and footer areas */
@@ -14,6 +13,11 @@ body {
   padding: 5px;
   border-radius: 5px;
 }
+
+.menu a {
+  display: inline-block;
+}
+
 .menu, .article-meta, footer { text-align: center; }
 .title { font-size: 1.1em; }
 footer a { text-decoration: none; }
@@ -34,7 +38,7 @@ pre code { background: none; }
 
 /* misc elements */
 img, iframe, video { max-width: 100%; }
-main { hyphens: auto; }
+
 blockquote {
   background: #f9f9f9;
   border-left: 5px solid #ccc;
