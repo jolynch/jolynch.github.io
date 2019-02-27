@@ -136,7 +136,7 @@ idea). This increases throughput and decreases mean slowdown by decreasing
 the likelihood that a worker is idle.</li>
 <li>They have more than one accept worker in case an order takes a long time to
 accept. This helps ensure we don&rsquo;t run into the slow request problem where a
-single slow item blocks the whole queue</li>
+single slow item blocks the whole queue.</li>
 <li>Finally, they hand the customer back the ticket and tell them to go to the
 end of the processing pipeline to receive their order <em>directly from the
 worker making the sandwich</em>. That&rsquo;s right, Jimmy John&rsquo;s does <em>direct return</em>
@@ -189,7 +189,7 @@ example of pre-compute caches that are becoming really popular these days.</p>
 for pending demand changes and pre-compute the cache entries for that demand.
 For example, if you use <a href="https://en.wikipedia.org/wiki/Change_data_capture">change data
 capture</a> (CDC) from your
-database to inform offline cache pre-compute systems which goes off, calculates
+database to inform offline cache pre-compute systems which go off, calculates
 the value a cache should have and writes it into the cache pre-emptively, you
 can significantly improve your cache hit rate and keep systems running fast. A
 common example of this in industry are cache invalidation systems like
@@ -217,7 +217,7 @@ workers</li>
 cache misses.</li>
 </ol>
 
-<p>Many food service shop do some of these techniques, but I am not aware of one
+<p>Many food service shops do some of these techniques, but I am not aware of one
 that combines so many best practices in high performance systems engineering
 in one, very fast, sandwich making package.</p>
 
