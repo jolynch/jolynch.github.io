@@ -19,11 +19,11 @@
       
       <li><a href="/projects/">Projects</a></li>
       
+      <li><a href="/tags/">Tags</a></li>
+      
       <li><a href="/talks/">Talks</a></li>
       
       <li><a href="/publications/">Publications</a></li>
-      
-      <li><a href="/about/">About</a></li>
       
       <li><a href="/index.xml">RSS</a></li>
       
@@ -57,17 +57,23 @@ was a somewhat minor contributor to Paasta, mostly working on SmartStack
 integrations, but I did help port the whole codebase to Python 3 so that was
 interesting&hellip;</li>
 <li><a href="https://github.com/jolynch/jvmquake"><code>jvmquake</code></a> agent for rescuing
-distributed Java databases from themselves by killing them when they go
-sideways. This is basically an extension of
-<a href="https://github.com/airlift/jvmkill"><code>jvmkill</code></a> that also detects GC spirals of
-death.</li>
+distributed Java databases from themselves by killing them (while grabbing
+a core dump) when they enter JVM death spirals. This is basically an
+extension of <a href="https://github.com/airlift/jvmkill"><code>jvmkill</code></a> that also
+detects GC spirals of death.</li>
 <li><a href="https://github.com/Netflix/Priam"><code>Priam</code></a> distributed sidecar for Apache
 Cassandra. I work on this at Netflix, improving operability of Cassandra.</li>
 </ul>
 
-<h2 id="debugging">Debugging</h2>
+<h2 id="debugging-performance-analysis">Debugging / Performance Analysis</h2>
 
 <ul>
+<li><a href="https://github.com/jolynch/performance-analysis"><code>performance-analysis</code></a>
+collection of <a href="https://github.com/jupyter"><code>jupyter</code></a> notebooks and various
+python I&rsquo;ve used to analyze the performance of various service or database
+setups. Perhaps one of the more interesting ones is my notebook for modeling
+Cassandra availability with different numbers of
+<a href="https://github.com/jolynch/performance-analysis/tree/master/notebooks/cassandra_availability">vnodes</a></li>
 <li><a href="https://github.com/jolynch/cqltrace"><code>cqltrace</code></a> dynamic tracer for observing
 live CQL traffic in real time. I mostly use this for debugging Cassandra
 clients and their performance.</li>
@@ -83,12 +89,6 @@ A step by step guide on how to make a <code>python3</code> web service based on
 <a href="https://github.com/gevent/gevent"><code>gevent</code></a> and
 <a href="https://github.com/nginx/nginx"><code>nginx</code></a> production ready. This means high
 scalability and low latency with a typical microservice setup.</li>
-<li><a href="https://github.com/jolynch/python_performance_toolkit"><code>python_performance_toolkit</code></a>
-collection of <a href="https://github.com/jupyter"><code>jupyter</code></a> notebooks I&rsquo;ve used
-to analyze the performance of various service or database setups. Perhaps one
-of the more interesting ones is my notebook for modeling Cassandra
-availability with different numbers of
-<a href="https://github.com/jolynch/python_performance_toolkit/tree/master/notebooks/cassandra_availability">vnodes</a></li>
 </ul>
 
 <h2 id="economics">Economics</h2>

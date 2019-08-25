@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Joey Lynch&#39;s Site</title>
-    <link>https://jolynch.github.io/posts/</link>
-    <description>Recent content in Posts on Joey Lynch&#39;s Site</description>
+    <title>Distributed Systems as Food Service Analogies on Joey Lynch&#39;s Site</title>
+    <link>https://jolynch.github.io/tags/distsys-as-food/</link>
+    <description>Recent content in Distributed Systems as Food Service Analogies on Joey Lynch&#39;s Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 25 Feb 2019 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="https://jolynch.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://jolynch.github.io/tags/distsys-as-food/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -40,16 +40,6 @@ In this post, I will explore how Jimmy John&amp;rsquo;s operates as a high-perfo
       <guid>https://jolynch.github.io/posts/supermarkets_and_efficient_queueing_part_1/</guid>
       <description>I&amp;rsquo;d like to kick off the &amp;ldquo;distributed systems as food service analogy&amp;rdquo; series with the basics. In this two part post I cover the basics of queueing theory, and how we can understand it with the help of your every day supermarket or grocery store.
  Part 1: Basics of queueing theory and minimizing latency. Part 2: More advanced techniques past optimizing latency.  Why should software engineers care about Queueing Theory?</description>
-    </item>
-    
-    <item>
-      <title>Purpose of this Blog</title>
-      <link>https://jolynch.github.io/posts/purpose_of_blog/</link>
-      <pubDate>Thu, 10 Jan 2019 11:30:16 -0800</pubDate>
-      
-      <guid>https://jolynch.github.io/posts/purpose_of_blog/</guid>
-      <description>I figured it was time to start a proper personal/tech blog given how much I enjoy writing about the crazy fun and wierd distributed systems problems that I work on.
-Initially I am planning on writing up my current rants on high performance software systems as understood through food service analogies, but I imagine it&amp;rsquo;ll evolve from there to just talking about cool systems problems I work on every day.</description>
     </item>
     
   </channel>
