@@ -6,10 +6,20 @@
     <description>Recent content in Distributed Systems as Food Service Analogies on Joey Lynch&#39;s Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 25 Feb 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 31 Aug 2019 00:00:00 -0800</lastBuildDate>
     
         <atom:link href="https://jolynch.github.io/tags/distsys-as-food/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Domino&#39;s Is A Pretty Good Content Delivery Network For Pizza</title>
+      <link>https://jolynch.github.io/posts/dominos_is_a_good_cdn/</link>
+      <pubDate>Sat, 31 Aug 2019 00:00:00 -0800</pubDate>
+      
+      <guid>https://jolynch.github.io/posts/dominos_is_a_good_cdn/</guid>
+      <description>Today on the &amp;ldquo;distributed systems as food service analogy&amp;rdquo; series we visit low latency pizza delivery and how they relate to Content Delivery Networks (CDN).
+Like with Jimmy John&amp;rsquo;s, I often order Domino&amp;rsquo;s pizza not because it tastes particularly good but because Domino&amp;rsquo;s is one of the only pizza places I know that offer a latency service level objective (SLO) of less than thirty minutes. To achieve this promise, they use a number of common techniques used by Content Delivery Networks (CDNs) to ensure that web content such as photos, code and even videos get to your browser or device quickly.</description>
+    </item>
     
     <item>
       <title>Jimmy John&#39;s is like a High-Performance Web Service</title>
