@@ -18,7 +18,7 @@
       
       <guid>https://jolynch.github.io/posts/dominos_is_a_good_cdn/</guid>
       <description>Today on the &amp;ldquo;distributed systems as food service analogy&amp;rdquo; series we visit low latency pizza delivery and how they relate to Content Delivery Networks (CDN).
-Like with Jimmy John&amp;rsquo;s, I often order Domino&amp;rsquo;s pizza not because it tastes particularly good but because Domino&amp;rsquo;s is one of the only pizza places I know that offer a latency service level objective (SLO) of less than thirty minutes. To achieve this promise, they use a number of common techniques used by Content Delivery Networks (CDNs) to ensure that web content such as photos, code and even videos get to your browser or device quickly.</description>
+Like with Jimmy John&amp;rsquo;s, I often order Domino&amp;rsquo;s pizza not because it tastes particularly good but because Domino&amp;rsquo;s is efficient! They are one of the only pizza places I know that offer a latency service level objective (SLO) of less than thirty minutes. To achieve this promise, they use a number of common techniques used by Content Delivery Networks (CDNs) to ensure that web content such as photos, code and even videos get to your browser or device quickly.</description>
     </item>
     
     <item>
