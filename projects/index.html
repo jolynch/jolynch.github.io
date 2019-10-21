@@ -63,6 +63,11 @@ extension of <a href="https://github.com/airlift/jvmkill"><code>jvmkill</code></
 detects GC spirals of death.</li>
 <li><a href="https://github.com/Netflix/Priam"><code>Priam</code></a> distributed sidecar for Apache
 Cassandra. I work on this at Netflix, improving operability of Cassandra.</li>
+<li><a href="https://github.com/jolynch/pinch"><code>pinch</code></a> toolkit for compressing, hashing
+and moving data around as fast as you can around a network. This is just
+a docker container with all of my favorite data compression and validation
+tools built in (e.g. <code>zstd</code>, <code>lz4</code>, <code>xxhash</code> etc &hellip;) and soon some helpers
+for moving large datasets to and from S3.</li>
 </ul>
 
 <h2 id="debugging-performance-analysis">Debugging / Performance Analysis</h2>
@@ -70,9 +75,9 @@ Cassandra. I work on this at Netflix, improving operability of Cassandra.</li>
 <ul>
 <li><a href="https://github.com/jolynch/performance-analysis"><code>performance-analysis</code></a>
 collection of <a href="https://github.com/jupyter"><code>jupyter</code></a> notebooks and various
-python I&rsquo;ve used to analyze the performance of various service or database
-setups. Perhaps one of the more interesting ones is my notebook for modeling
-Cassandra availability with different numbers of
+python scripts I&rsquo;ve used to analyze the performance of various service or
+database setups. Perhaps one of the more interesting ones is my notebook for
+modeling Cassandra availability with different numbers of
 <a href="https://github.com/jolynch/performance-analysis/tree/master/notebooks/cassandra_availability">vnodes</a></li>
 <li><a href="https://github.com/jolynch/cqltrace"><code>cqltrace</code></a> dynamic tracer for observing
 live CQL traffic in real time. I mostly use this for debugging Cassandra
