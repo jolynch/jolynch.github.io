@@ -1,6 +1,130 @@
-body {
-  font-family: Optima, Candara, Calibri, Arial, sans-serif;
+/**
+ * Economist fonts from https://github.com/economist-components/component-typography
+ * Used under the MIT License
+ *
+ * Milo TE
+*/
+/* Primary subset fonts (aA-zZ 0-9 etc). */
+@font-face {
+  font-display: swap;
+  font-family: MiloTE;
+  font-style: normal;
+  font-weight: 400;
+  src:
+    url('../fonts/milo-primary-subset-rg.woff2') format('woff2'),
+    url('../fonts/milo-primary-subset-rg.woff') format('woff');
 }
+@font-face {
+  font-display: swap;
+  font-family: MiloTE;
+  font-style: italic;
+  font-weight: 400;
+  src:
+    url('../fonts/milo-primary-subset-it.woff2') format('woff2'),
+    url('../fonts/milo-primary-subset-it.woff') format('woff');
+}
+@font-face {
+  font-display: swap;
+  font-family: MiloTE;
+  font-style: normal;
+  font-weight: 500;
+  src:
+    url('../fonts/milo-primary-subset-md.woff2') format('woff2'),
+    url('../fonts/milo-primary-subset-md.woff') format('woff');
+}
+@font-face {
+  font-display: swap;
+  font-family: MiloTE;
+  font-style: italic;
+  font-weight: 500;
+  src:
+    url('../fonts/milo-primary-subset-md-it.woff2') format('woff2'),
+    url('../fonts/milo-primary-subset-md-it.woff') format('woff');
+}
+@font-face {
+  font-display: swap;
+  font-family: MiloTE;
+  font-style: normal;
+  font-weight: 700;
+  src:
+    url('../fonts/milo-primary-subset-bd.woff2') format('woff2'),
+    url('../fonts/milo-primary-subset-bd.woff') format('woff');
+}
+@font-face {
+  font-display: swap;
+  font-family: MiloTE;
+  font-style: italic;
+  font-weight: 700;
+  src:
+    url('../fonts/milo-primary-subset-bd-it.woff2') format('woff2'),
+    url('../fonts/milo-primary-subset-bd-it.woff') format('woff');
+}
+
+/* Secondary subset fonts (all other characters) */
+@font-face {
+  font-display: swap;
+  font-family: MiloTESec;
+  font-style: normal;
+  font-weight: 400;
+  src:
+    url('../fonts/milo-secondary-subset-rg.woff2') format('woff2'),
+    url('../fonts/milo-secondary-subset-rg.woff') format('woff');
+}
+@font-face {
+  font-display: swap;
+  font-family: MiloTESec;
+  font-style: italic;
+  font-weight: 400;
+  src:
+    url('../fonts/milo-secondary-subset-it.woff2') format('woff2'),
+    url('../fonts/milo-secondary-subset-it.woff') format('woff');
+}
+@font-face {
+  font-display: swap;
+  font-family: MiloTESec;
+  font-style: normal;
+  font-weight: 500;
+  src:
+    url('../fonts/milo-secondary-subset-md.woff2') format('woff2'),
+    url('../fonts/milo-secondary-subset-md.woff') format('woff');
+}
+@font-face {
+  font-display: swap;
+  font-family: MiloTESec;
+  font-style: italic;
+  font-weight: 500;
+  src:
+    url('../fonts/milo-secondary-subset-md-it.woff2') format('woff2'),
+    url('../fonts/milo-secondary-subset-md-it.woff') format('woff');
+}
+@font-face {
+  font-display: swap;
+  font-family: MiloTESec;
+  font-style: normal;
+  font-weight: 700;
+  src:
+    url('../fonts/milo-secondary-subset-bd.woff2') format('woff2'),
+    url('../fonts/milo-secondary-subset-bd.woff') format('woff');
+}
+@font-face {
+  font-display: swap;
+  font-family: MiloTESec;
+  font-style: italic;
+  font-weight: 700;
+  src:
+    url('../fonts/milo-secondary-subset-bd-it.woff2') format('woff2'),
+    url('../fonts/milo-secondary-subset-bd-it.woff') format('woff');
+}
+head {
+  font-family: MiloTE, MiloTESec, Optima, Candara, Calibri, Arial, sans-serif;
+  font-size: 20.25px;
+}
+
+body {
+  font-family: MiloTE, MiloTESec, Optima, Candara, Calibri, Arial, sans-serif;
+  font-size: 20.25px;
+}
+
 code {
   font-family: "Lucida Console", Monaco, monospace;
   font-size: 85%;
