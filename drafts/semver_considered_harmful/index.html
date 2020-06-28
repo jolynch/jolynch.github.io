@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SemVer Needs to Evolve | Joey Lynch&#39;s Site</title>
+    <title>SemVer Considered Harmful | Joey Lynch&#39;s Site</title>
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
     <link rel="preload" href=https://jolynch.github.io/fonts/milo-primary-subset-rg.woff2 as="font" type="font/woff2" crossorigin="anonymous">
@@ -35,7 +35,7 @@
     </nav>
 
 <div class="article-meta">
-<h1><span class="title">SemVer Needs to Evolve</span></h1>
+<h1><span class="title">SemVer Considered Harmful</span></h1>
 
 <h2 class="date">2020/06/21</h2>
 </div>
@@ -84,8 +84,8 @@ frequently are:</p>
 
 <ol>
 <li>Most packaging systems (deb, rpm, python, ruby, java, etc &hellip;) cannot
-simultaneously host multiple major versions of a given package. This often
-leaves users unable to upgrade to the latest major version due to
+simultaneously install multiple major versions of the same package name.
+This often leaves users unable to upgrade to the latest major version due to
 (reasonable) fear of breakages.</li>
 <li>Frequent major version bumps frequently break functional code, leading
 to <a href="https://en.wikipedia.org/wiki/Dependency_hell">dependency hell</a> where
@@ -131,9 +131,9 @@ getting the JVM to not pick one implementation arbitrarily. As a result, Java
 developers often resort to hacks like
 <a href="https://imperceptiblethoughts.com/shadow/">package path rewriting</a>.</p>
 
-<p><strong>Python libraries (<code>pip</code>)</strong>: While the Python community has moved towards
-isolated virtual environments which does make this issue slightly less of an
-issue (and with tools like <code>docker</code> or
+<p><strong>Python libraries (<code>pip</code> in particular)</strong>: While the Python community has
+moved towards isolated virtual environments which does make this issue slightly
+less of an issue (and with tools like <code>docker</code> or
 <a href="https://github.com/spotify/dh-virtualenv"><code>dhvirtualenv</code></a> it gets even
 better), you still can&rsquo;t install multiple versions of the same package in the
 same virtualenv. Most Python projects I am aware of either don&rsquo;t work around
@@ -298,6 +298,14 @@ first including the new version, then porting all old code to the new version,
 and finally removing the old version. The only cost to the user is the extra
 disk space to host multiple versions.</p>
 
+<p><strong>How do I ensure other people don&rsquo;t take my package name and like add a suffix?</strong></p>
+
+<p>Yes, this is an issue. It is an issue right now in the status quo as well
+without semantic names.  I don&rsquo;t have a backwards-compatible solution, but it
+is probably reasonably straightforward for packaging systems (or package hosts)
+to add support for claiming a namespace and associating it with a particular
+publisher (similar to how you can do that for a single package name).</p>
+
 <p><strong>How do I do unstable releases?</strong></p>
 
 <p>The zero dot is still there, but now it is there to explicitly indicate stability.
@@ -327,7 +335,7 @@ https://github.com/org/project/compare/9bd9aeee..625cd1dc
 # Command line
 git diff v2.12.34 v2.13.0</code></pre></div>
 
-<p><strong>As a softwre author, isn&rsquo;t maintaining multiple branches annoying?</strong></p>
+<p><strong>As a software author, isn&rsquo;t maintaining multiple branches annoying?</strong></p>
 
 <p>Most projects I am aware of already use multiple branches to support
 multiple major versions. Otherwise applying patches that must apply to multiple
@@ -336,7 +344,7 @@ versions, such as security patches, is rather difficult.</p>
 <p>I haven&rsquo;t really seen a good way of doing multiple majors with a single branch
 absent sophisticated build infrastructure most people don&rsquo;t have.</p>
 
-<p><strong>The merge conflicts between majors is knarly</strong></p>
+<p><strong>The merge conflicts between majors is gnarly</strong></p>
 
 <p>Yes this is annoying, although I should point out again not unique to this
 proposal. The easiest solution is not to break your API in the first place, but
