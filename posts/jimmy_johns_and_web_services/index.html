@@ -41,18 +41,14 @@
 </div>
 
 <main>
-
-
 <p>Today on the
 <a href="https://jolynch.github.io/tags/distsys-as-food/">&ldquo;distributed systems as food service analogy&rdquo;</a>
 series we visit one of my favorites: sandwich shops.</p>
-
 <p>Most sandwich places are absolutely terrible at efficiently processing my
 sandwich order. They have limited workers that constantly context switch and
 are entirely unable to pipeline (looking at you Subway). <a href="https://www.jimmyjohns.com/">Jimmy
 John&rsquo;s</a>, however, is wonderfully efficient and a
 model for all other sandwich places.</p>
-
 <p>In this post, I will explore how Jimmy John&rsquo;s operates as a high-performance
 web (micro)service might. When I worked at Yelp in San Francisco, I spent a
 great deal of time eating at Jimmy John&rsquo;s, and a non-trivial reason for that is
@@ -62,16 +58,13 @@ few minutes). At least the one near Yelp&rsquo;s SF office achieved this by oper
 as a finely tuned web service might, and I feel it&rsquo;s worth reflecting on all of
 the tricks they do. If you&rsquo;re building a high-performance service and you
 aren&rsquo;t doing these things, it&rsquo;s food for thought.</p>
-
-<h1 id="so-what-does-jimmy-john-s-do">So, what does Jimmy John&rsquo;s Do?</h1>
-
+<h1 id="so-what-does-jimmy-johns-do">So, what does Jimmy John&rsquo;s Do?</h1>
 <p>At the end of the day, Jimmy John&rsquo;s is trying to provide sandwiches as a
 service. A customer walks up with a sandwich order of varying complexity and
 duration, and Jimmy John&rsquo;s tries to make it for them as fast as possible. They
 handle dozens of concurrent requests that might range in complexity from simple
 &ldquo;I&rsquo;ll have roast beef and some provolone&rdquo; to the more complex &ldquo;J.J. Gargantuan
 hold the oregano and extra tomatoes&rdquo;.</p>
-
 <p>In my experience, Jimmy John&rsquo;s is able to achieve average processing times in
 less than 30 seconds from when I place my order to when I receive it, and the
 end to end experience even under heavy load is a few minutes. In queueing
@@ -83,13 +76,10 @@ in flight) and fulfilling them all in parallel giving their throughput an even
 bigger boost. A quick online search indicates that Jimmy John&rsquo;s actually
 holds a yearly <a href="https://vimeo.com/289769768">competition</a> called &ldquo;Sandwich
 Masters&rdquo;, so you know they take this seriously.</p>
-
 <p>My favorite part of this all though is that Jimmy John&rsquo;s achieves these great
 speeds using a number of tricks common in high-performance web services that I
 have worked on.</p>
-
 <h2 id="trick-1-avoid-context-switches">Trick #1: Avoid Context Switches</h2>
-
 <p>One of the biggest enemies of high-performance systems is the <a href="https://en.wikipedia.org/wiki/Context_switch">&ldquo;context
 switch&rdquo;</a>.  The name comes from
 when CPUs have to switch from one running process to the other, which causes a
@@ -97,12 +87,10 @@ significant delay in processing, but the concept is actually pretty general. A
 context switch in the general sense is simply when a system goes from doing one
 thing to doing another. This change in activity usually takes some time that
 you could have been using to do real work.</p>
-
 <p>One of the most common ways that sandwich shops context switch is when the same
 person takes your order, retrieves your food, and takes your payment. For
 example, at Subway, a worker might context switch <em>four or more times</em> in a
 single order:</p>
-
 <ol>
 <li>Take your order,</li>
 <li>Make the sandwich</li>
@@ -113,14 +101,12 @@ you start waiting on the person to come back.</li>
 <li><em>Context Switch</em> to add toppings to your sandwich</li>
 <li>Switch to register to ring you up</li>
 </ol>
-
 <p>The biggest delays at Subway happen for me when we get to step 4 above, where
 the worker context switches to take another order which can take longer than
 my sandwich takes to toast. This kind of pre-emption based on IO bound work
 (toasting the sandwich) is called asynchronous processing and is generally
 a good thing, but in this case the context switch costs non-trivial time and
 can result in slowing down the order.</p>
-
 <p>Jimmy John&rsquo;s doesn&rsquo;t do this. Jimmy John&rsquo;s has dedicated accept workers like
 high-performance proxies use (e.g. <a href="http://www.haproxy.org/">HAProxy</a> and
 <a href="https://www.nginx.com/">NGINX</a>). These workers just accept orders and dispatch
@@ -129,11 +115,10 @@ handing off the compute-bound part (making the sandwich) but without the
 context switch. This saves time because the workers never have to context
 switch, they just process order after order and dispatch that work to highly
 efficient sandwich making workers. It looks a little like:</p>
-
-<p><center><img src="/img/jimmy_johns_single_queue.svg" alt="jj_single_queue" /></center></p>
-
+<center>
+<p><img src="/img/jimmy_johns_single_queue.svg" alt="jj_single_queue"></p>
+</center>
 <p>Jimmy John&rsquo;s does three more things crucially right here:</p>
-
 <ol>
 <li>They have a single queue going into the register (see my post on
 <a href="/posts/supermarkets_and_efficient_queueing_part_1/">Supermarkets and Efficient Queueing: Part 1</a> to see why that&rsquo;s a good
@@ -149,14 +134,11 @@ to their customers.  The sandwich doesn&rsquo;t waste time being passed back up 
 the register (looking at you McDonald&rsquo;s), it just goes straight to the
 customer.</li>
 </ol>
-
 <p>Direct return is, in particular, really neat because it&rsquo;s what high-performance
 routing layers like Google&rsquo;s Maglev [<a href="#maglev">1</a>] do to try to offload heavy
 network results off their load balancers (and instead have the servers return
 the bytes directly to the requester).</p>
-
 <h2 id="trick-2-parallel-pipelines">Trick #2: Parallel Pipelines</h2>
-
 <p>Jimmy John&rsquo;s doesn&rsquo;t just get its speed from avoiding context switches, it
 also cuts significant time by using <a href="https://en.wikipedia.org/wiki/Parallel_computing"><em>parallel
 processing</em></a>. In a web
@@ -164,16 +146,15 @@ service, you might run multiple workers that each run their own compute
 pipelines. You do this so that one slow order can&rsquo;t block all the fast ones.
 You also do this to allow different workers (services in software land) to
 specialize and process their work faster and more efficiently.</p>
-
 <p>Jimmy John&rsquo;s nails parallel processing. Not only does it have multiple lanes
 to make multiple sandwiches in parallel, but they even sometimes re-order
 or prioritize orders to make sure that large complex orders don&rsquo;t unnecessarily
 slow down short orders. This, in turn, keeps mean processing time and mean
 slowdown way down. We can now add the parallel sandwich pipelines to the Jimmy
 John&rsquo;s model:</p>
-
-<p><center><img src="/img/jimmy_johns_whole_system.svg" alt="jj_system" /></center></p>
-
+<center>
+<p><img src="/img/jimmy_johns_whole_system.svg" alt="jj_system"></p>
+</center>
 <p>I&rsquo;m not sure if the pipelines are specialized, as in I&rsquo;m not sure if certain
 orders like roast beef go to one lane and other orders like Italian sandwiches
 go to another lane. If they did do this it would be pretty neat because the
@@ -181,15 +162,12 @@ workers could probably cut processing time by only having to handle a subset of
 the menu in the general case. Of course, this would mean that they&rsquo;d have to
 have good sandwich load balancing to make sure no one lane got overloaded, or
 dynamically re-assign the workers when there is extra capacity.</p>
-
 <h2 id="trick-3-pre-compute-cache-misses">Trick #3: Pre-Compute Cache misses</h2>
-
 <p>Another interesting thing I&rsquo;ve noticed at Jimmy John&rsquo;s is that they have
 background workers who are constantly re-filling the pre-allocated sandwich
 materials for the workers that are running low on various meats or cheeses. Not
 only does this avoid the sandwich worker context switching, but it&rsquo;s a great
 example of pre-compute caches that are becoming really popular these days.</p>
-
 <p>In the past few years, software engineers have realized that you can watch
 for pending demand changes and pre-compute the cache entries for that demand.
 For example, if you use <a href="https://en.wikipedia.org/wiki/Change_data_capture">change data
@@ -202,16 +180,12 @@ systems like Facebook&rsquo;s <code>mcsqueal</code> [<a href="#fb_memcache">2</a
 <a href="https://engineeringblog.yelp.com/2018/03/caching-internal-service-calls-at-yelp.html">casper</a>
 project which uses CDC to <a href="https://engineeringblog.yelp.com/2018/03/caching-internal-service-calls-at-yelp.html#invalidating-caches">invalidate
 caches</a>.</p>
-
 <p>Jimmy John&rsquo;s appears to me to do pre-compute demand caches. They notice that a
 lane will run out of roast beef and pre-emptively have a background worker go
 and re-fill the roast beef, Wicked.</p>
-
-<h1 id="summary-jimmy-john-s-is-very-efficient">Summary: Jimmy John&rsquo;s is Very Efficient</h1>
-
+<h1 id="summary-jimmy-johns-is-very-efficient">Summary: Jimmy John&rsquo;s is Very Efficient</h1>
 <p>In this post we explored how Jimmy John&rsquo;s exploits the following concepts
 in high-performance computing:</p>
-
 <ol>
 <li>Minimize context switches with dedicated workers accepting sandwich
 requests, processing sandwiches, and direct returning results directly
@@ -221,18 +195,14 @@ workers</li>
 <li>Increase sandwich output rate by using background workers to pre-fetch
 cache misses.</li>
 </ol>
-
 <p>Many food service shops do some of these techniques, but I am not aware of one
 that combines so many best practices in high-performance systems engineering
 in one, very fast, sandwich making package.</p>
-
 <h1 id="citations">Citations</h1>
-
 <p><a name="maglev"></a>
 [1] Daniel E. Eisenbud, Cheng Yi, et al. &ldquo;Maglev: A Fast and Reliable Software
 Network Load Balancer&rdquo;
 (<a href="https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/44824.pdf">pdf</a>)</p>
-
 <p><a name="fb_memcache"></a>
 [2] Rajesh Nishtala, Hans Fugal, et al. &ldquo;Scaling Memcache at Facebook&rdquo; (<a href="https://www.usenix.org/system/files/conference/nsdi13/nsdi13-final170_update.pdf">pdf</a>)</p>
 
@@ -254,7 +224,7 @@ if (!doNotTrack) {
 
   
   <hr/>
-  &copy; <a href="https://jolynch.github.io">Joey Lynch</a> 2019 | <a href="https://github.com/jolynch">Github</a>
+  © <a href="https://jolynch.github.io">Joey Lynch</a> 2019-2021 | <a href="https://github.com/jolynch">Github</a>
   
   </footer>
   </body>

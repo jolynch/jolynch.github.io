@@ -41,29 +41,23 @@
 </div>
 
 <main>
-
-
 <p>I&rsquo;ve been asked to apply some of the lessons learned from the <a href="https://jolynch.github.io/tags/distsys-as-food/">&ldquo;distributed
 systems as food service analogies&rdquo;</a> to
 something unrelated to food but that does devour Americans&rsquo; souls: the
 Department of Motor Vehicles (DMV).</p>
-
 <p>The DMV is where happy Americans go to wait, sometimes for many moons, just to
 be told that they have the wrong identifying documents for a driver&rsquo;s license
 renewal. It is an unfortunately dreadful introduction to government
 bureaucracy, and is a uniform topic of derision for newly driving teenagers
 (and indeed adults) across the US. It is so dreadful that it is even mocked in
 <a href="https://www.youtube.com/watch?v=ONFj7AYgbko">children&rsquo;s movies</a>.</p>
-
 <p>In this post I will attempt to apply basic queueing theory and performance
 analysis to the DMV, the same way I would to a distributed system. Some State&rsquo;s
 DMVs are already doing some of the proposals I make, for example California
 generally does a better job than Maryland (in my experience), but they can all
 improve by scientifically analyzing their bottlenecks and continuously
 optimizing using data driven decisions.</p>
-
 <h1 id="step-1-gather-data">Step 1: Gather Data</h1>
-
 <p>The first step of scientific performance analysis is to rigorously measure the
 system under test. Measuring key metrics allows system engineers to propose and
 test improvements scientifically. We incrementally develop theories, devise
@@ -71,10 +65,10 @@ experiments, run the experiments, measure the results and finally update our
 mental models which allows us to develop new theories. All performance analysis
 and optimization works in this continuous fashion whether you are optimizing
 distributed systems, pizza delivery, or issuing form MC-706-M.</p>
-
-<p><center><h3>Performance Analysis</h3></center>
-<center><img src="/img/performance_analysis.svg" alt="performance analysis" /></center></p>
-
+<center><h3>Performance Analysis</h3></center>
+<center>
+<p><img src="/img/performance_analysis.svg" alt="performance analysis"></p>
+</center>
 <p>In most distributed systems we might care about the system throughput we can do
 at different levels of concurrent load, or the distribution of service times.
 We may want to optimize
@@ -84,19 +78,17 @@ or sacrifice a little time on average to keep our high percentile service time
 lower. For the DMV to improve, we must first collect actionable data. I propose
 collecting the following timing information for every single person that walks
 in the door of a DMV:</p>
-
 <ul>
 <li>When the customer arrives at the queue (<code>T_q</code>)</li>
 <li>When the customer leaves the queue to go to a worker (<code>T_qf</code>)</li>
 <li>When the customer is finished (<code>T_f</code>).</li>
 </ul>
-
 <p>This data is straightforward to collect and allows us to calculate both the
 system&rsquo;s mean slowdown (how much do fast tasks queue behind slow ones) and
 mean latency (how fast do tasks complete):</p>
-
-<p><center><img src="/img/dmv_metrics.svg" alt="dmv_metrics" /></center></p>
-
+<center>
+<p><img src="/img/dmv_metrics.svg" alt="dmv_metrics"></p>
+</center>
 <p>This time series data along with what kind of task the customer sought
 (license renewal, new license, etc &hellip;) allows the DMV to measure changes to
 their systems and is the first step to satisfying the well established
@@ -105,24 +97,18 @@ instance, if after rolling out a new system mean slowdown and mean latency
 decrease we have improved the world. If mean slowdown decreases but mean
 latency increases (meaning we need more workers) we have made people happier
 but may need to hire more workers to get the mean latency back down.</p>
-
 <p>Data isn&rsquo;t just vital for running experiments, it is also a pre-requisite for
 many advanced task assignment algorithms we want to be able to use later. It
 is also convenient for creating incentives for DMV workers to perform well,
 such as issuing bonuses to effective DMV workers who complete tasks to full
 satisfaction in less than expected amounts of time.</p>
-
 <h1 id="step-2-reduce-and-balance-the-load">Step 2: Reduce and Balance the Load</h1>
-
 <pre><code>The best way to make something fast is not to do it.
 
 - Software engineering proverb
-</code></pre>
-
-<p>To reduce load on DMV offices, the very first step should be to identify high
+</code></pre><p>To reduce load on DMV offices, the very first step should be to identify high
 load activities that take up a large quantity of processing time but do not
 have to be done in person.</p>
-
 <p>Eliminating work is typically done with education and by providing online or
 over the phone services (accessible via phones, computers, or libraries) which
 allow high traffic activities such as renewing drivers licenses or
@@ -132,12 +118,9 @@ where people have to physically attend the DMV, to see just how many renewals
 were being sped up by not having people physically attend. This may sound
 obvious but figuring out how to keep people out of the DMV is one of the best
 ways to improve it.</p>
-
 <p>When we can&rsquo;t eliminate work, a wealth of literature tells us that we should
 try to balance the load. We can attack load balancing to DMVs in a few ways.</p>
-
 <h2 id="balance-the-load-across-time">Balance the Load across Time</h2>
-
 <p>The DMV struggles, like many public services (roads, etc &hellip;), with time of day
 load unbalancing, where more customers tend to show up at certain times of the
 day. One of the best ways to spread out this load is using appointments, and
@@ -145,44 +128,38 @@ indeed many states such as California implement appointments to help distribute
 load out over the whole day. Note that selecting how many appointments to have
 is somewhat of a tricky problem, but tuning that can be done using the
 throughput and slowdown statistics gathered in real time.</p>
-
-<p><center><img src="/img/dmv_load_over_time.svg" alt="dmv time of day load" /></center></p>
-
+<center>
+<p><img src="/img/dmv_load_over_time.svg" alt="dmv time of day load"></p>
+</center>
 <p>This graph is made up (with data from part 1 we could make a real one!), but it
 demonstrates how appointments allow the DMV to more evenly spread load across
 all hours of the day and give users who can incentives to go during &ldquo;off-peak&rdquo;
 hours.</p>
-
 <p>An economist would go a step further and apply demand based pricing where a
 subset of reservations is held for auction every day, and we can use the money
 captured from the reservation auction to hire more workers. This in turn
 reduces load for everyone while allowing those with high cost per unit time to
 expedite their visits.</p>
-
 <h2 id="balance-the-load-across-space">Balance the Load across Space</h2>
-
 <p>Once the data collection of timing data is automated, we can record the
 distribution of wait times and use this to help those considering walk-ins to
 select the office with the shortest queueing time for their particular task.
 This helps users balance load to the least busy DMV office.</p>
-
-<p><center><img src="/img/dmv_time_distribution.svg" alt="dmv time of day load" /></center></p>
-
+<center>
+<p><img src="/img/dmv_time_distribution.svg" alt="dmv time of day load"></p>
+</center>
 <p>In this case a customer may choose to attend the green (long-dashed) DMV
 because it will be faster for them. This is similar to the &ldquo;Join Shortest
 Queue&rdquo; <a href="/posts/supermarkets_and_efficient_queueing_part_1/#lesson-2-balance-your-load">load balancing algorithm we saw earlier</a> and
 while it isn&rsquo;t as advanced as some alternative load balancing algorithms, it is
 something humans intuitively understand: to go where the line is shortest.</p>
-
 <h1 id="step-3-optimize-queueing-for-long-tailed-distributions">Step 3: Optimize Queueing for Long Tailed Distributions</h1>
-
 <p>Balancing load evenly is generally useful, but to deal with the long tailed
 nature of DMV tasks where some tasks take significantly longer then others, we
 will have to unbalance the load and try to use the data we have to make good
 choices and help minimize slowdown, which is probably a better proxy for
 happiness than throughput. It may be useful to experiment with two
 size based strategies:</p>
-
 <ul>
 <li>Size-Interval Task Assignment with Equal Load (SITA-E [<a href="#sita">1</a>]): Divide
 tasks to workers based on the task size such that load on each worker is
@@ -191,13 +168,11 @@ roughly even on average.</li>
 know how big a piece of work is, guess and reschedule when exceeding the
 guess deadline.</li>
 </ul>
-
 <p>Specifically we can use the data collected to group tasks together with similar
 durations, and then keep those tasks queued together. Think of this like
 creating different &ldquo;express lanes&rdquo; based on estimated task duration. A license
 renewal, which is a fast task, should be separated from a new license with
 vision test, which is typically a slower task.</p>
-
 <p>The cutoff points are calculated per <code>SITA-E</code> such that the percentage of load
 that arrives at each pool of workers is roughly even. We can improve this even
 further by allowing large task workers to take from the short task pool (this
@@ -208,15 +183,14 @@ is important to note that for this to work the cutoffs and worker assignments
 must be constantly adjusting to what the data is telling us, otherwise the
 <a href="/posts/supermarkets_and_efficient_queueing_part_2/#lesson-4-separate-out-different-kinds-of-work">system&rsquo;s throughput can actually suffer significantly</a> when a
 worker could be busy but is instead idle.</p>
-
-<p><center><img src="/img/dmv_task_queueing.svg" alt="dmv_task_queueing" /></center></p>
-
+<center>
+<p><img src="/img/dmv_task_queueing.svg" alt="dmv_task_queueing"></p>
+</center>
 <p>TAGs comes in when a task exceeds the duration we thought it would take. When
 this happens, we can turn that worker into a &ldquo;slow task&rdquo; worker and re-queue
 all future tasks exceeding the deadline to that single slow task worker. This
 is illustrated above as &ldquo;Slow Task Requeue&rdquo; and further corrals slow tasks
 together and prevents them from slowing down fast tasks.</p>
-
 <p>For example, imagine that a customer was supposed to be in the <code>10-30m</code> lane,
 but it turns out they need to get their vision checked, which will put them
 over the 30 minute deadline. TAGs says that instead of tying up the <code>10-30m</code>
@@ -224,22 +198,18 @@ worker with the unexpectedly long task we should instead re-queue the work to a
 dedicated &ldquo;slow&rdquo; queue. For practical reasons we would probably let the first
 such slow task consume the worker but any future slow tasks would get escalated
 to the slow queue.</p>
-
 <p>For either of these systems to work well, however, we <em>must</em> have good data
 on task sizing. We can compensate slightly with TAGs and by allowing idle
 workers to dynamically re-assign themselves to pending customers in the faster
 groups, but depending on the distribution of task durations our strategy has to
 change.  Indeed it may be better to just open up all workers to all tasks if
 the task duration distribution is less heavy tailed and more uniform.</p>
-
 <h1 id="conclusion">Conclusion</h1>
-
 <p>In this post we saw how the first step to fixing the DMV is to start with data
 so that we can continuously experiment and measure our theories. Then we saw a
 few potential strategies to improve involving both load balancing and
 unbalancing to try to help reduce mean latency and mean slowdown in the face
 of variable task duration.</p>
-
 <p>It is important to note that most of the above strategies are operating under
 the assumption of a stable system state, namely that the average number of
 employed workers is greater than the average arrival rate of customers
@@ -249,13 +219,10 @@ simply understaffed to handle the load placed on them, and absent techniques
 like auctioning off high demand appointment slots or getting fewer people to
 come in by doing things over the phone, by mail, or online; no amount of
 fancy load balancing can fix an overloaded system.</p>
-
 <h1 id="citations">Citations</h1>
-
 <p><a name="sita"></a>
 [1] Harchol-Balter, M., Crovella, M. E., &amp; Murta, C. D. (1999). On choosing a
 task assignment policy for a distributed server system. (<a href="https://www.cs.cmu.edu/~harchol/Papers/tools.pdf">paper</a>)</p>
-
 <p><a name="tags"></a>
 [2] Harchol-Balter, M. (2000, April). Task assignment with unknown duration.
 (<a href="https://www.cs.cmu.edu/~harchol/Papers/tags.pdf">paper</a>)</p>
@@ -278,7 +245,7 @@ if (!doNotTrack) {
 
   
   <hr/>
-  &copy; <a href="https://jolynch.github.io">Joey Lynch</a> 2019 | <a href="https://github.com/jolynch">Github</a>
+  © <a href="https://jolynch.github.io">Joey Lynch</a> 2019-2021 | <a href="https://github.com/jolynch">Github</a>
   
   </footer>
   </body>

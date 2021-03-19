@@ -41,24 +41,19 @@
 </div>
 
 <main>
-
-
 <p>I&rsquo;d like to kick off the
 <a href="https://jolynch.github.io/tags/distsys-as-food/">&ldquo;distributed systems as food service analogy&rdquo;</a>
 series with the basics. In this two part post I cover the basics of
 <a href="https://en.wikipedia.org/wiki/Queueing_theory"><strong>queueing theory</strong></a>, and how
 we can understand it with the help of your every day supermarket or grocery
 store.</p>
-
 <ul>
 <li><a href="/posts/supermarkets_and_efficient_queueing_part_1/">Part 1</a>: Basics
 of queueing theory and minimizing latency.</li>
 <li><a href="/posts/supermarkets_and_efficient_queueing_part_2/">Part 2</a>: More
 advanced techniques past optimizing latency.</li>
 </ul>
-
 <h1 id="why-should-software-engineers-care-about-queueing-theory">Why should software engineers care about Queueing Theory?</h1>
-
 <p>Software engineers should care about queueing theory because we spend a lot of
 time optimizing queues of work. Everything we do in a computer boils down to
 having some work to do, keeping that work in a queue, and then having
@@ -71,30 +66,24 @@ stream processing such as
 running off an ordered event log stored in <a href="https://kafka.apache.org/">Kafka</a>
 and even background processing tasks such as sending emails or resizing images
 from a <a href="https://aws.amazon.com/sqs/">SQS</a> queue worker.</p>
-
 <p>Many performance bugs boil down to something along the lines of:</p>
-
 <ol>
 <li>[<code>task</code>] starts taking twice as long</li>
 <li>The queues containing [<code>task</code>]s grow without bound</li>
 <li>Everything is sad</li>
 </ol>
-
 <p>Luckily, with just a little understanding of how queueing theory works, we can
 make our systems a lot faster and more efficient. As queues are so fundamental,
 there is a whole discipline that surrounds them, called <em>queueing theory</em>.
 There is a lot of math behind it, but to get a bit of intuition one need only
 look at a suburban classic: the supermarket.</p>
-
 <h1 id="what-do-supermarkets-have-to-do-with-queueing-theory">What do Supermarkets have to do with Queueing Theory</h1>
-
 <p>I spend a lot of time waiting in line at supermarkets, and I spend an
 embarrassing quantity of that time thinking about how they are making queueing
 theory tradeoffs. Supermarkets usually have multiple employees that can
 run cash registers, or bag groceries, or help customers. Furthermore customers
 arrive with varying durations of work as some customers are buying just a few
 items and some are buying groceries for a family of ten for two weeks.</p>
-
 <p>This is just like a service that a software engineer who works on the
 backend of a website might write, except that the food to check out
 are web requests and the employees are CPUs running a web worker (be it a
@@ -102,16 +91,12 @@ thread or a process, it&rsquo;s still a worker). Typically some requests are mor
 expensive than others meaning that they might require more computation or
 database work, and our goal is to service them as quickly and fairly as
 possible.</p>
-
 <p>It turns out that people who design supermarkets (food distribution engineers
 shall we say) and software engineers have similar goals: process the maximum
 number of customers (requests) in a given period of time with most efficient
 use of employees (workers).</p>
-
 <h2 id="lesson-1-use-the-right-kind-of-queue">Lesson #1: Use the right kind of queue</h2>
-
 <p>Supermarkets generally queue their customers in two ways:</p>
-
 <ol>
 <li>Have a separate queue for each register, customers self select with some
 selection criteria (random, shortest, etc &hellip;)</li>
@@ -119,10 +104,8 @@ selection criteria (random, shortest, etc &hellip;)</li>
 first free register, typically through a signaling mechanism such as a
 flashing light.</li>
 </ol>
-
 <p>Most supermarkets queue using the first strategy, but some like the Military
 PX near where I grew up use the second technique. Which technique is better?</p>
-
 <p>It turns out that the second, single queue, strategy is almost always the
 better option, leading to superior <a href="https://en.wikipedia.org/wiki/Latency_(engineering)">mean
 latency</a>, and therefore
@@ -130,7 +113,6 @@ also <a href="https://en.wikipedia.org/wiki/Throughput">throughput</a> for a giv
 or processors. This may not always be a good thing if we, for example, queue
 short tasks behind large ones, but absent significantly more information about
 job size, a single queue is the right choice.</p>
-
 <p>Intuitively we know that the second way is faster because the probability of
 you choosing a lane that has a &ldquo;slow grandma&rdquo; (or just a person with a lot of
 food to check out) is significantly higher with multiple queue. With the first
@@ -141,32 +123,26 @@ latency. You can also think of this as &ldquo;which strategy allows a worker to 
 idle&rdquo;, in that the first strategy allows workers to be idle because a job joins
 the wrong queue while the second strategy is guaranteed to always keep workers
 busy.</p>
-
 <p>We can also <em>prove</em> the single queue is better with the help of a queueing
 theory model. The first option can be
 approximated as multiple <a href="https://en.wikipedia.org/wiki/M/M/1_queue"><code>M/M/1</code>
 queues</a> with <code>1/c</code> the arrival rate
 per queue. The second queueing technique can be approximated as a single
 <a href="https://en.wikipedia.org/wiki/M/M/c_queue"><code>M/M/c</code> queue</a>.</p>
-
 <p><a name="figure1"></a></p>
-
 <table>
 <thead>
 <tr>
 <th>Our Queueing Options</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
-<td><center><img src="/img/fdm_vs_mmk_queue.svg" alt="fdm_vs_mmk_queue" /></center></td>
+<td><img src="/img/fdm_vs_mmk_queue.svg" alt="fdm_vs_mmk_queue"></td>
 </tr>
 </tbody>
 </table>
-
 <p>From <a href="#harchol_balter">M. Harchol-Balter</a> (Section 14.4, page 263) we can work out the expected latency of these two systems:</p>
-
 <table>
 <thead>
 <tr>
@@ -174,7 +150,6 @@ per queue. The second queueing technique can be approximated as a single
 <th>Single Queue</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td><center>
@@ -428,7 +403,6 @@ per queue. The second queueing technique can be approximated as a single
 </tr>
 </tbody>
 </table>
-
 <!--
 \begin{align*}
 E&[T]^{FDM} = \frac{c}{c * \mu - \lambda}
@@ -438,7 +412,6 @@ E&[T]^{FDM} = \frac{c}{c * \mu - \lambda}
 c &= \text{number of workers} \\
 \end{align}
 -->
-
 <!--
 \begin{align*}
 E&[T]^{M/M/c} = \frac{1}{\lambda} * P_q * \frac{\rho}{(1-\rho)} + \frac{1}{\mu} \\
@@ -446,14 +419,11 @@ E&[T]^{M/M/c} = \frac{1}{\lambda} * P_q * \frac{\rho}{(1-\rho)} + \frac{1}{\mu} 
 P_q &= \text{Pr(queueing on arrival)} \\
 \end{align*}
 -->
-
 <p>Based on this, we can see that under light load (<code>P_q ~= 0</code>) the two systems
-yield similar (although <code>MMc</code> strictly dominates) results with <code>E[T]_MMc = 1 /
-μ</code> and <code>E[T]_FDM ~= 1 / (μ - δ) ~= 1 / μ</code>. Under heavy load the two systems
+yield similar (although <code>MMc</code> strictly dominates) results with <code>E[T]_MMc = 1 / μ</code> and <code>E[T]_FDM ~= 1 / (μ - δ) ~= 1 / μ</code>. Under heavy load the two systems
 are reasonably equivalent as well in that they are essentially both
 a multiple of the request rate as requests are queueing faster than they are
 serviced.</p>
-
 <p>However, for reasonable request rates <code>λ</code> that do not put the system into an
 underloaded or overloaded state, we can see that the <code>M/M/c</code> queue dominates
 multiple queues using <a href="https://github.com/jolynch/python_performance_toolkit/blob/master/notebooks/queueing_theory/queueing_analysis.ipynb">a jupyter
@@ -465,7 +435,6 @@ response latency of <code>0.4ms</code> and a request rate of <code>18,000</code>
 (Poisson arrivals) we see that the multiple queues have about <strong><code>300%</code></strong> the
 latency of a single queue across the latency distribution with significantly
 higher variance:</p>
-
 <pre><code>Theory:
 E[T]_FDM = 1.43
 E[T]_MMc = 0.44
@@ -475,51 +444,43 @@ Strategy         |    mean |     var |     p50 |     p95 |     p99 |   p99.9 |
 Multiple Queues  |    1.41 |    1.83 |    1.00 |    4.11 |    6.13 |    7.96 |
 Single Queue     |    0.43 |    0.17 |    0.31 |    1.25 |    1.89 |    2.86 |
 
-</code></pre>
-
-<p>We can also clearly see that a single queue is better by plotting the response
+</code></pre><p>We can also clearly see that a single queue is better by plotting the response
 latencies with a standard boxplot where the whiskers are placed at the <code>1st</code>
-and <code>99th</code> percentile latency:
-<center><img src="/img/single_vs_multiple.png" alt="single_vs_multiple" /></center></p>
-
+and <code>99th</code> percentile latency:</p>
+<center>
+<p><img src="/img/single_vs_multiple.png" alt="single_vs_multiple"></p>
+</center>
 <p>Alternatively we can look at the latency distribution of these two queueing
 options over a wide range of load and as we saw above the <code>M/M/c</code> continues
 to provide significantly better latency bounds:</p>
-
-<p><center><img src="/img/single_vs_multiple_load.png" alt="single_vs_multiple_load" /></center></p>
-
+<center>
+<p><img src="/img/single_vs_multiple_load.png" alt="single_vs_multiple_load"></p>
+</center>
 <p><strong>Summary</strong>: Keeping work in a single queue is probably the right default
 choice if your goal is to minimize mean latency (maximize throughput).</p>
-
 <h2 id="lesson-2-balance-your-load">Lesson #2: Balance your Load</h2>
-
 <p>It is fair to note that shoppers don&rsquo;t just show up at one queue or the other,
 indeed they follow some form of algorithm where they try to select the best
 queue to join. In systems engineering we call this &ldquo;load balancing&rdquo; and we can
 improve immensely on the abysmal <code>FDM</code> results from above by using a smarter
 load balancing algorithm.</p>
-
 <p>Load balancing happens when an external process intentionally picks the queue
 that a new request (customer) should enter to try to balance the load, it looks
 something like:</p>
-
 <table>
 <thead>
 <tr>
 <th>Load Balancing</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
-<td><center><img src="/img/fdm_vs_lb_queue.svg" alt="fdm_vs_lb_queue" /></center></td>
+<td><img src="/img/fdm_vs_lb_queue.svg" alt="fdm_vs_lb_queue"></td>
 </tr>
 </tbody>
 </table>
-
 <p>We can explore three likely load balancing algorithms that customers in a
 grocery store may use in addition to our two strategies from above:</p>
-
 <ol>
 <li><strong><code>Random</code></strong>. The request is dispatched to a random worker. This should be
 equivalent to multiple queues from above.</li>
@@ -533,18 +494,16 @@ queues this one picks a random queue and picks between that queue and
 the one directly to the right and directly to the left. This simulates
 arriving at a random queue but then checking the queues to either side.</li>
 </ol>
-
 <p>If we simulate these three options we can see that, again, the single queue
 dominates the field, although <code>Join Shortest Queue</code> is only very slightly worse
 (about 10% worse across the latency distribution).</p>
-
-<p><center><img src="/img/single_vs_multiple_lb.png" alt="single_vs_multiple_lb" /></center></p>
-
+<center>
+<p><img src="/img/single_vs_multiple_lb.png" alt="single_vs_multiple_lb"></p>
+</center>
 <p>The surprise winner here in my opinion is the choice of two option, which
 underperforms <code>JSQ</code> but not by much, and unlike this simulation scanning all of
 the queues at the supermarket is not free. A good load balancing algorithm
 which is also lazy!? yes please.</p>
-
 <p>We have seen that when we have to split into multiple queues, balancing the
 load really does help. This applies equally to computer systems: if you
 temporarily have more work to do then you have workers to do it, try to keep
@@ -553,51 +512,42 @@ try to dispatch it to a worker that is free. For example if you&rsquo;re running
 website try to give a request to a web machine that has a free web worker
 <em>right now</em>. If you can&rsquo;t do that, then try to have a good load balancer that
 get&rsquo;s as close to that as possible.</p>
-
 <p><strong>Summary</strong>: If you must join a separate queue, try to go to the one with the
 least queued work. Joining the shortest queue you can is a good approximation
 of this (although as we will see in
 <a href="/posts/supermarkets_and_efficient_queueing_part_2/">Part 2</a>, estimating
 queued work is not exactly the same as the shortest queue).</p>
-
 <h2 id="lesson-3-when-you-have-picked-the-wrong-queue-cheat">Lesson #3: When you have picked the wrong queue, cheat</h2>
-
 <p>Unfortunately for you and me, supermarkets frequently choose the wrong way to
 queue their customers with individual queues per register. Computer programs
 also often don&rsquo;t know how large the queues are at various destination servers
 or on various cores. The bright news is that there is a great technique we can
 borrow from high performance distributed systems: tied requests (aka request
 speculation).</p>
-
 <p>With speculative/tied requests we as the customer try to get the fastest
 service time by dispatching to two or more workers, and you take whichever gets
 there first. Crucially to be efficient we have to drop the redundant request
 when the first starts being processed, however, we can still get a nice latency
 improvement even without this cancellation as shown in [<a href="#tail_at_scale">2</a>].</p>
-
 <p>If we do <a href="https://github.com/jolynch/python_performance_toolkit/blob/master/notebooks/queueing_theory/speculation_analysis.ipynb">a
 simulation</a> of such tied requests where we always speculate and
 cancel the other request that is pending, we can see that tail latency is
 reduced dramatically:</p>
-
-<p><center><img src="/img/speculation.png" alt="speculation" /></center></p>
-
+<center>
+<p><img src="/img/speculation.png" alt="speculation"></p>
+</center>
 <p>This is just like in a supermarket where a couple will split up and have one
 person wait at one register and the second person waits at a different
 register. Whoever gets to the cashier first tries to signal to the other person
 &ldquo;hey come over here we can check out together&rdquo; and they succeed at reducing
 their latency with no real decrease to throughput, although your fellow
 customers may be peeved at the surprise arrival of a potentially larger order.</p>
-
 <p><strong>Summary</strong>: In case you pick the wrong queue, you can just pick more than
 one queue and go to the one that dequeues first.</p>
-
 <h1 id="conclusion">Conclusion</h1>
-
 <p>We&rsquo;ve seen how supermarkets and high performance software services actually
 have a lot in common. Along the way we have hopefully learned how both
 queueing systems can take advantage of basic performance practices:</p>
-
 <ol>
 <li>Use a smaller number of queues when you are worker bound that dispatch to
 free workers rather than having a queue per worker. This will likely
@@ -609,23 +559,18 @@ shortest remaining work.</li>
 dispatch to multiple queues and race them against each other to get minimal
 latency.</li>
 </ol>
-
 <p>Perhaps someday more supermarkets will see the light of better queueing theory
 and I&rsquo;ll have less time to think about how I&rsquo;m wasting time needlessly in line
 waiting to checkout.</p>
-
 <p>Check out <a href="/posts/supermarkets_and_efficient_queueing_part_2/">Part 2</a>
 for a slightly more sophisticated analysis.</p>
-
 <h1 id="citations">Citations</h1>
-
 <p><a name="harchol_balter"></a>
 [1] M. Harchol-Balter, Performance Modeling and Design of Computer Systems:
 Queueing Theory in Action. (<a href="https://books.google.com/books?id=75SbigDGK0kC">google
 books</a>)</p>
-
 <p><a name="tail_at_scale"></a>
-[2] Jeffrey Dean and Luiz Andre Barroso, The Tail at Scale (<a href="https://ai.google/research/pubs/pub40801]">paper</a>)</p>
+[2] Jeffrey Dean and Luiz Andre Barroso, The Tail at Scale (<a href="https://ai.google/research/pubs/pub40801%5D">paper</a>)</p>
 
 </main>
 
@@ -645,7 +590,7 @@ if (!doNotTrack) {
 
   
   <hr/>
-  &copy; <a href="https://jolynch.github.io">Joey Lynch</a> 2019 | <a href="https://github.com/jolynch">Github</a>
+  © <a href="https://jolynch.github.io">Joey Lynch</a> 2019-2021 | <a href="https://github.com/jolynch">Github</a>
   
   </footer>
   </body>

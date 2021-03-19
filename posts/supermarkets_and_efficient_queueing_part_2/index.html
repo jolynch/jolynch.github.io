@@ -41,56 +41,47 @@
 </div>
 
 <main>
-
-
 <p>This post wraps up the two part writeup on queueing theory and understanding
 computer systems using supermarkets within the larger
 <a href="https://jolynch.github.io/tags/distsys-as-food/">&ldquo;distributed systems as food service analogy&rdquo;</a>
 series.</p>
-
 <ul>
 <li><a href="/posts/supermarkets_and_efficient_queueing_part_1/">Part 1</a>: Basics
 of queueing theory and minimizing latency.</li>
 <li><a href="/posts/supermarkets_and_efficient_queueing_part_2/">Part 2</a>: More
 advanced techniques past optimizing latency.</li>
 </ul>
-
 <p>We learned in <a href="/posts/supermarkets_and_efficient_queueing_part_1/">Part 1</a>
 that we should keep our queues together and if we must form separate queues
 we should always try to pick the shortest queue if we can. In this post we
 will see that isn&rsquo;t quite true if you care about metrics other than throughput.</p>
-
 <p>In particular, we will re-examine the supermarket queueing systems and try
 to optimize for <strong>mean slowdown</strong> instead of <strong>mean service time</strong>.
 See <a href="#harchol_balter">M. Harchol-Balter</a> (Section 28.3, page 474) for a
 precise handling but generally mean slowdown is a measure of how much a small
 task queues behind larger ones:</p>
-
-<p><center><img src="/img/slowdown_eq.svg" alt="slowdown_eq" /></center></p>
-
+<center>
+<p><img src="/img/slowdown_eq.svg" alt="slowdown_eq"></p>
+</center>
 <p>Ideally, if you are a task that only takes a few seconds, you shouldn&rsquo;t wait
 behind tasks that take hours. Put differently, today we&rsquo;re going to be talking
 about how we can use queueing theory to not only keep your wait low at a
 supermarket, but also keep you happier while waiting.</p>
-
 <h2 id="lesson-4-separate-out-different-kinds-of-work">Lesson #4: Separate out different kinds of work</h2>
-
 <p>We are all familiar with the &ldquo;15 items or less&rdquo; lines at
 supermarkets, but did you know that this is based in a very common queueing
 theory based strategy that aims to minimize average slowdown?</p>
-
 <p>When you create dedicated queues for the &ldquo;fast&rdquo; customers, you guarantee that
 quick jobs cannot queue behind slow jobs, and while you sacrifice a
 throughput to get this, your customer&rsquo;s slowdown decreases
 significantly because the slow tasks can&rsquo;t penalize the fast ones. This
 tradeoff exists because when there are few &ldquo;fast&rdquo; customers, you are effectively losing cashiers that could
 be servicing the slower masses.</p>
-
 <p>We can actually observe this in action by simulating such a bi-modal workload,
 something like a sum of two truncated Pareto distributions:</p>
-
-<p><center><img src="/img/slowdown_request_distribution.png" alt="slowdown_request_distribution" /></center></p>
-
+<center>
+<p><img src="/img/slowdown_request_distribution.png" alt="slowdown_request_distribution"></p>
+</center>
 <p>As these are <a href="https://en.wikipedia.org/wiki/M/G/k_queue">M/G/k</a> queues, and are
 somewhat complex to find closed form solutions for we can instead show our
 intuition to be true through a <a href="https://github.com/jolynch/python_performance_toolkit/blob/master/notebooks/queueing_theory/slowdown_analysis.ipynb">jupyter
@@ -99,10 +90,10 @@ by simulating a bimodal sum of Pareto distributions. In this simulation we
 route requests knowing how long they take to either a &ldquo;fast lane&rdquo; or a &ldquo;slow
 lane&rdquo;. By doing this we <strong>increase mean latency</strong> but we <strong>decrease mean
 slowdown</strong>:</p>
-
-<p><center><img src="/img/fast_lane.svg" alt="fast_lane" /></center></p>
-
-<pre><code class="language-code">Latency results
+<center>
+<p><img src="/img/fast_lane.svg" alt="fast_lane"></p>
+</center>
+<pre><code class="language-code" data-lang="code">Latency results
 ------------------
 Strategy              |   mean |    var |    p50 |    p95 |    p99 |  p99.9 |
 Fast Lane Latency     |   6.49 |  60.96 |   3.00 |  22.71 |  31.31 |  40.25 |
@@ -113,18 +104,15 @@ Slowdown results
 Strategy              |   mean |    var |    p50 |    p95 |    p99 |  p99.9 |
 Fast Lane Slowdown    |   1.10 |   0.09 |   1.00 |   1.69 |   2.54 |   3.61 |
 Single Queue Slowdown |   1.19 |   1.94 |   1.00 |   1.11 |   8.06 |  18.98 |
-</code></pre>
-
-<p>We can see that the dedicated fast lanes are superior in terms of slowdown
+</code></pre><p>We can see that the dedicated fast lanes are superior in terms of slowdown
 by plotting the slowdowns in a variable width histogram:</p>
-
-<p><center><img src="/img/slowdown_histogram.png" alt="slowdown_histogram" /></center></p>
-
+<center>
+<p><img src="/img/slowdown_histogram.png" alt="slowdown_histogram"></p>
+</center>
 <p>I love that supermarkets mostly get this right,
 but I do wish that they would do more of this based on metrics other than
 number of items, such as payment method. Indeed a queuing theorist would say
 if you pay with a check you should get directed to the &ldquo;super slow&rdquo; lanes.</p>
-
 <p>It turns out that computer systems can benefit from the same type of isolation
 of work we think will be fast (aka &ldquo;latency sensitive&rdquo; or &ldquo;interactive&rdquo;
 requests) from work that we know will take a long time (aka &ldquo;batch&rdquo; or
@@ -132,7 +120,6 @@ requests) from work that we know will take a long time (aka &ldquo;batch&rdquo; 
 replicas just for handling offline batch traffic, and also why CPU pinning will
 will almost always beat CPU shares for mixed latency+batch workloads
 as shown in Google&rsquo;s <a href="#herecles">Heracles</a> system.</p>
-
 <p>It&rsquo;s important to recognize, however, that there are real tradeoffs here,
 especially if you size the worker pools incorrectly you will lose throughput
 <strong>and</strong> slowdown. For example, if you had a dozen &ldquo;15 items or less&rdquo; cashiers
@@ -140,18 +127,14 @@ but only a single normal cashier, then your customers with more than 15 items
 will be very unhappy. I encourage you to play around with the notebook and see
 how if you tweak the distributions even a little bit these strategies can make
 things less efficient.</p>
-
 <p><strong>Summary</strong>: Split your work into separate queues based on expected latency to
 tradeoff average latency for average slowdown.</p>
-
 <h2 id="lesson-5-when-queues-form-autoscale-and-re-assign-workers">Lesson #5: When queues form, autoscale and re-assign workers</h2>
-
 <p>I mentioned earlier that supermarket employees can take on many roles, very
 similar to how CPUs can run different programs. Interestingly, this ability
 to change what someone is doing with a task switch can be very valuable and
 can help mitigate some of the issues with the previous strategy of separating
 out work.</p>
-
 <p>Some of the more efficient grocery stores I know do this kind of dynamic
 re-assignment of workers to ensure that no worker is idle. For example,
 baggers might re-distribute to the line with the larger orders to try to reduce
@@ -160,12 +143,10 @@ enough of a customer queue starts forming. The supermarket actually
 <em>autoscales</em> their workers to try to minimize latency in the critical section.
 They also only do this when the queue get&rsquo;s large enough to justify the context
 switching costs of moving a worker from one task to another.</p>
-
 <p>This technique of worker re-assignment allows us to re-capture some of the lost
 throughput we got from separating out 15 item customers from the rest because
 when there are not enough 15 item customers to justify the cashiers we can
 re-allocate those cashiers to the normal pool.</p>
-
 <p>This kind of work re-prioritization is common in computers, for example servers
 run processes with different priorities (the &ldquo;bagging&rdquo; process has lower
 priority than the &ldquo;customer checkout&rdquo; process). It&rsquo;s also similar to work
@@ -179,17 +160,13 @@ market</a> is built on the notion of &ldquo;while
 there are free baggers lying around we&rsquo;ll do your relatively unimportant work,
 but when customers show up we&rsquo;re stopping with the complimentary bagging and
 re-assign these baggers to work the cashier&rdquo;.</p>
-
 <p><strong>Summary</strong>: You can recoup some throughput losses while splitting queues by
 dynamically resizing queues and re-assigning workers.</p>
-
 <h1 id="conclusion">Conclusion</h1>
-
 <p>We&rsquo;ve seen how supermarkets and high performance software services actually
 have a lot in common. We have learned how both can take advantage of basic
 queueing theory to optimize their performance metrics such as latency and
 slowdown. To sum up:</p>
-
 <ol>
 <li>Use a smaller number of queues when you are worker bound that dispatch to
 free workers rather than having a queue per worker. This will likely
@@ -205,18 +182,14 @@ in duration to minimize mean slowdown.</li>
 <li>If you are separating out workers, make sure to dynamically re-assign them
 to different pools so you don&rsquo;t decrease throughput by too much.</li>
 </ol>
-
 <p>We have also learned how supermarkets could improve by keeping queues together,
 except when they want to create dedicated fast lanes. When they do make fast
 lanes they should be dynamic and shift automatically with the workload to try
 to adapt to load conditions. In practice, supermarkets have a long way to go.</p>
-
 <h1 id="citations">Citations</h1>
-
 <p><a name="harchol_balter"></a>
 [1] M. Harchol-Balter, Performance Modeling and Design of Computer Systems:
 Queueing Theory in Action.</p>
-
 <p><a name="herecles"></a>
 [2] D Lo, L Cheng, R Govindaraju et al. Heracles: Improving resource efficiency
 at scale
@@ -240,7 +213,7 @@ if (!doNotTrack) {
 
   
   <hr/>
-  &copy; <a href="https://jolynch.github.io">Joey Lynch</a> 2019 | <a href="https://github.com/jolynch">Github</a>
+  © <a href="https://jolynch.github.io">Joey Lynch</a> 2019-2021 | <a href="https://github.com/jolynch">Github</a>
   
   </footer>
   </body>

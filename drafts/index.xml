@@ -5,10 +5,19 @@
     <description>Recent content in Drafts on Joey Lynch&#39;s Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 21 Jun 2020 12:57:26 -0700</lastBuildDate>
+    <lastBuildDate>Sun, 14 Mar 2021 20:48:05 -0400</lastBuildDate>
     
         <atom:link href="https://jolynch.github.io/drafts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>SemVer Considered Harmful</title>
+      <link>https://jolynch.github.io/posts/semver_considered_harmful/</link>
+      <pubDate>Sat, 04 Jul 2020 20:50:00 -0700</pubDate>
+      
+      <guid>https://jolynch.github.io/posts/semver_considered_harmful/</guid>
+      <description>In the past ten years or so, Semantic Versioning a.k.a &amp;ldquo;SemVer&amp;rdquo; has become extremely popular in the software development world. The idea is that libraries and services can convey information to users about how the application programming interface (API) of that library/package/service is evolving just using the version number. This information is conveyed through three dotted numbers that form a logical clock for totally ordering changes to the software API:</description>
+    </item>
     
     <item>
       <title>How to Speed up the DMV</title>
