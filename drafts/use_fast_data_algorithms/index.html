@@ -47,9 +47,11 @@ generally trying to shovel it between VMs and blob stores over TLS. I am
 constantly surprised by how many systems only support slow, inefficient, and
 expensive ways of doing these operations.</p>
 <p>In my experience, these poor algorithm choices are <em>orders of magnitude</em> slower
-than modern alternatives. In the interest of using more of our CPU time to do
-useful work instead of melting ice-caps and giving programmers excessively long
-coffee breaks, we will explore some faster alternatives in this post.</p>
+than modern alternatives. Indeed, using a fast algorithm can often be the
+difference between actually doing compression/hashing/encryption and &ldquo;Eh, I&rsquo;ll
+skip it&rdquo;.  In the interest of using more of our CPU time to do useful work
+instead of melting ice-caps and giving programmers excessively long coffee
+breaks, we will explore some faster alternatives in this post.</p>
 <p><strong>TLDR</strong></p>
 <table>
 <thead>
@@ -206,7 +208,8 @@ where you don&rsquo;t want a fast hash. For example, one situation where you wan
 intentionally slow algorithm is when dealing with passwords. In such cases you
 want a very slow hash like
 <a href="https://en.wikipedia.org/wiki/Argon2"><code>argon2</code></a>,
-<a href="https://en.wikipedia.org/wiki/Bcrypt"><code>bcrypt</code></a>&quot;), <code>PBKFD2</code> or even just a high number of
+<a href="https://en.wikipedia.org/wiki/Bcrypt"><code>bcrypt</code></a>&quot;,
+<a href="https://en.wikipedia.org/wiki/PBKDF2"><code>PBKFD2</code></a> or even just a high number of
 rounds of <code>SHA-512</code>.</p>
 <h3 id="show-me-the-data">Show me the Data</h3>
 <p>Expect <code>xxHash</code> to net about a <code>~10x</code> improvement on <code>MD5</code> and ~5-10x improvement
@@ -294,7 +297,8 @@ because of the specification!&quot;.  That is unfortunate, but at least make sur
 you&rsquo;re using fast implementations, for example
 <a href="https://github.com/corretto/amazon-corretto-crypto-provider">ACCP</a> will speed
 up <code>MD5</code> on most Java VMs by a factor of ~4 as well as <code>AES-GCM</code> by ~10x while
-it is at it.</p>
+it is at it. ACCP achieves this by &hellip; linking in fast native implementations
+of crypto.</p>
 <h2 id="compression">Compression</h2>
 <blockquote>
 <p>I like my data transfers fast and don&rsquo;t like paying for lots of disk or
