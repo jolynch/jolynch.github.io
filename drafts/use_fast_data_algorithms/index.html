@@ -332,24 +332,24 @@ many-read use cases.</li>
 first &ldquo;I&rsquo;ll trade off ratio for speed&rdquo; algorithms, snappy was good for its
 time. These days it is almost always outperformed by other choices.</li>
 </ul>
-<h3 id="best-choice---i-care-about-ratio">Best Choice - I care about ratio</h3>
-<p>Use <a href="https://facebook.github.io/zstd/"><code>zstd</code></a>. To trade off more compression
-time CPU for better ratio increase the compression level or increase the block
+<h3 id="better-choice---i-care-about-ratio">Better Choice - I care about ratio</h3>
+<p>Try <a href="https://facebook.github.io/zstd/"><code>zstd</code></a>. To spend more compression
+CPU time for better compression ratio increase the compression level or increase the block
 size. I find that in most database workloads the default level (<code>3</code>) or even
-level <code>1</code> is a good choice for write heavy datasets (getting close to <code>lz4</code>)
+level <code>1</code> is a good choice for write heavy datasets (getting closer to <code>lz4</code>)
 and level <code>10</code> is good for read heavy datasets (surpassing <code>gzip</code> in every
 dimension). Note that <code>zstd</code> strictly dominates <code>gzip</code> as it is faster and gets
 better ratio.</p>
 <p>Even better: <code>zstd</code> supports <a href="https://facebook.github.io/zstd/#small-data">training dictionaries</a>
 which can really come in handy if you have lots of individually small but
 collectively large <code>JSON</code> data (looking at you tracing systems).</p>
-<h3 id="best-choice---i-only-care-about-speed">Best Choice - I only care about speed</h3>
-<p>Use <a href="https://github.com/lz4/lz4"><code>lz4</code></a>. With near memory speeds and decent
+<h3 id="better-choice---i-only-care-about-speed">Better Choice - I only care about speed</h3>
+<p>Try <a href="https://github.com/lz4/lz4"><code>lz4</code></a>. With near memory speeds and decent
 ratio this algorithm is almost always a safe choice over not compressing at
 all. It has excellent language support and is exceptionally good for real-time
 compression/decompression as it is so cheap.</p>
-<h3 id="best-choice---i-want-to-shovel-data-from-here-to-there">Best Choice - I want to shovel data from here to there</h3>
-<p>use <a href="https://facebook.github.io/zstd/"><code>zstd --adapt</code></a>. This feature
+<h3 id="better-choice---i-want-to-shovel-data-from-here-to-there">Better Choice - I want to shovel data from here to there</h3>
+<p>Try <a href="https://facebook.github.io/zstd/"><code>zstd --adapt</code></a>. This feature
 automatically adapts the compression ratio as the IO conditions change to make
 the current optimal tradeoff between CPU and &ldquo;keeping the pipe fed&rdquo;.</p>
 <p>For example, if you are have very little free CPU on your system but a fast
@@ -363,8 +363,8 @@ a more expensive compression step for cheaper decompression.</p>
 <p>Historically we had to make tradeoffs between ratio, compression speed and
 decompression speed, but as we see with <a href="https://gist.github.com/jolynch/55185e455351d6b7febb266499207afa#file-compression-sh">this quick
 benchmark</a>
-we no longer need to make tradeoffs. These days (2021) I just always reach for <code>lz4</code> or <code>zstd</code> with an appropriate
-level.</p>
+we no longer need to make tradeoffs. These days (2021), I just reach for <code>zstd</code>
+with an appropriate level or <code>lz4</code> if I really need to minimize CPU cost.</p>
 <p>First let&rsquo;s look at the results for the <code>6.5GiB</code> review dataset.</p>
 <table>
 <thead>
@@ -506,9 +506,10 @@ following implementations:</p>
 <li><code>xxHash</code>: <code>cli</code>, <a href="https://pypi.org/project/xxhash/"><code>python</code></a>, and <a href="https://github.com/lz4/lz4-java#xxhash-java"><code>java</code></a></li>
 <li><code>lz4</code>: <code>cli</code>, <a href="https://pypi.org/project/lz4/"><code>python</code></a>, and <a href="https://github.com/lz4/lz4-java#lz4-java"><code>java</code></a>.</li>
 <li><code>zstd</code>: <code>cli</code>, <a href="https://pypi.org/project/zstandard/"><code>python</code></a>, and <a href="https://github.com/luben/zstd-jni"><code>java</code></a>.</li>
+<li><code>blake3</code>: <a href="https://github.com/BLAKE3-team/BLAKE3/releases/tag/0.3.7"><code>cli</code></a>, and <a href="https://pypi.org/project/blake3/"><code>python</code></a></li>
 <li><a href="https://github.com/jolynch/pinch"><code>Pinch</code></a> is a <a href="https://hub.docker.com/r/jolynch/pinch">docker image</a>
 I built so I can bring my swiss-army-knife of hashing/compression techniques
-to any server that can run docker.</li>
+to any server that can run docker. I use this a lot on CI/CD systems.</li>
 </ul>
 
 </main>
