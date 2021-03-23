@@ -10,6 +10,16 @@
     
     
     <item>
+      <title>Use Fast Data Algorithms</title>
+      <link>https://jolynch.github.io/posts/use_fast_data_algorithms/</link>
+      <pubDate>Mon, 22 Mar 2021 20:48:05 -0400</pubDate>
+      
+      <guid>https://jolynch.github.io/posts/use_fast_data_algorithms/</guid>
+      <description>As an engineer who primarily works with data and databases I spend a lot of time moving data around, hashing it, compressing it, decompressing it and generally trying to shovel it between VMs and blob stores over TLS. I am constantly surprised by how many systems only support slow, inefficient, and expensive ways of doing these operations.
+In my experience, these poor algorithm choices are orders of magnitude slower than modern alternatives.</description>
+    </item>
+    
+    <item>
       <title>SemVer Considered Harmful</title>
       <link>https://jolynch.github.io/posts/semver_considered_harmful/</link>
       <pubDate>Sat, 04 Jul 2020 20:50:00 -0700</pubDate>
