@@ -65,8 +65,13 @@ Cassandra. I work on this at Netflix, improving operability of Cassandra.</li>
 <li><a href="https://github.com/jolynch/pinch"><code>pinch</code></a> toolkit for compressing, hashing
 and moving data around as fast as you can around a network. This is just
 a docker container with all of my favorite data compression and validation
-tools built in (e.g. <code>zstd</code>, <code>lz4</code>, <code>xxhash</code> etc &hellip;) and soon some helpers
-for moving large datasets to and from S3.</li>
+tools built in (e.g. <code>zstd</code>, <code>lz4</code>, <code>xxhash</code> etc &hellip;) and a local <code>go</code> server
+that can do it all via HTTP for you (assuming the commands are installed)</li>
+<li><a href="https://github.com/Netflix-Skunkworks/service-capacity-modeling"><code>service-capacity-modeling</code></a>
+library for capacity planning (determining which kind and how much of a
+computer to buy) for a particular workload such as Apache Cassandra or
+Elasticsearch. Essentially a multi-variate monte carlo simulation with a
+least regret optimizer over per workload models.</li>
 </ul>
 <h2 id="debugging--performance-analysis">Debugging / Performance Analysis</h2>
 <ul>
@@ -114,7 +119,7 @@ the HQSOM deep learning algorithm. This was a project I worked on for a few
 graduate classes at MIT (6.867 and 6.868) that used genetic algorithms and
 deep learning and other such buzzwords. Surprisingly it actually worked
 pretty well.</li>
-<li><a href="https://github.com/jolynch/food.op">food.op</a> recipe recommender based on
+<li><a href="https://github.com/jolynch/food.op"><code>food.op</code></a> recipe recommender based on
 gradient boosting classifiers. It was a hackathon project but sorta neat to
 have recipes recommended based on previous cooking experiences.</li>
 <li><a href="https://github.com/jolynch/organon"><code>organon</code></a> symbolic constraint framework
@@ -122,6 +127,11 @@ and solver for modeling complex constrained systems that may not have
 solutions. The
 <a href="https://github.com/jolynch/organon/blob/master/papers/final.pdf">paper</a> is a
 decent read if you&rsquo;re interested in what this project can do.</li>
+<li><a href="https://github.com/Netflix-Skunkworks/service-capacity-modeling"><code>service-capacity-modeling</code></a>
+library for capacity planning (determining which kind and how much of a
+computer to buy) for a particular workload such as Apache Cassandra or
+Elasticsearch. Essentially a multi-variate monte carlo simulation with a
+least regret optimizer over per workload models.</li>
 </ul>
 
 </main>
