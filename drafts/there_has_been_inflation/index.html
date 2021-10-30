@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Yes there has been inflation | Joey Lynch&#39;s Site</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="preload" href=https://jolynch.github.io/fonts/milo-primary-subset-rg.woff2 as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href=https://jolynch.github.io/fonts/milo-primary-subset-bd.woff2 as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href=https://jolynch.github.io/fonts/milo-secondary-subset-rg.woff2 as="font" type="font/woff2" crossorigin="anonymous">
+
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/posts/">Posts</a></li>
+      
+      <li><a href="/projects/">Projects</a></li>
+      
+      <li><a href="/tags/">Tags</a></li>
+      
+      <li><a href="/talks/">Talks</a></li>
+      
+      <li><a href="/publications/">Publications</a></li>
+      
+      <li><a href="/index.xml">RSS</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">Yes there has been inflation</span></h1>
+
+<h2 class="date">2021/10/30</h2>
+</div>
+
+<main>
+<p>I recently read <a href="https://www.google.com/books/edition/_/0r7_ygEACAAJ?hl=en">The Deficit Myth</a>
+and I particularly enjoyed the insight that <a href="https://en.wikipedia.org/wiki/Inflation">inflation</a>
+comes from consumer spending on supply-limited goods, <em>not printing money</em>. Put
+differently, when a consumer wants a scarce good <em>and</em> has more money to spend
+they will accept a higher price for the same good. Inflation only occurs when
+the consumer accepts that higher price.</p>
+<p>This realization has some interesting consequences for U.S. Federal
+<a href="https://en.wikipedia.org/wiki/Monetary_policy">monetary</a> and
+<a href="https://en.wikipedia.org/wiki/Fiscal_policy">fiscal</a> policy:</p>
+<ol>
+<li>Printing money does not inherently cause inflation. People spending money
+causes inflation and it matters more <em>who</em> has excess money (or credit) to
+spend.</li>
+<li>Spending money to create supply only causes inflation on the materials that
+supplier requires. It is less likely consumers would see these price increases
+long term as the increased supply compensates.</li>
+<li>For the <em>federal</em> government, tax cuts are functionally equivalent to
+printing money and handing it directly to certain people. Taxes remove
+money from the system, spending creates it.</li>
+</ol>
+<p>Under this insight the past decade of lose money but <a href="https://fred.stlouisfed.org/graph/?g=EqRD">low
+inflation</a> in the consumer price
+index (<a href="https://www.bls.gov/cpi/">CPI</a>) makes sense if that money supply did
+not primarily flow to most consumers who buy most goods.</p>
+<p>I contend there actually has been inflation, but in goods that wealthy
+Americans compete for, not for everyday goods. Relatedly, I personally believe
+this is a sign we as a society are not efficiently distributing
+wealth to most people, but concentrating it in the hands of the few who then
+use it to compete for luxury goods.</p>
+<h2 id="there-has-actually-been-inflation">There has actually been inflation</h2>
+<p>Most of the money that has been created in the past twenty years via tax cuts,
+stock market gains, defense spending, and government guaranteed loans (in
+particular mortgage guarantees and education loans) has flowed to generally
+wealthier people and not to most consumers.</p>
+<p>Wealthy people don&rsquo;t compete for gallons of milk, they compete for scarce
+assets and luxury real world goods. For example, a wealthy person might compete
+with other wealthy people for:</p>
+<ul>
+<li>(Fine) Art</li>
+<li>(Desirable) Land</li>
+<li>(Large) Yachts</li>
+<li>(Fancy) Jewelry</li>
+<li>(New) Cars</li>
+<li>(Higher) Education</li>
+</ul>
+<p>Average prices on all of these have increased, but just like measuring average
+latency doesn&rsquo;t reveal much information, we want to
+look at the <a href="https://en.wikipedia.org/wiki/Long_tail">statistical tail</a> of the
+distribution to see where the inflation lives.</p>
+<p>Unfortunately, there isn&rsquo;t very much in the way of price distribution data
+available for these asset classes (say relative to liquid assets like
+stocks or bonds) and I&rsquo;m not sufficiently invested in this post to try to
+get it, so let&rsquo;s just look as some of the tail events that have happened
+in the last decade and see what we see.</p>
+<p>We can calculate inflation rates with a simple function
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">inflation</span>(p, y):
+    <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">    Given two prices and two years, calculate the annual inflation
+</span><span style="color:#e6db74">    rate as a percentage (0-100)
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+    p1, p2 <span style="color:#f92672">=</span> p
+    y1, y2 <span style="color:#f92672">=</span> y
+    ratio <span style="color:#f92672">=</span> p2 <span style="color:#f92672">/</span> p1
+    years <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">/</span> (y2 <span style="color:#f92672">-</span> y1)
+    <span style="color:#66d9ef">return</span> round((ratio <span style="color:#f92672">**</span> years <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">2</span>)
+
+<span style="color:#75715e"># inflation((127.5, 450.3), (2013, 2017)) -&gt; 37.09</span></code></pre></div></p>
+<p>So if we were to look at <a href="https://fred.stlouisfed.org/series/CPIAUCNS">CPI</a>
+we&rsquo;d see inflation of around 3% annually since 1980 and even lower around
+2.3% since 2000.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">inflation((77.8, 261.582), (1980, 2021)) -&gt; 3.0
+# Or just from 2000 to 2021
+inflation((168.8, 273), (2000, 2021)) -&gt; 2.32</code></pre></div>
+<p>How does this compare to the tail of the distribution?</p>
+<h3 id="desirable-art">Desirable Art</h3>
+<p>The 2010s have been <a href="https://www.artnews.com/art-news/market/art-market-2010s-1202674009/">good</a>
+for fine art, seeing some <a href="https://en.wikipedia.org/wiki/List_of_most_expensive_paintings">record breaking sales</a>
+such as:</p>
+<p>2017: $450.3 million for
+<a href="https://en.wikipedia.org/wiki/Salvator_Mundi_(Leonardo)">Salvator Mundi</a> by
+<a href="https://en.wikipedia.org/wiki/Leonardo_da_Vinci">Leonardo da Vinci</a>. Valued at
+$127.5 million in 2013 for a 37% annual inflation rate.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">inflation((127.5, 450.3), (2013, 2017)) -&gt; 37.09</code></pre></div>
+<p>2017: $110.5 million for <a href="https://en.wikipedia.org/wiki/Untitled_(1982_painting)">Untitled</a>
+by <a href="https://en.wikipedia.org/wiki/Jean-Michel_Basquiat">Jean-Michel Basquiat</a>,
+the largest sum ever paid for an American artist at auction. Valued at
+$20,900 in 1984 this is a 30% annual inflation rate.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">inflation((20_900, 110.5e6), (1984, 2017)) -&gt; 29.67</code></pre></div>
+<p>2015: $179.4 million for <a href="https://en.wikipedia.org/wiki/Les_Femmes_d%27Alger#%22Version_O%22">Les Femmes d&rsquo;Alger, Version O</a> by <a href="https://en.wikipedia.org/wiki/Pablo_Picasso">Pablo Picasso</a>.
+Sold for $31.9 million in 1997 this is a 10% annual inflation rate.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">inflation((31.9, 179.4), (1997, 2015)) -&gt; 10.07</code></pre></div>
+<p>As many (most?) sales of art are private it is hard to know exactly how much
+inflation has been going on in the fine art community. Above we looked at some
+of the tail events happening in public auctions over the past decade and
+hopefully as the
+<a href="https://www.sec.gov/Archives/edgar/data/1738134/000149315218016661/partiiandiii.htm">LLCs</a>
+created by companies like <a href="https://www.masterworks.io/">masterworks.io</a> become
+more common we can finally get some accurate data on the matter.</p>
+<p>That being said, art is inflating at a rate far greater than 3%, probably closer
+to 10%.</p>
+<h3 id="desirable-land">Desirable Land</h3>
+<p>Ideally we could break down land value separately from homes so we can look
+at how the actual scarce good (land) performs relative to the durable good
+of the house itself. I can&rsquo;t seem to find good data on per locality land values
+without homes on them, but <a href="https://www.zillow.com/research/data/">Zillow Research</a>
+does provide the Zillow Home Value Index (ZHVI) for <a href="https://files.zillowstatic.com/research/public_csvs/zhvi/City_zhvi_uc_sfrcondo_tier_0.67_1.0_sm_sa_month.csv?t=1633281985">&ldquo;Top Tier&rdquo;</a>
+markets (65% - 95% for a region) which can give us some insight into how the
+most expensive real-estate markets in America have inflated since 2000.</p>
+<p>Homes in <a href="https://en.wikipedia.org/wiki/Atherton,_California">Atherton</a>,
+California (rich Tech Bay Area, part of &ldquo;Silicon Valley&rdquo;) have increased from
+$4.6 million in 2000 right at the peak of the tech bubble to $12.4 million in
+2021, for a 4.85% inflation rate. If you just look from 2012 to 2021 the
+rate increases to around 7%.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">inflation((4_599_043, 12_445_835), (2000, 2021)) -&gt; 4.85
+inflation((6_804_630, 12_445_835), (2012, 2021)) -&gt; 6.94</code></pre></div>
+<p>Homes in <a href="https://en.wikipedia.org/wiki/Aspen,_Colorado">Aspen</a>, Colorado
+have increased from $3.1 million in 2000 to $8.36 million in 2021, for a
+4.8% inflation rate.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">inflation((3_125_662, 8_362_437), (2000, 2021)) -&gt; 4.8</code></pre></div></p>
+<p>Homes in
+<a href="https://en.wikipedia.org/wiki/Bridgehampton,_New_York">Bridgehampton</a>, New
+York (part of the &ldquo;Hamptons&rdquo;) have increased from $1.82m in 2000 to $7.8
+million in 2021, for a 7.11% inflation rate.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">inflation((1_842_709, 7_793_749), (2000, 2021)) -&gt;: 7.11</code></pre></div></p>
+<p>Near where I grew up the most desirable homes were in
+<a href="https://en.wikipedia.org/wiki/Potomac,_Maryland">Potomac</a>, Maryland (rich
+public figures and such from DC). From 2000 to 2006 homes there increased from
+$782,806 to around $1.7 million, for a 14% inflation rate, but never really
+recovered after the financial crisis and stand at about the same value today
+yielding a 3.6% annual inflation rate from 2000 to 2021.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">inflation((782_806, 1_713_201), (2000, 2006)) -&gt; 13.94
+inflation((782_806, 1_652_206), (2000, 2021)) -&gt; 3.62</code></pre></div></p>
+<p>At the top end of the real-estate market we have also seen higher price
+increases than 2.3%, although it is very time dependent, probably around 5%
+though.</p>
+<h3 id="desirable-watches">Desirable Watches</h3>
+<p>I wasn&rsquo;t sure if I should include watches in this analysis because desireable
+luxury watches have had a somewhat large <a href="https://www.cnbc.com/2021/10/13/luxury-watch-shortage-drives-growth-of-20-billion-secondhand-market.html">rise in prices</a>
+since 2019, but I do think it&rsquo;s a good example of the kind of supply limited
+luxury goods that wealthly people are absolutely competing for.</p>
+<p>For example, the Patek Philippe Nautilus 5711 (blue dial 1A-010) has increased
+from around $24,215 in 2013 to nearly $145,000 in 2021 according to
+<a href="https://www.chrono24.com/patekphilippe/ref-57111a010.htm">Chrono24</a>. Yes there
+are <em>stainless steel</em> watches going for over one hundred thousand dollars on the
+secondary market! Rare and precious metal watches have increased perhaps even
+more such as the <a href="https://www.chrono24.com/rolex/rainbow--imod2759.htm">Rolex Rainbow Daytona ref 116595RBOW</a>
+which can go for as high as $500,000 in rose gold, which were originally sold
+at $96,900 in 2018. Watches that are expressely kept scarce such as <a href="https://en.wikipedia.org/wiki/Richard_Mille">Richard
+Mille</a> routinely sell for between
+a quarter and half a million dollars, often far above retail prices.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">inflation((24_215, 145_000), (2013, 2021)) -&gt; 25.07
+inflation((96_900, 500_000), (2018, 2021)) -&gt; 72.8</code></pre></div>
+<p>At the top end of the luxury watch market we have seen price increases similar
+to that of art, probably because luxury watches are more art than functional.
+Although data is scarce, it&rsquo;s likely that luxury watches in general have seen
+around 10% inflation over the past two decades.</p>
+<h3 id="desirable-education">Desirable Education</h3>
+<p>We often hear about how the cost of higher education is increasing in
+America for a multitude of reasons. Under the &ldquo;available money spent on scarce
+goods creates inflation&rdquo; philosophy one might explain it primarily because
+more consumers have access to credit (often with rather punishing terms) to
+pay for college (demand) while the number of slots at universities (supply)
+have remained somewhat constant.</p>
+<p>But at the tail how have tuitions changed at the top three
+Universities in the world (according to
+<a href="https://www.usnews.com/education/best-global-universities/rankings">US News and World Report</a>)?</p>
+<p>One year of education at Harvard University has
+<a href="https://oir.harvard.edu/fact-book/undergraduate_package">increased</a> from
+$32,164 in 2000 to $63,025 in 2017 for a 4% inflation rate.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">inflation((32_164, 63_025), (2000, 2017)) -&gt; 4.04</code></pre></div>
+<p>One year of education at MIT, which apparently <a href="https://sfs.mit.edu/undergraduate-students/the-cost-of-attendance/annual-student-budget/">includes much more expensive
+housing than Harvard</a>,
+has increased from $33,225 in <a href="https://news.mit.edu/2000/tuition">2000</a> to $77,020 in 2021
+for a 4.08% inflation rate.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">inflation((33_225, 77_020), (2000, 2021)) -&gt; 4.08</code></pre></div>
+<p>One year of education at Stanford has increased from $32,471 in <a href="https://news.stanford.edu/pr/00/000216tuition.html">2000</a>
+to $73,333 in <a href="https://news.stanford.edu/2021/02/03/stanford-expands-financial-aid-keeps-2021-22-tuition-flat/">2021</a>
+for a 3.96% inflation rate.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">inflation((32_471, 73_333), (2000, 2021)) -&gt; 3.96</code></pre></div>
+<p>At the top end of the education market we have again seen higher price increases
+than 2.3%, probably around 4%.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>From the data we&rsquo;ve seen looking at the price increases of goods that wealthier
+people compete on, we see about double (in some places more than double) the
+officially reported rate of inflation. This data matches with the
+hypothesis put forward by the Deficit Myth, namely that spending causes
+inflation, not money supply.</p>
+<p>I personally worry that this data furthermore indicates the created money is
+mostly flowing to the wealthy, rather than to all Americans. If
+rich people are willing to spend $200,000 for a stainless steel watch that
+keeps time less well than a $100 quartz watch, I think it may be better to tax
+that money and spend it to buy food instead even if that causes some inflation
+in the price of food.</p>
+
+</main>
+
+  <footer>
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-155022966-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+  
+  <hr/>
+  © <a href="https://jolynch.github.io">Joey Lynch</a> 2019-2021 | <a href="https://github.com/jolynch">Github</a>
+  
+  </footer>
+  </body>
+</html>
+
