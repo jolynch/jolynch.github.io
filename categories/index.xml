@@ -10,6 +10,16 @@
     
     
     <item>
+      <title>Distributed Systems Shibboleths</title>
+      <link>https://jolynch.github.io/posts/distsys_shibboleths/</link>
+      <pubDate>Sun, 24 Apr 2022 11:28:49 -0500</pubDate>
+      
+      <guid>https://jolynch.github.io/posts/distsys_shibboleths/</guid>
+      <description>Shibboleths are historically a word or phrasing that indicate membership in a particular group or culture. I was introduced to the term in the West Wing where the President needed to verify the veracity of a person&amp;rsquo;s claims of religious persecution.
+I am still a relatively new engineer in the field of distributed systems, having only studied and worked in the field for around a decade, but in that time I believe I have learned to recognize some key &amp;ldquo;distsys shibboleths&amp;rdquo; that help me recognize when I can trust what a vendor or other engineer is telling me.</description>
+    </item>
+    
+    <item>
       <title>Yes There Has Been Inflation</title>
       <link>https://jolynch.github.io/posts/there_has_been_inflation/</link>
       <pubDate>Thu, 11 Nov 2021 09:32:19 -0400</pubDate>
