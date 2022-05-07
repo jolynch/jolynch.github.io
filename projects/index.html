@@ -44,6 +44,16 @@
 <p>Below are some of my projects roughly categorized by area.</p>
 <h2 id="distributed-systems">Distributed Systems</h2>
 <ul>
+<li><a href="https://github.com/Netflix-Skunkworks/service-capacity-modeling"><code>service-capacity-modeling</code></a>
+library for capacity planning (determining which kind and how much of a
+computer to buy) for a particular workload such as Apache Cassandra or
+Elasticsearch. Essentially a multi-variate monte carlo simulation with a
+least regret optimizer over per workload models.</li>
+<li><a href="https://github.com/jolynch/jvmquake"><code>jvmquake</code></a> agent for rescuing
+distributed databases written in Java from themselves by killing them (while
+grabbing a core dump) when they enter JVM death spirals. This is basically an
+extension of <a href="https://github.com/airlift/jvmkill"><code>jvmkill</code></a> that also
+detects GC spirals of death.</li>
 <li><a href="https://github.com/airbnb/synapse"><code>synapse</code></a> and
 <a href="https://github.com/airbnb/nerve"><code>nerve</code></a> service mesh aka SmartStack. I help
 maintain and have contributed significant features to Airbnb&rsquo;s service mesh,
@@ -55,11 +65,6 @@ pluggable and support any proxy.</li>
 was a somewhat minor contributor to Paasta, mostly working on SmartStack
 integrations, but I did help port the whole codebase to Python 3 so that was
 interesting&hellip;</li>
-<li><a href="https://github.com/jolynch/jvmquake"><code>jvmquake</code></a> agent for rescuing
-distributed databases written in Java from themselves by killing them (while
-grabbing a core dump) when they enter JVM death spirals. This is basically an
-extension of <a href="https://github.com/airlift/jvmkill"><code>jvmkill</code></a> that also
-detects GC spirals of death.</li>
 <li><a href="https://github.com/Netflix/Priam"><code>Priam</code></a> distributed sidecar for Apache
 Cassandra. I work on this at Netflix, improving operability of Cassandra.</li>
 <li><a href="https://github.com/jolynch/pinch"><code>pinch</code></a> toolkit for compressing, hashing
@@ -67,11 +72,6 @@ and moving data around as fast as you can around a network. This is just
 a docker container with all of my favorite data compression and validation
 tools built in (e.g. <code>zstd</code>, <code>lz4</code>, <code>xxhash</code> etc &hellip;) and a local <code>go</code> server
 that can do it all via HTTP for you (assuming the commands are installed)</li>
-<li><a href="https://github.com/Netflix-Skunkworks/service-capacity-modeling"><code>service-capacity-modeling</code></a>
-library for capacity planning (determining which kind and how much of a
-computer to buy) for a particular workload such as Apache Cassandra or
-Elasticsearch. Essentially a multi-variate monte carlo simulation with a
-least regret optimizer over per workload models.</li>
 </ul>
 <h2 id="debugging--performance-analysis">Debugging / Performance Analysis</h2>
 <ul>
@@ -114,6 +114,11 @@ improved the project!</li>
 </ul>
 <h2 id="machine-learning--ai">Machine Learning / AI</h2>
 <ul>
+<li><a href="https://github.com/Netflix-Skunkworks/service-capacity-modeling"><code>service-capacity-modeling</code></a>
+library for capacity planning (determining which kind and how much of a
+computer to buy) for a particular workload such as Apache Cassandra or
+Elasticsearch. Essentially a multi-variate monte carlo simulation with a
+least regret optimizer over per workload models.</li>
 <li><a href="https://github.com/jolynch/python-hqsom"><code>python_hqsom</code></a> implementation of
 the HQSOM deep learning algorithm. This was a project I worked on for a few
 graduate classes at MIT (6.867 and 6.868) that used genetic algorithms and
@@ -127,11 +132,6 @@ and solver for modeling complex constrained systems that may not have
 solutions. The
 <a href="https://github.com/jolynch/organon/blob/master/papers/final.pdf">paper</a> is a
 decent read if you&rsquo;re interested in what this project can do.</li>
-<li><a href="https://github.com/Netflix-Skunkworks/service-capacity-modeling"><code>service-capacity-modeling</code></a>
-library for capacity planning (determining which kind and how much of a
-computer to buy) for a particular workload such as Apache Cassandra or
-Elasticsearch. Essentially a multi-variate monte carlo simulation with a
-least regret optimizer over per workload models.</li>
 </ul>
 
 </main>
