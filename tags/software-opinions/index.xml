@@ -55,7 +55,7 @@ In my experience, these poor algorithm choices are orders of magnitude slower th
       <pubDate>Sat, 25 Jan 2020 12:00:00 -0800</pubDate>
       
       <guid>https://jolynch.github.io/posts/how_to_speed_up_the_dmv/</guid>
-      <description>I&amp;rsquo;ve been asked to apply some of the lessons learned from the &amp;ldquo;distributed systems as food service analogies&amp;rdquo; to something unrelated to food but that does devour Americans&amp;rsquo; souls: the Department of Motor Vehicles (DMV).
+      <description>I&amp;rsquo;ve been asked to apply some of the lessons learned from the &amp;ldquo;distributed systems as food service analogies&amp;rdquo; to something unrelated to food but that does devour Americans&#39; souls: the Department of Motor Vehicles (DMV).
 The DMV is where happy Americans go to wait, sometimes for many moons, just to be told that they have the wrong identifying documents for a driver&amp;rsquo;s license renewal. It is an unfortunately dreadful introduction to government bureaucracy, and is a uniform topic of derision for newly driving teenagers (and indeed adults) across the US.</description>
     </item>
     

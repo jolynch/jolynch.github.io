@@ -1,106 +1,70 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
     <loc>https://jolynch.github.io/projects/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jolynch.github.io/talks/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jolynch.github.io/publications/</loc>
-  </url>
-  
-  <url>
+  </url><url>
+    <loc>https://jolynch.github.io/drafts/</loc>
+    <lastmod>2022-06-25T11:40:04-04:00</lastmod>
+  </url><url>
+    <loc>https://jolynch.github.io/drafts/wait_before_you_sync/</loc>
+    <lastmod>2022-06-25T11:40:04-04:00</lastmod>
+  </url><url>
     <loc>https://jolynch.github.io/posts/distsys_shibboleths/</loc>
     <lastmod>2022-04-24T11:28:49-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jolynch.github.io/posts/</loc>
     <lastmod>2022-04-24T11:28:49-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jolynch.github.io/tags/software-opinions/</loc>
     <lastmod>2022-04-24T11:28:49-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jolynch.github.io/tags/</loc>
     <lastmod>2022-04-24T11:28:49-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jolynch.github.io/tags/economics/</loc>
     <lastmod>2021-11-11T09:32:19-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jolynch.github.io/posts/there_has_been_inflation/</loc>
     <lastmod>2021-11-11T09:32:19-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jolynch.github.io/posts/use_fast_data_algorithms/</loc>
     <lastmod>2021-03-22T20:48:05-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jolynch.github.io/posts/semver_considered_harmful/</loc>
     <lastmod>2020-07-04T20:50:00-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jolynch.github.io/posts/how_to_speed_up_the_dmv/</loc>
     <lastmod>2020-01-25T12:00:00-08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jolynch.github.io/tags/real-life-queueing/</loc>
     <lastmod>2020-01-25T12:00:00-08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jolynch.github.io/tags/distsys-as-food/</loc>
     <lastmod>2019-08-31T00:00:00-08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jolynch.github.io/posts/dominos_is_a_good_cdn/</loc>
     <lastmod>2019-08-31T00:00:00-08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jolynch.github.io/posts/jimmy_johns_and_web_services/</loc>
     <lastmod>2019-02-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jolynch.github.io/posts/supermarkets_and_efficient_queueing_part_2/</loc>
     <lastmod>2019-02-20T00:00:00-01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jolynch.github.io/posts/supermarkets_and_efficient_queueing_part_1/</loc>
     <lastmod>2019-02-19T12:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jolynch.github.io/</loc>
     <lastmod>2019-02-03T17:22:58-08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jolynch.github.io/posts/purpose_of_blog/</loc>
     <lastmod>2019-01-10T11:30:16-08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://jolynch.github.io/categories/</loc>
   </url>
-  
 </urlset>

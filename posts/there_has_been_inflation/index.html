@@ -97,7 +97,7 @@ stocks or bonds) and I&rsquo;m not sufficiently invested in this post to try to
 get it, so let&rsquo;s just look as some of the tail events that have happened
 in the last decade and see what we see. We can calculate inflation rates with a
 simple function:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">inflation</span>(p, y):
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">inflation</span>(p, y):
     <span style="color:#e6db74">&#34;&#34;&#34;
 </span><span style="color:#e6db74">    Given two prices and two years, calculate the annual
 </span><span style="color:#e6db74">    inflation rate as a percentage (0-100)
@@ -112,7 +112,7 @@ simple function:</p>
 <p>So if we were to look at <a href="https://fred.stlouisfed.org/series/CPIAUCNS">CPI</a>
 we&rsquo;d see inflation of around 3% annually since 1980 and even lower around
 2.3% since 2000.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text"># From 1980 to 2021
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text"># From 1980 to 2021
 inflation((77.8, 261.582), (1980, 2021)) -&gt; 3.0
 # Or just from 2000 to 2021
 inflation((168.8, 273), (2000, 2021)) -&gt; 2.32</code></pre></div>
@@ -122,7 +122,7 @@ first <a href="https://fred.stlouisfed.org/series/LEU0252911200Q">decile</a> of 
 increased similarly (data is only available since 2000 for that series). <a href="https://fred.stlouisfed.org/series/MEHOINUSA646N">Median
 household income</a> has also
 increased similarly in <a href="https://www.census.gov/topics/income-poverty/income/guidance/current-vs-constant-dollars.html">current dollars</a></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text"># Median full-time wages from 1980 to 2021
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text"># Median full-time wages from 1980 to 2021
 inflation((254, 990), (1980, 2021)) -&gt; 3.37
 # Median full-time wages from 2000 to 2021
 inflation((568, 990), (2000, 2021)) -&gt; 2.68
@@ -144,15 +144,15 @@ such as:</p>
 <a href="https://en.wikipedia.org/wiki/Salvator_Mundi_(Leonardo)">Salvator Mundi</a> by
 <a href="https://en.wikipedia.org/wiki/Leonardo_da_Vinci">Leonardo da Vinci</a>. Valued at
 $127.5 million in 2013 for a 37% annual inflation rate.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">inflation((127.5, 450.3), (2013, 2017)) -&gt; 37.09</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">inflation((127.5, 450.3), (2013, 2017)) -&gt; 37.09</code></pre></div>
 <p>2017: $110.5 million for <a href="https://en.wikipedia.org/wiki/Untitled_(1982_painting)">Untitled</a>
 by <a href="https://en.wikipedia.org/wiki/Jean-Michel_Basquiat">Jean-Michel Basquiat</a>,
 the largest sum ever paid for an American artist at auction. Valued at
 $20,900 in 1984 this is a 30% annual inflation rate.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">inflation((20_900, 110.5e6), (1984, 2017)) -&gt; 29.67</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">inflation((20_900, 110.5e6), (1984, 2017)) -&gt; 29.67</code></pre></div>
 <p>2015: $179.4 million for <a href="https://en.wikipedia.org/wiki/Les_Femmes_d%27Alger#%22Version_O%22">Les Femmes d&rsquo;Alger, Version O</a> by <a href="https://en.wikipedia.org/wiki/Pablo_Picasso">Pablo Picasso</a>.
 Sold for $31.9 million in 1997 this is a 10% annual inflation rate.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">inflation((31.9, 179.4), (1997, 2015)) -&gt; 10.07</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">inflation((31.9, 179.4), (1997, 2015)) -&gt; 10.07</code></pre></div>
 <p>As many (most?) sales of art are private it is hard to know exactly how much
 inflation has been going on in the fine art community. Above we looked at some
 of the tail events happening in public auctions over the past decade and
@@ -175,24 +175,24 @@ California (rich Tech Bay Area, part of &ldquo;Silicon Valley&rdquo;) have incre
 $4.6 million in 2000 right at the peak of the tech bubble to $12.4 million in
 2021, for a 4.85% inflation rate. If you just look from 2012 to 2021 the
 rate increases to around 7%.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">inflation((4_599_043, 12_445_835), (2000, 2021)) -&gt; 4.85
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">inflation((4_599_043, 12_445_835), (2000, 2021)) -&gt; 4.85
 inflation((6_804_630, 12_445_835), (2012, 2021)) -&gt; 6.94</code></pre></div>
 <p>Homes in <a href="https://en.wikipedia.org/wiki/Aspen,_Colorado">Aspen</a>, Colorado
 have increased from $3.1 million in 2000 to $8.36 million in 2021, for a
 4.8% inflation rate.
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">inflation((3_125_662, 8_362_437), (2000, 2021)) -&gt; 4.8</code></pre></div></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">inflation((3_125_662, 8_362_437), (2000, 2021)) -&gt; 4.8</code></pre></div></p>
 <p>Homes in
 <a href="https://en.wikipedia.org/wiki/Bridgehampton,_New_York">Bridgehampton</a>, New
 York (part of the &ldquo;Hamptons&rdquo;) have increased from $1.82m in 2000 to $7.8
 million in 2021, for a 7.11% inflation rate.
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">inflation((1_842_709, 7_793_749), (2000, 2021)) -&gt;: 7.11</code></pre></div></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">inflation((1_842_709, 7_793_749), (2000, 2021)) -&gt;: 7.11</code></pre></div></p>
 <p>Near where I grew up the most desirable homes were in
 <a href="https://en.wikipedia.org/wiki/Potomac,_Maryland">Potomac</a>, Maryland (rich
 public figures and such from DC). From 2000 to 2006 homes there increased from
 $782,806 to around $1.7 million, for a 14% inflation rate, but never really
 recovered after the financial crisis and stand at about the same value today
 yielding a 3.6% annual inflation rate from 2000 to 2021.
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">inflation((782_806, 1_713_201), (2000, 2006)) -&gt; 13.94
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">inflation((782_806, 1_713_201), (2000, 2006)) -&gt; 13.94
 inflation((782_806, 1_652_206), (2000, 2021)) -&gt; 3.62</code></pre></div></p>
 <p>At the top end of the real-estate market we have also seen higher price
 increases than 2.3%, although it is very time dependent, probably around 5%
@@ -216,7 +216,7 @@ produced by
 <a href="https://en.wikipedia.org/wiki/Richard_Mille">Richard Mille</a> routinely
 sell for between a quarter and half a million dollars, often far above retail
 prices.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">inflation((24_215, 145_000), (2013, 2021)) -&gt; 25.07
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">inflation((24_215, 145_000), (2013, 2021)) -&gt; 25.07
 inflation((96_900, 500_000), (2018, 2021)) -&gt; 72.8</code></pre></div>
 <p>At the top end of the luxury watch market we have seen price increases similar
 to that of fine art, probably because luxury watches are more fine art than
@@ -234,21 +234,21 @@ the top three Universities in the world (according to
 <p>One year of education at Harvard University has
 <a href="https://oir.harvard.edu/fact-book/undergraduate_package">increased</a> from
 $32,164 in 2000 to $63,025 in 2017 for a 4% inflation rate.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">inflation((32_164, 63_025), (2000, 2017)) -&gt; 4.04</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">inflation((32_164, 63_025), (2000, 2017)) -&gt; 4.04</code></pre></div>
 <p>One year of education at MIT, which apparently <a href="https://sfs.mit.edu/undergraduate-students/the-cost-of-attendance/annual-student-budget/">includes much more expensive
 housing than Harvard</a>,
 has increased from $33,225 in <a href="https://news.mit.edu/2000/tuition">2000</a> to $77,020 in 2021
 for a 4.08% inflation rate.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">inflation((33_225, 77_020), (2000, 2021)) -&gt; 4.08</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">inflation((33_225, 77_020), (2000, 2021)) -&gt; 4.08</code></pre></div>
 <p>One year of education at Stanford has increased from $32,471 in <a href="https://news.stanford.edu/pr/00/000216tuition.html">2000</a>
 to $73,333 in <a href="https://news.stanford.edu/2021/02/03/stanford-expands-financial-aid-keeps-2021-22-tuition-flat/">2021</a>
 for a 3.96% inflation rate.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">inflation((32_471, 73_333), (2000, 2021)) -&gt; 3.96</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">inflation((32_471, 73_333), (2000, 2021)) -&gt; 3.96</code></pre></div>
 <p>Even if we look at a large in-state university like Ohio State, we see one year
 of in-state education has increased from $12,483 in <a href="https://www.asc.ohio-state.edu/wilkins.5/osu_and_ohio/statistics/statistics01.htm">2000</a>
 to $25,288 in <a href="http://undergrad.osu.edu/cost-and-aid/basic-costs">2021</a> for a
 3.4% inflation rate.
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">inflation((12_483, 25_288), (2000, 2021)) -&gt; 3.42</code></pre></div></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">inflation((12_483, 25_288), (2000, 2021)) -&gt; 3.42</code></pre></div></p>
 <p>At the top end of the education market we have again seen higher price increases
 than 2.3%, probably around 4%. This was somewhat surprisingly low to me, in my
 opinion, as a 20 year

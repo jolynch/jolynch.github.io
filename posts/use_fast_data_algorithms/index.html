@@ -117,7 +117,7 @@ Since I want to benchmark the algorithms instead of disks I&rsquo;ll be pre-touc
 the file into RAM with <a href="https://hoytech.com/vmtouch/"><code>vmtouch</code></a>. Remember that
 on most modern cloud servers with fast <code>NVMe</code> storage (multiple Gi<strong>B</strong>ps) and
 good page-caching algorithms your disks are likely not your bottleneck.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ du -shc yelp_academic_dataset_review.json
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ du -shc yelp_academic_dataset_review.json
 6.5G    yelp_academic_dataset_review.json
 $ vmtouch -t yelp_academic_dataset_review.json
 <span style="color:#75715e"># ...</span>
@@ -223,68 +223,68 @@ note I&rsquo;m reporting <code>user</code> CPU time since the system time is not
 <thead>
 <tr>
 <th>Algo</th>
-<th align="right">Hash Time (seconds)</th>
-<th align="right">Hash Speed (MiBps)</th>
-<th align="right">Cryptographic?</th>
-<th align="right">Bits of Entropy</th>
+<th style="text-align:right">Hash Time (seconds)</th>
+<th style="text-align:right">Hash Speed (MiBps)</th>
+<th style="text-align:right">Cryptographic?</th>
+<th style="text-align:right">Bits of Entropy</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>MD5</code></td>
-<td align="right"><code>9.1s</code></td>
-<td align="right"><code>727</code></td>
-<td align="right">Not really</td>
-<td align="right"><code>128</code></td>
+<td style="text-align:right"><code>9.1s</code></td>
+<td style="text-align:right"><code>727</code></td>
+<td style="text-align:right">Not really</td>
+<td style="text-align:right"><code>128</code></td>
 </tr>
 <tr>
 <td><code>CRC32</code></td>
-<td align="right"><code>4.8s</code></td>
-<td align="right"><code>1378</code></td>
-<td align="right">No</td>
-<td align="right"><code>32</code></td>
+<td style="text-align:right"><code>4.8s</code></td>
+<td style="text-align:right"><code>1378</code></td>
+<td style="text-align:right">No</td>
+<td style="text-align:right"><code>32</code></td>
 </tr>
 <tr>
 <td><strong><code>XXH64</code></strong></td>
-<td align="right"><code>0.5s</code></td>
-<td align="right"><code>13232</code></td>
-<td align="right">No</td>
-<td align="right"><code>64</code></td>
+<td style="text-align:right"><code>0.5s</code></td>
+<td style="text-align:right"><code>13232</code></td>
+<td style="text-align:right">No</td>
+<td style="text-align:right"><code>64</code></td>
 </tr>
 <tr>
 <td></td>
-<td align="right"></td>
-<td align="right"></td>
-<td align="right"></td>
-<td align="right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
+<td style="text-align:right"></td>
 </tr>
 <tr>
 <td><code>SHA256</code></td>
-<td align="right"><code>27.5s</code></td>
-<td align="right"><code>240</code></td>
-<td align="right">Yes</td>
-<td align="right"><code>256</code></td>
+<td style="text-align:right"><code>27.5s</code></td>
+<td style="text-align:right"><code>240</code></td>
+<td style="text-align:right">Yes</td>
+<td style="text-align:right"><code>256</code></td>
 </tr>
 <tr>
 <td><code>SHA3-256</code></td>
-<td align="right"><code>16.8s</code></td>
-<td align="right"><code>393</code></td>
-<td align="right">Yes</td>
-<td align="right"><code>256</code></td>
+<td style="text-align:right"><code>16.8s</code></td>
+<td style="text-align:right"><code>393</code></td>
+<td style="text-align:right">Yes</td>
+<td style="text-align:right"><code>256</code></td>
 </tr>
 <tr>
 <td><code>SHA1  </code></td>
-<td align="right"><code>10.7s</code></td>
-<td align="right"><code>618</code></td>
-<td align="right">Yes*</td>
-<td align="right"><code>160</code></td>
+<td style="text-align:right"><code>10.7s</code></td>
+<td style="text-align:right"><code>618</code></td>
+<td style="text-align:right">Yes*</td>
+<td style="text-align:right"><code>160</code></td>
 </tr>
 <tr>
 <td><strong><code>BLAKE3</code></strong></td>
-<td align="right"><code>1.8s</code></td>
-<td align="right"><code>3675</code></td>
-<td align="right">Yes</td>
-<td align="right"><code>256</code></td>
+<td style="text-align:right"><code>1.8s</code></td>
+<td style="text-align:right"><code>3675</code></td>
+<td style="text-align:right">Yes</td>
+<td style="text-align:right"><code>256</code></td>
 </tr>
 </tbody>
 </table>
@@ -293,7 +293,7 @@ If all you need to do is verify a file transfer you could be doing that 10x fast
 <p>The language versions often do make a big deal, e.g. <code>JNI</code> versions that link
 to fast native code in Java will often significantly out-perform pure Java
 versions. &ldquo;But Joey&rdquo;, you say, &ldquo;I have to use XYZ algorithm from the early &rsquo;00s
-because of the specification!&quot;.  That is unfortunate, but at least make sure
+because of the specification!&rdquo;.  That is unfortunate, but at least make sure
 you&rsquo;re using fast implementations, for example
 <a href="https://github.com/corretto/amazon-corretto-crypto-provider">ACCP</a> will speed
 up <code>MD5</code> on most Java VMs by a factor of ~4 as well as <code>AES-GCM</code> by ~10x while
@@ -373,39 +373,39 @@ with an appropriate level or <code>lz4</code> if I really need to minimize CPU c
 <tr>
 <th>Algo</th>
 <th>Ratio</th>
-<th align="right">Compression Speed (MiBps)</th>
-<th align="right">Decompression Speed (MiBps)</th>
-<th align="right">Transfer Time</th>
+<th style="text-align:right">Compression Speed (MiBps)</th>
+<th style="text-align:right">Decompression Speed (MiBps)</th>
+<th style="text-align:right">Transfer Time</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>gzip</code></td>
 <td><code>0.41</code></td>
-<td align="right"><code>21</code></td>
-<td align="right"><code>168</code></td>
-<td align="right"><code>295s</code></td>
+<td style="text-align:right"><code>21</code></td>
+<td style="text-align:right"><code>168</code></td>
+<td style="text-align:right"><code>295s</code></td>
 </tr>
 <tr>
 <td><code>lz4</code></td>
 <td><code>0.65</code></td>
-<td align="right"><code>361</code></td>
-<td align="right"><code>1760</code></td>
-<td align="right"><code>36s</code></td>
+<td style="text-align:right"><code>361</code></td>
+<td style="text-align:right"><code>1760</code></td>
+<td style="text-align:right"><code>36s</code></td>
 </tr>
 <tr>
 <td><code>zstd</code></td>
 <td><code>0.38</code></td>
-<td align="right"><code>134</code></td>
-<td align="right"><code>730</code></td>
-<td align="right"><code>47s</code></td>
+<td style="text-align:right"><code>134</code></td>
+<td style="text-align:right"><code>730</code></td>
+<td style="text-align:right"><code>47s</code></td>
 </tr>
 <tr>
 <td><code>xz</code></td>
 <td><code>??</code></td>
-<td align="right"><code>??</code></td>
-<td align="right"><code>???</code></td>
-<td align="right"><code>??</code></td>
+<td style="text-align:right"><code>??</code></td>
+<td style="text-align:right"><code>???</code></td>
+<td style="text-align:right"><code>??</code></td>
 </tr>
 </tbody>
 </table>
@@ -416,32 +416,32 @@ that on a smaller <code>380MiB</code> dataset:</p>
 <tr>
 <th>Algo</th>
 <th>Ratio</th>
-<th align="right">Compression Speed (MiBps)</th>
-<th align="right">Decompression Speed (MiBps)</th>
-<th align="right">Transfer Time</th>
+<th style="text-align:right">Compression Speed (MiBps)</th>
+<th style="text-align:right">Decompression Speed (MiBps)</th>
+<th style="text-align:right">Transfer Time</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>xz</code></td>
 <td><code>0.18</code></td>
-<td align="right"><code>1.34</code></td>
-<td align="right"><code>92 </code></td>
-<td align="right"><code>299s</code></td>
+<td style="text-align:right"><code>1.34</code></td>
+<td style="text-align:right"><code>92 </code></td>
+<td style="text-align:right"><code>299s</code></td>
 </tr>
 <tr>
 <td><code>zstd -10</code></td>
 <td><code>0.26</code></td>
-<td align="right"><code>15.4</code></td>
-<td align="right"><code>713</code></td>
-<td align="right"><code>24s</code></td>
+<td style="text-align:right"><code>15.4</code></td>
+<td style="text-align:right"><code>713</code></td>
+<td style="text-align:right"><code>24s</code></td>
 </tr>
 <tr>
 <td><code>zstd -19</code></td>
 <td><code>0.21</code></td>
-<td align="right"><code>1.18</code></td>
-<td align="right"><code>404</code></td>
-<td align="right"><code>24s</code></td>
+<td style="text-align:right"><code>1.18</code></td>
+<td style="text-align:right"><code>404</code></td>
+<td style="text-align:right"><code>24s</code></td>
 </tr>
 </tbody>
 </table>
@@ -464,7 +464,7 @@ efficiently upload and download data by doing everything (IO, decrypt, decompres
 in parallel.</p>
 <p>For example, something like the following will outperform almost any Java S3
 upload at putting 100 files in S3 along with whole object checksums</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Assumption: You have xargs, xxh64sum, zstd and awscli installed</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Assumption: You have xargs, xxh64sum, zstd and awscli installed</span>
 
 <span style="color:#75715e"># Simple version</span>
 $ DIR<span style="color:#f92672">=</span>.
