@@ -37,7 +37,7 @@
 <div class="article-meta">
 <h1><span class="title">Wait Before You Sync</span></h1>
 
-<h2 class="date">2022/06/25</h2>
+<h2 class="date">2023/06/29</h2>
 </div>
 
 <main>
@@ -81,20 +81,23 @@ would be correct:</p>
 <li>Can&rsquo;t tell - Sometimes the <code>read</code> syscall hangs forever</li>
 </ul>
 <p>The presence of the <code>fdatasync</code> on line 3 does not guarantee that any
-subsequent read will observe the correct data, it just guarantees that the
-kernel will have attempted to flush data from page cache to disk and, as of
+subsequent read (line 6) will observe the correct data, it just guarantees that
+the kernel will have attempted to flush data from page cache to disk and, as of
 Linux 4.13, if the kernel knows that it didn&rsquo;t make it there, processes with
 open file descriptors referencing those pages should get an <code>EIO</code>.</p>
 <p>Remember that even when you call <code>fdatasync</code> you have to do something
 reasonable with the <code>EIO</code>, which in the case of a distributed database is
 usually to drop the corrupt data from view and either re-replicate the affected
 ranges from other nodes or possibly even replacing the faulty node with fresh
-hardware. <em>This can equally be done on a checksum failure</em>.</p>
+hardware. If you are running a SQL setup the equivalent would be triggering
+a failover to a hot standby after taking downtime to play/resolve the remaining
+replication stream. <em>These actions can equally be done on a checksum failure</em>.</p>
 <p>So why call <code>fdatasync</code> at all? We still want to sync in the background
 because we both want to make sure we are not accepting data faster than our
 underlying hardware can actually handle it and we <em>do</em> want to find out
 about disk failures in a reasonable amount of time so we can trigger recovery,
-ideally while data still lives in a time based replicated commit log.</p>
+ideally while data still lives in a time based replicated commit log or
+replication data structure.</p>
 <h1 id="show-me-the-numbers">Show me the numbers</h1>
 <p>To show how disastrous adding <code>fdatasync</code> into the hot path of a writes are,
 a quick <a href="https://github.com/jolynch/performance-analysis/blob/master/notebooks/fsync/benchmark.c">benchmark</a>
@@ -112,20 +115,20 @@ of the 1GiB, and then one call every <code>100MiB</code>, <code>10MiB</code>, an
 to tank performance. To see just how bad it can get we can run the benchmark
 going even further and calling <code>fdatasync</code>
 <a href="https://gist.github.com/jolynch/a67a2bbd235dcbc3a6e1b0d47ea6a3be#file-benchmark-run-sh">more frequently</a>
-(🫡 to my poor SSD):
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Strategy       | Median time-to-write |
----------------------------------------
-never          |              151.0ms |
-end            |              663.5ms |
-100MiB         |              738.5ms |
-10MiB          |             1127.0ms |
-1MiB           |             3159.5ms |
-512KiB         |             5955.0ms |
-256KiB         |            10695.5ms |
-128KiB         |            17842.5ms |
-64KiB          |            26912.5ms |
-32KiB          |            52306.0ms |
-16KiB          |           111981.0ms |</code></pre></div></p>
+over multiple trials (condolences to my SSD):
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Strategy       | p50 time-to-write |
+------------------------------------
+never          |           151.0ms |
+end            |           663.5ms |
+100MiB         |           738.5ms |
+10MiB          |          1127.0ms |
+1MiB           |          3159.5ms |
+512KiB         |          5955.0ms |
+256KiB         |         10695.5ms |
+128KiB         |         17842.5ms |
+64KiB          |         26912.5ms |
+32KiB          |         52306.0ms |
+16KiB          |        111981.0ms |</code></pre></div></p>
 <p>A plot of this data going out all the way to 16KiB writebacks shows that the
 pattern of writes getting unbearably slow as flushes get smaller:
 <a href="/img/fsync_quantitative.svg"><img src="/img/fsync_quantitative.svg" alt="fsync_qualitative"></a></p>
