@@ -116,19 +116,19 @@ to tank performance. To see just how bad it can get we can run the benchmark
 going even further and calling <code>fdatasync</code>
 <a href="https://gist.github.com/jolynch/a67a2bbd235dcbc3a6e1b0d47ea6a3be#file-benchmark-run-sh">more frequently</a>
 over multiple trials (condolences to my SSD):
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Strategy       | p50 time-to-write |
-------------------------------------
-never          |           151.0ms |
-end            |           663.5ms |
-100MiB         |           738.5ms |
-10MiB          |          1127.0ms |
-1MiB           |          3159.5ms |
-512KiB         |          5955.0ms |
-256KiB         |         10695.5ms |
-128KiB         |         17842.5ms |
-64KiB          |         26912.5ms |
-32KiB          |         52306.0ms |
-16KiB          |        111981.0ms |</code></pre></div></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Strategy  | p50 time-to-write |
+-------------------------------
+never     |           151.0ms |
+end       |           663.5ms |
+100MiB    |           738.5ms |
+ 10MiB    |          1127.0ms |
+  1MiB    |          3159.5ms |
+512KiB    |          5955.0ms |
+256KiB    |         10695.5ms |
+128KiB    |         17842.5ms |
+ 64KiB    |         26912.5ms |
+ 32KiB    |         52306.0ms |
+ 16KiB    |        111981.0ms |</code></pre></div></p>
 <p>A plot of this data going out all the way to 16KiB writebacks shows that the
 pattern of writes getting unbearably slow as flushes get smaller:
 <a href="/img/fsync_quantitative.svg"><img src="/img/fsync_quantitative.svg" alt="fsync_qualitative"></a></p>
