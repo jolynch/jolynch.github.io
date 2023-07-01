@@ -43,8 +43,8 @@
 <main>
 <p>I work with distributed databases, and one of the number one performance issues
 I see is when they put
-<a href="https://linux.die.net/man/2/fdatasync"><code>fdatasync</code></a> in the hot path of data
-mutation.</p>
+<a href="https://linux.die.net/man/2/fdatasync"><code>fdatasync</code></a> calls in the critical path
+of accepting writes.</p>
 <blockquote>
 <p><strong>Please stop putting <code>fdatasync</code> in the hot path</strong>. Call it in the
 background every ~10-30 seconds or O(100MiB) written, as a <em>performance</em>
@@ -55,8 +55,8 @@ measure, but your correctness should be based on checksums and redundancy
 <p>For a single machine database in the 1990s with only local drives for
 durability, <code>fdatasync</code> may have played a correctness role, but modern
 distributed databases should <em>only</em> use <code>fdatasync</code> as a way to ensure they
-don&rsquo;t queue unbounded data into page cache, <a href="https://github.com/firmianay/Life-long-Learner/blob/master/linux-kernel-development/chapter-16.md">which would eventually force synchronous
-writeback</a>.
+don&rsquo;t queue unbounded data into page cache, <a href="https://github.com/firmianay/Life-long-Learner/blob/master/linux-kernel-development/chapter-16.md">which would eventually force
+synchronous writeback</a>.
 Instead, most still-correct-but-higher-performance storage engines prefer to
 periodically and asynchronously (not in the critical path of writes) trigger
 syncs to avoid writeback and to eventually learn of disk failure.</p>
@@ -69,7 +69,7 @@ occur on a SSD:</p>
 (<span style="color:#ae81ff">3</span>) assert(fdatasync(fd) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)
 (<span style="color:#ae81ff">4</span>) assert(close(fd) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)
 
-<span style="color:#75715e">// Now wait ~5 seconds and try to read what we wrote
+<span style="color:#75715e">// Now wait ~5 seconds and try to read
 </span><span style="color:#75715e"></span>(<span style="color:#ae81ff">5</span>) fd <span style="color:#f92672">=</span> open(<span style="color:#e6db74">&#34;file.db&#34;</span>)
 (<span style="color:#ae81ff">6</span>) read(fd, buf)</code></pre></div>
 <p>What can the contents in <code>buf</code> be? If you answered any of the following you
@@ -108,8 +108,8 @@ drives have block sizes of <code>4KiB</code> anyways), this is somewhat of a wor
 test. The benchmark writes <code>1GiB</code> of data with different strategies of calling
 <code>fdatasync</code> with an <code>ext4</code> filesystem backed by a single <code>Samsung SSD 970 PRO 512GB</code> NVMe flash drive.  This drive theoretically can achieve <code>~2.7GiB/s</code>
 although in this case it maxes out around ~<code>1.5GiB/s</code>.</p>
-<p>The time to write 1GiB with no <code>fdatasync</code>, one <code>fdatasync</code> at the end
-of the 1GiB, and then one call every <code>100MiB</code>, <code>10MiB</code>, and <code>1MiB</code> are as follows:</p>
+<p>The time to write <code>1GiB</code> with no <code>fdatasync</code>, one <code>fdatasync</code> at the end of the
+<code>1GiB</code>, and then one call every <code>100MiB</code>, <code>10MiB</code>, and <code>1MiB</code> are as follows:</p>
 <p><a href="/img/fsync_qualitative.svg"><img src="/img/fsync_qualitative.svg" alt="fsync_qualitative"></a></p>
 <p>It is clear that calling <code>fdatasync</code> anything more than every ~10MiB starts
 to tank performance. To see just how bad it can get we can run the benchmark
@@ -132,20 +132,21 @@ end       |           663.5ms |
 <p>A plot of this data going out all the way to 16KiB writebacks shows that the
 pattern of writes getting unbearably slow as flushes get smaller:
 <a href="/img/fsync_quantitative.svg"><img src="/img/fsync_quantitative.svg" alt="fsync_qualitative"></a></p>
-<p>From this data it is clear calling <code>fdatasync</code> too often completely tanks
+<p>From this data it is clear that calling <code>fdatasync</code> too often completely tanks
 performance on modern fast NVMe drives. I&rsquo;ve seen some databases that call
-<code>fdatasync</code> after <em>every</em> write transaction, typically because of a clear
+<code>fdatasync</code> after <em>every</em> write transaction, typically because of a
 misunderstanding of the failure modes of actual hardware.</p>
 <h1 id="concerns">Concerns</h1>
-<p>Database engineers often have concerns when I argue we should be waiting before
-we <code>fdatasync</code>. Let&rsquo;s go through them.</p>
+<p>Database engineers often have concerns when I propose we should be waiting
+before we <code>fdatasync</code>. Let&rsquo;s go through them.</p>
 <h2 id="but-i-care-about-correctness">But I care about Correctness!</h2>
 <p>Great, I do too! The way to be correct and durable is to run your transactions
-through quorums of replicas e.g. via having multiple replicas running
-<a href="https://en.wikipedia.org/wiki/Paxos_(computer_science)">Paxos</a>
-(or <a href="https://raft.github.io/raft.pdf">Raft</a> if you
-like that flavor of consensus better) to admit mutations into the distributed
-commit log. These commit log files should be written to ~32-128MiB segments
+through quorums of replicas either with a <code>leader -&gt; follower + witness</code> setup
+or via having multiple replicas running
+<a href="https://en.wikipedia.org/wiki/Paxos_(computer_science)">Paxos</a> (or
+<a href="https://raft.github.io/raft.pdf">Raft</a> if you like that flavor of consensus
+better) to admit mutations into the distributed commit log. On each machine
+accepting to the commit log the files should be written to ~32-128MiB segments
 append-only and with locks provided by the process. Then, have a background
 thread that opens the segment files and calls <code>fdatasync</code> every ~10-30 seconds
 (or some size like <code>100-1000MiB</code> whichever comes first) so you give your drives
@@ -154,9 +155,9 @@ nice constant amounts of work. Remember to use the
 IO scheduler so your read latencies are not affected by these background flushes.</p>
 <p>Finally, put checksums such as a <a href="https://github.com/Cyan4973/xxHash"><code>xxhash</code></a>
 along with every block of data written to the commitlog files and any on-disk
-state you write. When reading files you must check the checksums for any blocks
-of data read, and if checksums ever fail or you receive an <code>EIO</code> treat the
-entire block of data in that file as corrupt.</p>
+state you write. When reading files, the read path must check the checksums for
+any blocks of data it reads, and if checksums ever mismatch or result an <code>EIO</code>
+treat the entire block of data in that file as corrupt.</p>
 <h2 id="but-what-about-machine-reboots">But what about machine reboots?</h2>
 <p>There are two kinds of machine reboots, intentional ones and unintentional
 ones. By all means, when rebooting intentionally, call <code>fdatasync</code> on every data
@@ -165,9 +166,24 @@ file. You probably even want to
 page cache will be preserved across the reboot too!</p>
 <p>For unintentional reboots, treat it as a machine failure: either throw the
 machine away (practice failure recovery) or recover the ~10-30 seconds of data
-from neighbors. The reboot duration was likely longer than the last background
-<code>fdatasync</code> by a lot, so you will have to recover the writes you&rsquo;ve missed either
-way - this is where having a distributed log to replay comes in handy.</p>
+from neighbors. The reboot duration, where the node was missing writes, was
+likely significantly longer than the last background <code>fdatasync</code>, so you will
+have to recover the writes you&rsquo;ve missed either way - this is where having a
+distributed replication log to replay comes in handy.</p>
+<h2 id="but-what-if-i-need-to-see-the-write-in-another-process">But what if I need to see the write in another process?</h2>
+<p>On Linux with a POSIX compliant filesystem, any
+<a href="https://man7.org/linux/man-pages/man2/write.2.html"><code>write</code></a> syscall has a
+strong read-after-write guarantee without a <code>fdatasync</code>. If the kernel caches a
+page it must maintain that property.</p>
+<blockquote>
+<p>POSIX requires that a read(2) that can be proved to occur after a
+write() has returned will return the new data.  Note that not all
+filesystems are POSIX conforming.</p>
+</blockquote>
+<p>On most database servers with <code>xfs</code> or <code>ext4</code> filesystems, <code>read</code> syscalls
+really should observe <code>write</code>s. If the database is bypassing the kernel
+entirely and trying to do their own device IO without going through
+<code>read</code>/<code>write</code> syscalls, then naturally this whole post does not apply.</p>
 <h1 id="is-this-really-a-big-problem">Is this really a big problem?</h1>
 <p><strong>Yes</strong>. Forcing threads to frequently <code>fdatasync</code> small bits
 of data will cap the performance of your database significantly, and
