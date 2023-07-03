@@ -5,10 +5,20 @@
     <description>Recent content in Tags on Joey Lynch&#39;s Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 24 Apr 2022 11:28:49 -0500</lastBuildDate>
+    <lastBuildDate>Sun, 02 Jul 2023 11:40:04 -0400</lastBuildDate>
     
         <atom:link href="https://jolynch.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Wait Before You Sync</title>
+      <link>https://jolynch.github.io/posts/wait_before_you_sync/</link>
+      <pubDate>Sun, 02 Jul 2023 11:40:04 -0400</pubDate>
+      
+      <guid>https://jolynch.github.io/posts/wait_before_you_sync/</guid>
+      <description>I work with distributed databases, and one of the number one performance issues I see is when they put fdatasync calls in the critical path of accepting writes.
+ Please stop putting fdatasync in the hot path. Call it in the background every ~10-30 seconds or O(100MiB) written, as a performance measure, but your correctness should be based on checksums and redundancy — e.g. replicated commit logs and replica snapshots — not relying on fdatasync.</description>
+    </item>
     
     <item>
       <title>Distributed Systems Shibboleths</title>
@@ -26,8 +36,7 @@ I am still a relatively new engineer in the field of distributed systems, having
       <pubDate>Thu, 11 Nov 2021 09:32:19 -0400</pubDate>
       
       <guid>https://jolynch.github.io/posts/there_has_been_inflation/</guid>
-      <description>I recently read The Deficit Myth and I particularly enjoyed the insight that inflation comes from consumer spending on supply-limited goods, not printing money. Put differently, when a consumer wants a scarce good and has more money to spend they will accept a higher price for the same good. Inflation only occurs when the consumer accepts that higher price.
-This realization has some interesting consequences for U.S. Federal monetary and fiscal policy:</description>
+      <description>2023-07-03: When I wrote this post, inflation in the US had just started rising and everyone was saying that it was &amp;ldquo;transitory&amp;rdquo; and pointed to the past decade of low inflation plus stimulus to justify things would be ok. Since then, there has obviously been a large increase in core inflation in 2022 and folks stopped arguing it was transitory. I still think the points in this post are relevant and worth considering.</description>
     </item>
     
     <item>
