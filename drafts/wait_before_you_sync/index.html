@@ -139,25 +139,28 @@ misunderstanding of the failure modes of actual hardware.</p>
 <h1 id="concerns">Concerns</h1>
 <p>Database engineers often have concerns when I propose we should be waiting
 before we <code>fdatasync</code>. Let&rsquo;s go through them.</p>
-<h2 id="but-i-care-about-correctness">But I care about Correctness!</h2>
-<p>Great, I do too! The way to be correct and durable is to run your transactions
-through quorums of replicas either with a <code>leader -&gt; follower + witness</code> setup
-or via having multiple replicas running
+<h2 id="but-i-care-about-correctness-and-durability">But I care about Correctness and Durability!</h2>
+<p>Great, I do too! The way to be correct and durable in a distributed database is
+<a href="https://vitess.io/docs/18.0/overview/scalability-philosophy/#durability-through-replication">via replication</a>:
+run your transactions through quorums of replicas either with a <code>leader -&gt; follower + witness</code> setup (~semi-sync replication) or have multiple
+replicas running
 <a href="https://en.wikipedia.org/wiki/Paxos_(computer_science)">Paxos</a> (or
-<a href="https://raft.github.io/raft.pdf">Raft</a> if you like that flavor of consensus
-better) to admit mutations into the distributed commit log. On each machine
-accepting to the commit log the files should be written to ~32-128MiB segments
-append-only and with locks provided by the process. Then, have a background
-thread that opens the segment files and calls <code>fdatasync</code> every ~10-30 seconds
-(or some size like <code>100-1000MiB</code> whichever comes first) so you give your drives
-nice constant amounts of work. Remember to use the
-<a href="https://www.kernel.org/doc/html/latest/block/kyber-iosched.html"><code>kyber</code></a>
-IO scheduler so your read latencies are not affected by these background flushes.</p>
+<a href="https://raft.github.io/raft.pdf">Raft</a> or <a href="https://en.wikipedia.org/wiki/Atomic_broadcast">Atomic
+Broadcast</a> if you like those
+flavors better) to admit mutations into the distributed commit log. On each
+machine accepting writes to the commit log, files should be written to ~32-128MiB
+segments append-only and with locks provided by the process. Then, have a
+background thread that opens the segment files and calls <code>fdatasync</code> every
+~10-30 seconds (or some size like <code>100-1000MiB</code> whichever comes first) so you
+give your drives nice constant amounts of work. Remember to use the
+<a href="https://www.kernel.org/doc/html/latest/block/kyber-iosched.html"><code>kyber</code></a> IO
+scheduler so your read latencies are not affected by these background flushes.</p>
 <p>Finally, put checksums such as a <a href="https://github.com/Cyan4973/xxHash"><code>xxhash</code></a>
 along with every block of data written to the commitlog files and any on-disk
 state you write. When reading files, the read path must check the checksums for
 any blocks of data it reads, and if checksums ever mismatch or result an <code>EIO</code>
-treat the entire block of data in that file as corrupt.</p>
+treat the entire block of data in that file as corrupt and initiate recovery
+from replicas or backups/snapshots.</p>
 <h2 id="but-what-about-machine-reboots">But what about machine reboots?</h2>
 <p>There are two kinds of machine reboots, intentional ones and unintentional
 ones. By all means, when rebooting intentionally, call <code>fdatasync</code> on every data
