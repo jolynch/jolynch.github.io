@@ -44,47 +44,52 @@
 <p>I&rsquo;ve mostly written blog posts and whitepapers, mostly for employers. I&rsquo;ve
 included links here in case they might be interesting.</p>
 <ul>
-<li>(2024) <a href="https://www.infoq.com/articles/netflix-highly-reliable-stateful-systems/">How Netflix Ensures Highly-Reliable Online Stateful Systems</a>:
+<li>(2024, InfoQ) <a href="https://www.infoq.com/articles/netflix-highly-reliable-stateful-systems/"><strong>How Netflix Ensures Highly-Reliable Online Stateful Systems</strong></a>:
 An article published on InfoQ on how to structure stateful systems to be
 designed for reliability, handle load spikes, and gracefully handle failure.
 A review article of the <a href="https://www.infoq.com/presentations/netflix-stateful-cache/">same talk</a>
 from QConSF 2023.</li>
-<li>(2024) <a href="https://netflixtechblog.medium.com/data-gateway-a-platform-for-growing-and-protecting-the-data-tier-f1ed8db8f5c6">Data Gateway - A Platform For Growing and Protecting the Data Tier</a>:
+<li>(2024, Netflix) <a href="https://netflixtechblog.medium.com/enhancing-netflix-reliability-with-service-level-prioritized-load-shedding-e735e6ce8f7d">Enhancing Netflix Reliability with Service-Level Prioritized Load Shedding</a>:
+A post I co-authored with Anirudh Mendiratta, Kevin Wang, Javier Fernandez-Ivern
+and Benjamin Fedorka for Netflix that shared how we implemented
+quality-of-service prioritization techniques at the service layer to keep
+Netflix up even under sudden traffic spikes.</li>
+<li>(2024, Netflix) <a href="https://netflixtechblog.medium.com/data-gateway-a-platform-for-growing-and-protecting-the-data-tier-f1ed8db8f5c6">Data Gateway - A Platform For Growing and Protecting the Data Tier</a>:
 A post I co-authored with Shahar Zimmerman, Vidhya Arvind, and Vinay Chella
 for Netflix that shared the architecture of our Data Gateway Platform.
 The Data Gateway Platform at Netflix hosts Data Abstraction Layers (DALs)
 that shield Developers from complex and backwards-incompatible database API
 changes.</li>
-<li>(2020) <a href="/pdf/practical-self-healing-databases.pdf">Towards Practical Self-Healing Distributed Databases</a>:
+<li>(2020, IEEE) <a href="/pdf/practical-self-healing-databases.pdf"><strong>Towards Practical Self-Healing Distributed Databases</strong></a>:
 A paper published in proceedings of the <a href="https://ieeexplore.ieee.org/document/9377621/references#references">2020 IEEE Infrastructure Conference</a> about how one can build self-healing
 databases out of existing software and hardware without replacing the entire
 database engine.</li>
-<li>(2019) <a href="https://medium.com/@NetflixTechBlog/introducing-jvmquake-ec944c60ba70">Garbage Collecting Unhealthy JVMs, a proactive approach</a>:
+<li>(2019, Netflix) <a href="https://medium.com/@NetflixTechBlog/introducing-jvmquake-ec944c60ba70">Garbage Collecting Unhealthy JVMs, a proactive approach</a>:
 A post I authored with Josh Snyder for Netflix that introduced and explained
 how we use the <a href="https://github.com/jolynch/jvmquake"><code>jvmquake</code></a> agent to
 rescue our distributed databases written in Java from JVM death spirals.</li>
-<li>(2018) <a href="/pdf/cassandra-availability-virtual.pdf">Cassandra Availability with Virtual Nodes</a>:
+<li>(2018, whitepaper) <a href="/pdf/cassandra-availability-virtual.pdf">Cassandra Availability with Virtual Nodes</a>:
 A whitepaper I authored with Josh Snyder that attempted to formally
 model Cassandra&rsquo;s availability under different numbers of tokens per node.
 TLDR: use no more than 4 tokens if you want high availability in a Dynamo
 style database. The paper is based on <a href="https://github.com/jolynch/python_performance_toolkit/blob/master/notebooks/cassandra_availability/cassandra_availability.ipynb">this
 notebook</a></li>
-<li>(2017) <a href="https://engineeringblog.yelp.com/2017/05/taking-zero-downtime-load-balancing-even-further.html">Taking Zero Downtime Load Balancing even Further</a>:
+<li>(2017, Yelp) <a href="https://engineeringblog.yelp.com/2017/05/taking-zero-downtime-load-balancing-even-further.html">Taking Zero Downtime Load Balancing even Further</a>:
 In this post I showed how Yelp had evolved their highly available and scalable
 service mesh based on SmartStack to use NGINX and HAProxy and get the best of
 all worlds.</li>
-<li>(2016) <a href="https://engineeringblog.yelp.com/2016/06/monitoring-cassandra-at-scale.html">Monitoring Cassandra at Scale</a>:
+<li>(2016, Yelp) <a href="https://engineeringblog.yelp.com/2016/06/monitoring-cassandra-at-scale.html">Monitoring Cassandra at Scale</a>:
 A post I wrote for Yelp about how they monitored their distributed
 Cassandra deployments taking into account full ring health. Also includes
 some helpful examples for how to interact with Cassandra&rsquo;s JMX interface from
 Python.</li>
-<li>(2015) <a href="https://engineeringblog.yelp.com/2015/04/true-zero-downtime-haproxy-reloads.html">True Zero Downtime HAProxy
+<li>(2015, Yelp) <a href="https://engineeringblog.yelp.com/2015/04/true-zero-downtime-haproxy-reloads.html">True Zero Downtime HAProxy
 Reloads</a>:
 A post I wrote for Yelp about how they reloaded HAProxy without any
 downtime to requests using Linux queueing disciplines. A super hacky way to
 achieve the end that has since been superseded by better techniques. It was
 pretty novel at the time though.</li>
-<li>(2014) <a href="https://engineeringblog.yelp.com/2014/11/scaling-elasticsearch-to-hundreds-of-developers.html">Scaling Elasticsearch to Hundreds of Developers</a>:
+<li>(2014, Yelp) <a href="https://engineeringblog.yelp.com/2014/11/scaling-elasticsearch-to-hundreds-of-developers.html">Scaling Elasticsearch to Hundreds of Developers</a>:
 A blog post I wrote for Yelp about the Apollo data gateway which
 acted as a proxy tier to NoSQL databases such as Elasticsearch (And later
 Cassandra). Basically this was an API-gateway for datastores, which was
