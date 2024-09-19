@@ -17,7 +17,7 @@
       
       <guid>https://jolynch.github.io/posts/wait_before_you_sync/</guid>
       <description>I work with distributed databases, and one of the number one performance issues I see is when they put fdatasync calls in the critical path of accepting writes.
- Please stop putting fdatasync in the hot path. Call it in the background every ~10-30 seconds or O(100MiB) written, as a performance measure, but your correctness should be based on checksums and redundancy — e.g. replicated commit logs and replica snapshots — not relying on fdatasync.</description>
+Please stop putting fdatasync in the hot path. Call it in the background every ~10-30 seconds or O(100MiB) written, as a performance measure, but your correctness should be based on checksums and redundancy — e.g. replicated commit logs and replica snapshots — not relying on fdatasync.</description>
     </item>
     
     <item>
@@ -64,7 +64,7 @@ In my experience, these poor algorithm choices are orders of magnitude slower th
       <pubDate>Sat, 25 Jan 2020 12:00:00 -0800</pubDate>
       
       <guid>https://jolynch.github.io/posts/how_to_speed_up_the_dmv/</guid>
-      <description>I&amp;rsquo;ve been asked to apply some of the lessons learned from the &amp;ldquo;distributed systems as food service analogies&amp;rdquo; to something unrelated to food but that does devour Americans&#39; souls: the Department of Motor Vehicles (DMV).
+      <description>I&amp;rsquo;ve been asked to apply some of the lessons learned from the &amp;ldquo;distributed systems as food service analogies&amp;rdquo; to something unrelated to food but that does devour Americans&amp;rsquo; souls: the Department of Motor Vehicles (DMV).
 The DMV is where happy Americans go to wait, sometimes for many moons, just to be told that they have the wrong identifying documents for a driver&amp;rsquo;s license renewal. It is an unfortunately dreadful introduction to government bureaucracy, and is a uniform topic of derision for newly driving teenagers (and indeed adults) across the US.</description>
     </item>
     
@@ -96,7 +96,7 @@ In this post, I will explore how Jimmy John&amp;rsquo;s operates as a high-perfo
       
       <guid>https://jolynch.github.io/posts/supermarkets_and_efficient_queueing_part_2/</guid>
       <description>This post wraps up the two part writeup on queueing theory and understanding computer systems using supermarkets within the larger &amp;ldquo;distributed systems as food service analogy&amp;rdquo; series.
- Part 1: Basics of queueing theory and minimizing latency. Part 2: More advanced techniques past optimizing latency.  We learned in Part 1 that we should keep our queues together and if we must form separate queues we should always try to pick the shortest queue if we can.</description>
+Part 1: Basics of queueing theory and minimizing latency. Part 2: More advanced techniques past optimizing latency. We learned in Part 1 that we should keep our queues together and if we must form separate queues we should always try to pick the shortest queue if we can.</description>
     </item>
     
     <item>
@@ -106,7 +106,7 @@ In this post, I will explore how Jimmy John&amp;rsquo;s operates as a high-perfo
       
       <guid>https://jolynch.github.io/posts/supermarkets_and_efficient_queueing_part_1/</guid>
       <description>I&amp;rsquo;d like to kick off the &amp;ldquo;distributed systems as food service analogy&amp;rdquo; series with the basics. In this two part post I cover the basics of queueing theory, and how we can understand it with the help of your every day supermarket or grocery store.
- Part 1: Basics of queueing theory and minimizing latency. Part 2: More advanced techniques past optimizing latency.  Why should software engineers care about Queueing Theory?</description>
+Part 1: Basics of queueing theory and minimizing latency. Part 2: More advanced techniques past optimizing latency. Why should software engineers care about Queueing Theory? Software engineers should care about queueing theory because we spend a lot of time optimizing queues of work.</description>
     </item>
     
     <item>

@@ -50,25 +50,25 @@ that library/package/service is evolving just using the version number. This
 information is conveyed through three dotted numbers that form a logical clock
 for totally ordering changes to the software API:</p>
 <center><h3>Semantic Version Numbers</h3></center>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">====================== Specification ========================
-
-Version = &lt;Major&gt;.&lt;Minor&gt;.&lt;Patch&gt;
-
-Major: this number goes up when the public API breaks
-Minor: this number goes up when the public API changes
-Patch: this number goes up when the public API doesn&#39;t change
-
-====================== Examples =============================
-
-# A Minor API change happened, safe to upgrade
-1.4.5 -&gt; 1.5.0
-
-# API breakage, probably unsafe to upgrade
-1.7.0 -&gt; 2.0.0
-
-# Who knows what will happen
-0.182.13 -&gt; 0.182.14
-=============================================================</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>====================== Specification ========================
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Version = &lt;Major&gt;.&lt;Minor&gt;.&lt;Patch&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Major: this number goes up when the public API breaks
+</span></span><span style="display:flex;"><span>Minor: this number goes up when the public API changes
+</span></span><span style="display:flex;"><span>Patch: this number goes up when the public API doesn&#39;t change
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>====================== Examples =============================
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span># A Minor API change happened, safe to upgrade
+</span></span><span style="display:flex;"><span>1.4.5 -&gt; 1.5.0
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span># API breakage, probably unsafe to upgrade
+</span></span><span style="display:flex;"><span>1.7.0 -&gt; 2.0.0
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span># Who knows what will happen
+</span></span><span style="display:flex;"><span>0.182.13 -&gt; 0.182.14
+</span></span><span style="display:flex;"><span>=============================================================</span></span></code></pre></div>
 <p>Armed with this information, software developers can theoretically upgrade
 without fear of the new version breaking their code.</p>
 <h1 id="how-semver-breaks">How SemVer Breaks</h1>
@@ -209,37 +209,37 @@ fourth piece of metadata in their version number indicating the source version
 that produced the artifact. Depending on the packaging system this is usually
 either another dotted version (making it a four-tuple) or a <code>-</code> suffix.</p>
 <center><h3> Better Semantic Versioning </h3></center>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">====================== Specification ========================
-&lt;Package Version&gt; = &lt;Package Name&gt;:&lt;Version Number&gt;
-&lt;Version Number&gt;  = &lt;Major&gt;.&lt;Minor&gt;.&lt;Patch&gt;&lt;Identifier&gt;
-
-Package Name: This name changes when the public API breaks
-Major: this number goes up with &#34;major&#34; public API additions
-Minor: this number goes up with &#34;minor&#34; public API additions
-Patch: this number goes up on every release
-Identifier: For packaging systems that support it, this
-            string relates directly to a specific source
-            code that produced the artifact.
-
-An example of an identifier in git would be the first 8
-characters of the commit SHA or if the project uses tags
-this could be a tag
-
-====================== Examples =============================
-
-# Minor API change, SHAs indicate code versions
-foo1:1.12.34-9bd9aeee -&gt; foo1:1.13.0-625cd1dc
-
-# Patch bump, lack of SHA indicates versions are tagged
-foo1:1.13.12 -&gt; foo1:1.13.13
-
-# API breakage for an alpha
-foo1:1.13.0 -&gt; foo2:0.1.0
-
-# Transition from unstable to stable API
-foo3:0.123.1 -&gt; foo3:1.0.0
-
-=============================================================</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>====================== Specification ========================
+</span></span><span style="display:flex;"><span>&lt;Package Version&gt; = &lt;Package Name&gt;:&lt;Version Number&gt;
+</span></span><span style="display:flex;"><span>&lt;Version Number&gt;  = &lt;Major&gt;.&lt;Minor&gt;.&lt;Patch&gt;&lt;Identifier&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Package Name: This name changes when the public API breaks
+</span></span><span style="display:flex;"><span>Major: this number goes up with &#34;major&#34; public API additions
+</span></span><span style="display:flex;"><span>Minor: this number goes up with &#34;minor&#34; public API additions
+</span></span><span style="display:flex;"><span>Patch: this number goes up on every release
+</span></span><span style="display:flex;"><span>Identifier: For packaging systems that support it, this
+</span></span><span style="display:flex;"><span>            string relates directly to a specific source
+</span></span><span style="display:flex;"><span>            code that produced the artifact.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>An example of an identifier in git would be the first 8
+</span></span><span style="display:flex;"><span>characters of the commit SHA or if the project uses tags
+</span></span><span style="display:flex;"><span>this could be a tag
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>====================== Examples =============================
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span># Minor API change, SHAs indicate code versions
+</span></span><span style="display:flex;"><span>foo1:1.12.34-9bd9aeee -&gt; foo1:1.13.0-625cd1dc
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span># Patch bump, lack of SHA indicates versions are tagged
+</span></span><span style="display:flex;"><span>foo1:1.13.12 -&gt; foo1:1.13.13
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span># API breakage for an alpha
+</span></span><span style="display:flex;"><span>foo1:1.13.0 -&gt; foo2:0.1.0
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span># Transition from unstable to stable API
+</span></span><span style="display:flex;"><span>foo3:0.123.1 -&gt; foo3:1.0.0
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>=============================================================</span></span></code></pre></div>
 <p>This solution is, as far as I am aware, backwards compatible with all existing
 packaging and versioning schemes and solves all major issues identified with
 the status quo. I have personally used such techniques in my jobs to do
@@ -276,21 +276,21 @@ release&rdquo;, and during the alpha/beta/unstable phases of a project you hopef
 have a somewhat early-adopting audience who is willing to change import names.</p>
 <p><strong>How do I see the changes between two versions?</strong></p>
 <p>You can use the third part of the tuple to relate the artifact to code.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text"># SHA based identifiers
-# 1.12.34.9bd9aeee -&gt; 1.13.0.625cd1dc
-
-# Command line
-git diff 9bd9aeee 625cd1dc
-
-# Github
-https://github.com/org/project/compare/9bd9aeee..625cd1dc
-
-# When shas are not absent in the released versions, version tags
-# should exist
-# 2.12.34 -&gt; 2.13.0
-
-# Command line
-git diff v2.12.34 v2.13.0</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span># SHA based identifiers
+</span></span><span style="display:flex;"><span># 1.12.34.9bd9aeee -&gt; 1.13.0.625cd1dc
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span># Command line
+</span></span><span style="display:flex;"><span>git diff 9bd9aeee 625cd1dc
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span># Github
+</span></span><span style="display:flex;"><span>https://github.com/org/project/compare/9bd9aeee..625cd1dc
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span># When shas are not absent in the released versions, version tags
+</span></span><span style="display:flex;"><span># should exist
+</span></span><span style="display:flex;"><span># 2.12.34 -&gt; 2.13.0
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span># Command line
+</span></span><span style="display:flex;"><span>git diff v2.12.34 v2.13.0</span></span></code></pre></div>
 <p><strong>As a software author, isn&rsquo;t maintaining multiple branches annoying?</strong></p>
 <p>Most projects I am aware of already use multiple branches to support
 multiple major versions. Otherwise applying patches that must apply to multiple
@@ -313,7 +313,7 @@ plugin</a>.</p>
 
   <footer>
   
-<script type="application/javascript">
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
 	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
