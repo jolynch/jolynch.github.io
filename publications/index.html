@@ -44,6 +44,16 @@
 <p>I&rsquo;ve mostly written blog posts and whitepapers, mostly for employers. I&rsquo;ve
 included links here in case they might be interesting.</p>
 <ul>
+<li>(2026, ACM) <a href="https://dl.acm.org/doi/abs/10.1145/3789239.3793275"><strong>Intelligent Live Origin and Resilient Streaming</strong></a>
+(<a href="/pdf/mhv2026-intelligent-live-origin-resilient-streaming.pdf">pdf</a>):
+A paper I co-authored with Xiaomei Liu, Rajasekhar Ummadisetty, and Chris
+Newton in the proceedings of the
+<a href="https://www.mile-high.video/">2026 Mile-High Video Conference</a>. It describes
+techniques for making live streaming origins more resilient by using segment
+template awareness, multi-pipeline selection, defective segment avoidance, and
+multi-region storage propagation to improve reliability without scaling
+redundancy by duplicating every publishing path. I primarily contributed to
+the storage sections.</li>
 <li>(2024, Netflix) <a href="https://netflixtechblog.com/introducing-netflix-timeseries-data-abstraction-layer-31552f6326f8">Introducing Netflix&rsquo;s TimeSeries Data Abstraction Layer</a>:
 A post I contributed to written by my colleagues Rajiv Shringi, Vinay Chella,
 Kaidan Fullerton, and Oleksii Tkachuk for Netflix. The post lays out how we
@@ -112,17 +122,20 @@ upgrade them all the time.</li>
 
   <footer>
   
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-155022966-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-DK90FP2GLT"></script>
+      <script>
+        var doNotTrack = false;
+        if ( true ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-DK90FP2GLT');
+        }
+      </script>
 
   
   <hr/>

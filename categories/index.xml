@@ -15,8 +15,16 @@
       <pubDate>Sun, 02 Jul 2023 11:40:04 -0400</pubDate>
       
       <guid>https://jolynch.github.io/posts/wait_before_you_sync/</guid>
-      <description>I work with distributed databases, and one of the number one performance issues I see is when they put fdatasync calls in the critical path of accepting writes.
-Please stop putting fdatasync in the hot path. Call it in the background every ~10-30 seconds or O(100MiB) written, as a performance measure, but your correctness should be based on checksums and redundancy — e.g. replicated commit logs and replica snapshots — not relying on fdatasync.</description>
+      <description>&lt;p&gt;I work with distributed databases, and one of the number one performance issues
+I see is when they put
+&lt;a href=&#34;https://linux.die.net/man/2/fdatasync&#34;&gt;&lt;code&gt;fdatasync&lt;/code&gt;&lt;/a&gt; calls in the critical path
+of accepting writes.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Please stop putting &lt;code&gt;fdatasync&lt;/code&gt; in the hot path&lt;/strong&gt;. Call it in the
+background every ~10-30 seconds or O(100MiB) written, as a &lt;em&gt;performance&lt;/em&gt;
+measure, but your correctness should be based on checksums and redundancy
+— e.g. replicated commit logs and replica snapshots — &lt;em&gt;not&lt;/em&gt; relying on
+&lt;code&gt;fdatasync&lt;/code&gt;.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -25,8 +33,16 @@ Please stop putting fdatasync in the hot path. Call it in the background every ~
       <pubDate>Sun, 24 Apr 2022 11:28:49 -0500</pubDate>
       
       <guid>https://jolynch.github.io/posts/distsys_shibboleths/</guid>
-      <description>Shibboleths are historically a word or phrasing that indicate membership in a particular group or culture. I was introduced to the term in the West Wing where the President needed to verify the veracity of a person&amp;rsquo;s claims of religious persecution.
-I am still a relatively new engineer in the field of distributed systems, having only studied and worked in the field for around a decade, but in that time I believe I have learned to recognize some key &amp;ldquo;distsys shibboleths&amp;rdquo; that help me recognize when I can trust what a vendor or other engineer is telling me.</description>
+      <description>&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Shibboleth&#34;&gt;Shibboleths&lt;/a&gt; are historically a
+word or phrasing that indicate membership in a particular group or culture. I
+was introduced to the term in the &lt;a href=&#34;https://youtu.be/fqkaBEWPH18?t=24&#34;&gt;West Wing&lt;/a&gt;
+where the President needed to verify the veracity of a person&amp;rsquo;s claims of
+religious persecution.&lt;/p&gt;
+&lt;p&gt;I am still a relatively new engineer in the field of distributed systems,
+having only studied and worked in the field for around a decade, but in that
+time I believe I have learned to recognize some key &amp;ldquo;distsys shibboleths&amp;rdquo; that
+help me recognize when I can trust what a vendor or other engineer is telling
+me.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -35,7 +51,13 @@ I am still a relatively new engineer in the field of distributed systems, having
       <pubDate>Thu, 11 Nov 2021 09:32:19 -0400</pubDate>
       
       <guid>https://jolynch.github.io/posts/there_has_been_inflation/</guid>
-      <description>2023-07-03: When I wrote this post, inflation in the US had just started rising and everyone was saying that it was &amp;ldquo;transitory&amp;rdquo; and pointed to the past decade of low inflation plus stimulus to justify things would be ok. Since then, there has obviously been a large increase in core inflation in 2022 and folks stopped arguing it was transitory. I still think the points in this post are relevant and worth considering.</description>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;2023-07-03&lt;/strong&gt;: When I wrote this post, inflation in the US had just
+started rising and everyone was saying that it was &amp;ldquo;transitory&amp;rdquo; and
+pointed to the past decade of low inflation plus stimulus to justify
+things would be ok. Since then, there has obviously been a large increase in
+core inflation in 2022 and folks stopped arguing it was transitory. I still
+think the points in this post are relevant and worth considering.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -44,8 +66,17 @@ I am still a relatively new engineer in the field of distributed systems, having
       <pubDate>Mon, 22 Mar 2021 20:48:05 -0400</pubDate>
       
       <guid>https://jolynch.github.io/posts/use_fast_data_algorithms/</guid>
-      <description>As an engineer who primarily works with data and databases I spend a lot of time moving data around, hashing it, compressing it, decompressing it and generally trying to shovel it between VMs and blob stores over TLS. I am constantly surprised by how many systems only support slow, inefficient, and expensive ways of doing these operations.
-In my experience, these poor algorithm choices are orders of magnitude slower than modern alternatives.</description>
+      <description>&lt;p&gt;As an engineer who primarily works with data and databases I spend a lot of
+time moving data around, hashing it, compressing it, decompressing it and
+generally trying to shovel it between VMs and blob stores over TLS. I am
+constantly surprised by how many systems only support slow, inefficient, and
+expensive ways of doing these operations.&lt;/p&gt;
+&lt;p&gt;In my experience, these poor algorithm choices are &lt;em&gt;orders of magnitude&lt;/em&gt; slower
+than modern alternatives. Indeed, using a fast algorithm can often be the
+difference between actually doing compression/hashing/encryption and &amp;ldquo;Eh, I&amp;rsquo;ll
+skip it&amp;rdquo;.  In the interest of using more of our CPU time to do useful work
+instead of melting ice-caps and giving programmers excessively long coffee
+breaks, we will explore some faster alternatives in this post.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -54,7 +85,36 @@ In my experience, these poor algorithm choices are orders of magnitude slower th
       <pubDate>Sat, 04 Jul 2020 20:50:00 -0700</pubDate>
       
       <guid>https://jolynch.github.io/posts/semver_considered_harmful/</guid>
-      <description>In the past ten years or so, Semantic Versioning a.k.a &amp;ldquo;SemVer&amp;rdquo; has become extremely popular in the software development world. The idea is that libraries and services can convey information to users about how the application programming interface (API) of that library/package/service is evolving just using the version number. This information is conveyed through three dotted numbers that form a logical clock for totally ordering changes to the software API:</description>
+      <description>&lt;p&gt;In the past ten years or so, &lt;a href=&#34;https://semver.org&#34;&gt;Semantic Versioning&lt;/a&gt; a.k.a
+&amp;ldquo;SemVer&amp;rdquo; has become extremely popular in the software development world. The
+idea is that libraries and services can convey information to users about how
+the application programming interface
+(&lt;a href=&#34;https://en.wikipedia.org/wiki/Application_programming_interface&#34;&gt;API&lt;/a&gt;) of
+that library/package/service is evolving just using the version number. This
+information is conveyed through three dotted numbers that form a logical clock
+for totally ordering changes to the software API:&lt;/p&gt;
+&lt;center&gt;&lt;h3&gt;Semantic Version Numbers&lt;/h3&gt;&lt;/center&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;====================== Specification ========================
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Version = &amp;lt;Major&amp;gt;.&amp;lt;Minor&amp;gt;.&amp;lt;Patch&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Major: this number goes up when the public API breaks
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Minor: this number goes up when the public API changes
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Patch: this number goes up when the public API doesn&amp;#39;t change
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;====================== Examples =============================
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;# A Minor API change happened, safe to upgrade
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1.4.5 -&amp;gt; 1.5.0
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;# API breakage, probably unsafe to upgrade
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1.7.0 -&amp;gt; 2.0.0
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;# Who knows what will happen
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;0.182.13 -&amp;gt; 0.182.14
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;=============================================================&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Armed with this information, software developers can theoretically upgrade
+without fear of the new version breaking their code.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -63,8 +123,16 @@ In my experience, these poor algorithm choices are orders of magnitude slower th
       <pubDate>Sat, 25 Jan 2020 12:00:00 -0800</pubDate>
       
       <guid>https://jolynch.github.io/posts/how_to_speed_up_the_dmv/</guid>
-      <description>I&amp;rsquo;ve been asked to apply some of the lessons learned from the &amp;ldquo;distributed systems as food service analogies&amp;rdquo; to something unrelated to food but that does devour Americans&amp;rsquo; souls: the Department of Motor Vehicles (DMV).
-The DMV is where happy Americans go to wait, sometimes for many moons, just to be told that they have the wrong identifying documents for a driver&amp;rsquo;s license renewal. It is an unfortunately dreadful introduction to government bureaucracy, and is a uniform topic of derision for newly driving teenagers (and indeed adults) across the US.</description>
+      <description>&lt;p&gt;I&amp;rsquo;ve been asked to apply some of the lessons learned from the &lt;a href=&#34;https://jolynch.github.io/tags/distsys-as-food/&#34;&gt;&amp;ldquo;distributed
+systems as food service analogies&amp;rdquo;&lt;/a&gt; to
+something unrelated to food but that does devour Americans&amp;rsquo; souls: the
+Department of Motor Vehicles (DMV).&lt;/p&gt;
+&lt;p&gt;The DMV is where happy Americans go to wait, sometimes for many moons, just to
+be told that they have the wrong identifying documents for a driver&amp;rsquo;s license
+renewal. It is an unfortunately dreadful introduction to government
+bureaucracy, and is a uniform topic of derision for newly driving teenagers
+(and indeed adults) across the US. It is so dreadful that it is even mocked in
+&lt;a href=&#34;https://www.youtube.com/watch?v=ONFj7AYgbko&#34;&gt;children&amp;rsquo;s movies&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -73,8 +141,18 @@ The DMV is where happy Americans go to wait, sometimes for many moons, just to b
       <pubDate>Sat, 31 Aug 2019 00:00:00 -0800</pubDate>
       
       <guid>https://jolynch.github.io/posts/dominos_is_a_good_cdn/</guid>
-      <description>Today on the &amp;ldquo;distributed systems as food service analogy&amp;rdquo; series we visit low latency pizza delivery and how they relate to Content Delivery Networks (CDN).
-Like with Jimmy John&amp;rsquo;s, I often order Domino&amp;rsquo;s pizza not because it tastes particularly good but because Domino&amp;rsquo;s is efficient! They are one of the only pizza places I know that offer a latency service level objective (SLO) of less than thirty minutes. To achieve this promise, they use a number of common techniques used by Content Delivery Networks (CDNs) to ensure that web content such as photos, code and even videos get to your browser or device quickly.</description>
+      <description>&lt;p&gt;Today on the
+&lt;a href=&#34;https://jolynch.github.io/tags/distsys-as-food/&#34;&gt;&amp;ldquo;distributed systems as food service analogy&amp;rdquo;&lt;/a&gt;
+series we visit low latency pizza delivery and how they relate to Content
+Delivery Networks (CDN).&lt;/p&gt;
+&lt;p&gt;Like with &lt;a href=&#34;https://jolynch.github.io/posts/jimmy_johns_and_web_services/&#34;&gt;Jimmy John&amp;rsquo;s&lt;/a&gt;, I often
+order Domino&amp;rsquo;s pizza not because it tastes particularly good but because
+Domino&amp;rsquo;s is efficient! They are one of the only pizza places I know that offer
+a latency service level objective
+(&lt;a href=&#34;https://en.wikipedia.org/wiki/Service-level_objective&#34;&gt;SLO&lt;/a&gt;) of less than
+thirty minutes. To achieve this promise, they use a number of common techniques
+used by Content Delivery Networks (CDNs) to ensure that web content such as
+photos, code and even videos get to your browser or device quickly.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -83,9 +161,23 @@ Like with Jimmy John&amp;rsquo;s, I often order Domino&amp;rsquo;s pizza not bec
       <pubDate>Mon, 25 Feb 2019 00:00:00 +0000</pubDate>
       
       <guid>https://jolynch.github.io/posts/jimmy_johns_and_web_services/</guid>
-      <description>Today on the &amp;ldquo;distributed systems as food service analogy&amp;rdquo; series we visit one of my favorites: sandwich shops.
-Most sandwich places are absolutely terrible at efficiently processing my sandwich order. They have limited workers that constantly context switch and are entirely unable to pipeline (looking at you Subway). Jimmy John&amp;rsquo;s, however, is wonderfully efficient and a model for all other sandwich places.
-In this post, I will explore how Jimmy John&amp;rsquo;s operates as a high-performance web (micro)service might.</description>
+      <description>&lt;p&gt;Today on the
+&lt;a href=&#34;https://jolynch.github.io/tags/distsys-as-food/&#34;&gt;&amp;ldquo;distributed systems as food service analogy&amp;rdquo;&lt;/a&gt;
+series we visit one of my favorites: sandwich shops.&lt;/p&gt;
+&lt;p&gt;Most sandwich places are absolutely terrible at efficiently processing my
+sandwich order. They have limited workers that constantly context switch and
+are entirely unable to pipeline (looking at you Subway). &lt;a href=&#34;https://www.jimmyjohns.com/&#34;&gt;Jimmy
+John&amp;rsquo;s&lt;/a&gt;, however, is wonderfully efficient and a
+model for all other sandwich places.&lt;/p&gt;
+&lt;p&gt;In this post, I will explore how Jimmy John&amp;rsquo;s operates as a high-performance
+web (micro)service might. When I worked at Yelp in San Francisco, I spent a
+great deal of time eating at Jimmy John&amp;rsquo;s, and a non-trivial reason for that is
+that it was so &lt;em&gt;efficient&lt;/em&gt; at processing orders. I would show up and there
+would be a queue of 20-50 people, but I still got my sandwich in record time (a
+few minutes). At least the one near Yelp&amp;rsquo;s SF office achieved this by operating
+as a finely tuned web service might, and I feel it&amp;rsquo;s worth reflecting on all of
+the tricks they do. If you&amp;rsquo;re building a high-performance service and you
+aren&amp;rsquo;t doing these things, it&amp;rsquo;s food for thought.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -94,8 +186,20 @@ In this post, I will explore how Jimmy John&amp;rsquo;s operates as a high-perfo
       <pubDate>Wed, 20 Feb 2019 00:00:00 -0100</pubDate>
       
       <guid>https://jolynch.github.io/posts/supermarkets_and_efficient_queueing_part_2/</guid>
-      <description>This post wraps up the two part writeup on queueing theory and understanding computer systems using supermarkets within the larger &amp;ldquo;distributed systems as food service analogy&amp;rdquo; series.
-Part 1: Basics of queueing theory and minimizing latency. Part 2: More advanced techniques past optimizing latency. We learned in Part 1 that we should keep our queues together and if we must form separate queues we should always try to pick the shortest queue if we can.</description>
+      <description>&lt;p&gt;This post wraps up the two part writeup on queueing theory and understanding
+computer systems using supermarkets within the larger
+&lt;a href=&#34;https://jolynch.github.io/tags/distsys-as-food/&#34;&gt;&amp;ldquo;distributed systems as food service analogy&amp;rdquo;&lt;/a&gt;
+series.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://jolynch.github.io/posts/supermarkets_and_efficient_queueing_part_1/&#34;&gt;Part 1&lt;/a&gt;: Basics
+of queueing theory and minimizing latency.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://jolynch.github.io/posts/supermarkets_and_efficient_queueing_part_2/&#34;&gt;Part 2&lt;/a&gt;: More
+advanced techniques past optimizing latency.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We learned in &lt;a href=&#34;https://jolynch.github.io/posts/supermarkets_and_efficient_queueing_part_1/&#34;&gt;Part 1&lt;/a&gt;
+that we should keep our queues together and if we must form separate queues
+we should always try to pick the shortest queue if we can. In this post we
+will see that isn&amp;rsquo;t quite true if you care about metrics other than throughput.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -104,8 +208,31 @@ Part 1: Basics of queueing theory and minimizing latency. Part 2: More advanced 
       <pubDate>Tue, 19 Feb 2019 12:00:00 +0000</pubDate>
       
       <guid>https://jolynch.github.io/posts/supermarkets_and_efficient_queueing_part_1/</guid>
-      <description>I&amp;rsquo;d like to kick off the &amp;ldquo;distributed systems as food service analogy&amp;rdquo; series with the basics. In this two part post I cover the basics of queueing theory, and how we can understand it with the help of your every day supermarket or grocery store.
-Part 1: Basics of queueing theory and minimizing latency. Part 2: More advanced techniques past optimizing latency. Why should software engineers care about Queueing Theory? Software engineers should care about queueing theory because we spend a lot of time optimizing queues of work.</description>
+      <description>&lt;p&gt;I&amp;rsquo;d like to kick off the
+&lt;a href=&#34;https://jolynch.github.io/tags/distsys-as-food/&#34;&gt;&amp;ldquo;distributed systems as food service analogy&amp;rdquo;&lt;/a&gt;
+series with the basics. In this two part post I cover the basics of
+&lt;a href=&#34;https://en.wikipedia.org/wiki/Queueing_theory&#34;&gt;&lt;strong&gt;queueing theory&lt;/strong&gt;&lt;/a&gt;, and how
+we can understand it with the help of your every day supermarket or grocery
+store.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://jolynch.github.io/posts/supermarkets_and_efficient_queueing_part_1/&#34;&gt;Part 1&lt;/a&gt;: Basics
+of queueing theory and minimizing latency.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://jolynch.github.io/posts/supermarkets_and_efficient_queueing_part_2/&#34;&gt;Part 2&lt;/a&gt;: More
+advanced techniques past optimizing latency.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;why-should-software-engineers-care-about-queueing-theory&#34;&gt;Why should software engineers care about Queueing Theory?&lt;/h1&gt;
+&lt;p&gt;Software engineers should care about queueing theory because we spend a lot of
+time optimizing queues of work. Everything we do in a computer boils down to
+having some work to do, keeping that work in a queue, and then having
+processors do the work for us. Our systems generally work well when the
+incoming rate of tasks does not exceed the service rate (load is low) and we
+really hope the queues do not grow without bound. Some examples are processes
+being scheduled on a CPU, requests dispatched to a farm of python web workers,
+stream processing such as
+&lt;a href=&#34;https://ci.apache.org/projects/flink/flink-docs-release-1.7/&#34;&gt;Flink&lt;/a&gt;
+running off an ordered event log stored in &lt;a href=&#34;https://kafka.apache.org/&#34;&gt;Kafka&lt;/a&gt;
+and even background processing tasks such as sending emails or resizing images
+from a &lt;a href=&#34;https://aws.amazon.com/sqs/&#34;&gt;SQS&lt;/a&gt; queue worker.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -114,8 +241,13 @@ Part 1: Basics of queueing theory and minimizing latency. Part 2: More advanced 
       <pubDate>Thu, 10 Jan 2019 11:30:16 -0800</pubDate>
       
       <guid>https://jolynch.github.io/posts/purpose_of_blog/</guid>
-      <description>I figured it was time to start a proper personal/tech blog given how much I enjoy writing about the crazy fun and wierd distributed systems problems that I work on.
-Initially I am planning on writing up my current rants on high performance software systems as understood through food service analogies, but I imagine it&amp;rsquo;ll evolve from there to just talking about cool systems problems I work on every day.</description>
+      <description>&lt;p&gt;I figured it was time to start a proper personal/tech blog given how much I
+enjoy writing about the crazy fun and wierd distributed systems problems that
+I work on.&lt;/p&gt;
+&lt;p&gt;Initially I am planning on writing up my current rants on high performance
+software systems as understood through food service analogies, but I imagine
+it&amp;rsquo;ll evolve from there to just talking about cool systems problems I work on
+every day.&lt;/p&gt;</description>
     </item>
     
   </channel>

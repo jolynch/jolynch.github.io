@@ -45,6 +45,13 @@
 given, typically related to distributed systems or other software engineering
 topics:</p>
 <ul>
+<li>(2025) <a href="https://qconsf.com/presentation/nov2025/how-netflix-shapes-our-fleet-efficiency-and-reliability">How Netflix Shapes Our Fleet for Efficiency and Reliability</a>
+(<a href="/pdf/qconsf2025-how-netflix-shapes-efficiency-reliability.pdf">slides</a>, video requires infoq account login):
+A talk Argha C. and I gave at QConSF 2025 about how Netflix shapes our compute
+fleet to improve efficiency while maintaining reliability. It covers how we
+think about hardware selection, workload placement, resource utilization, and
+resilience so that a large, heterogeneous fleet can keep getting more
+efficient while simultaneously achieving more reliability.</li>
 <li>(2025) <a href="https://www.usenix.org/conference/srecon25americas/presentation/lynch">Techniques Netflix Uses to Weather Significant Demand Shifts</a>
 (<a href="/pdf/srecon2025-techniques-to-weather-demand-shifts.pdf">slides</a>, <a href="https://www.youtube.com/watch?v=RivD2EK5QFk&amp;t=1s">video</a>)
 A talk I gave at SRECon 2025 about how Netflix ensures reliability of our complex architecture under order of
@@ -131,17 +138,20 @@ be maintained and scaled to large engineering organizations.</li>
 
   <footer>
   
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-155022966-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-DK90FP2GLT"></script>
+      <script>
+        var doNotTrack = false;
+        if ( true ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-DK90FP2GLT');
+        }
+      </script>
 
   
   <hr/>

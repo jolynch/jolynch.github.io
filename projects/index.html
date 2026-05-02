@@ -54,6 +54,12 @@ distributed databases written in Java from themselves by killing them (while
 grabbing a core dump) when they enter JVM death spirals. This is basically an
 extension of <a href="https://github.com/airlift/jvmkill"><code>jvmkill</code></a> that also
 detects GC spirals of death.</li>
+<li><a href="https://github.com/jolynch/tx"><code>tx</code></a> high-performance file transfer tool
+written in Go that saturates SSD, network, and CPU simultaneously to copy
+directories and files up to 10x faster than <code>rsync</code>. Adaptively sizes TCP
+connection pools, switches between no compression, <code>lz4</code>, and <code>zstd</code> based
+on observed read/write latencies, and moves durability off the critical
+path with batched background <code>fsync</code>s and sampled verification.</li>
 <li><a href="https://github.com/airbnb/synapse"><code>synapse</code></a> and
 <a href="https://github.com/airbnb/nerve"><code>nerve</code></a> service mesh aka SmartStack. I help
 maintain and have contributed significant features to Airbnb&rsquo;s service mesh,
@@ -138,17 +144,20 @@ decent read if you&rsquo;re interested in what this project can do.</li>
 
   <footer>
   
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-155022966-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-DK90FP2GLT"></script>
+      <script>
+        var doNotTrack = false;
+        if ( true ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-DK90FP2GLT');
+        }
+      </script>
 
   
   <hr/>
